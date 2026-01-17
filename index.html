@@ -15,7 +15,6 @@
       --brand-blue: #003b71;
       --brand-gold: #fab51f;
       --brand-white: #ffffff;
-      --brand-light-gray: #f4f4f4;
       --safe-top: env(safe-area-inset-top, 20px);
       --safe-bottom: env(safe-area-inset-bottom, 20px);
     }
@@ -32,46 +31,47 @@
 
     .hidden { display: none !important; }
 
-    /* --- Dynamic Top Title --- */
+    /* --- Top Bar (Blue with White Font) --- */
     header {
-      padding: calc(var(--safe-top) + 20px) 20px 10px;
+      padding: calc(var(--safe-top) + 25px) 20px 15px;
       text-align: center;
-      background: var(--brand-white);
+      background: var(--brand-blue);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     #page-title {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 800;
-      color: var(--brand-blue);
+      color: var(--brand-white);
       text-transform: uppercase;
       margin: 0;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
-    /* --- Navigation with Yellow Border --- */
+    /* --- Navigation Bar (Yellow with Blue Font) --- */
     nav {
-      margin: 10px 20px;
-      padding: 5px;
-      border: 2px solid var(--brand-gold);
-      border-radius: 50px;
+      margin: 0;
+      padding: 10px 5px;
+      background: var(--brand-gold);
       display: flex;
       justify-content: space-around;
-      background: var(--brand-white);
+      border-bottom: 2px solid rgba(0,0,0,0.05);
     }
 
     nav button {
       background: none;
       border: none;
       color: var(--brand-blue);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 11px;
       text-transform: uppercase;
-      padding: 12px 5px;
-      transition: all 0.2s;
+      padding: 8px 4px;
+      transition: opacity 0.2s;
     }
 
     nav button.active {
-      color: var(--brand-gold);
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
     /* --- Main Content Area --- */
@@ -84,37 +84,40 @@
       z-index: 1;
     }
 
+    /* Fixed Watermark Image */
     .page-watermark {
       position: fixed;
-      top: 55%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80%;
-      opacity: 0.05;
+      width: 85%;
+      opacity: 0.08;
       z-index: -1;
       pointer-events: none;
     }
 
     .content-card {
       background: var(--brand-white);
-      border: 1px solid #eee;
+      border: 1px solid #ddd;
       border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      border-left: 5px solid var(--brand-gold);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border-left: 6px solid var(--brand-gold);
       color: var(--brand-blue);
     }
 
     .content-card h3 {
-      margin: 0 0 10px;
+      margin: 0 0 12px;
+      font-size: 18px;
       text-transform: uppercase;
+      font-weight: 800;
     }
 
-    /* --- Footer Brand Bar (Full Color) --- */
+    /* --- Footer Brand Bar (Enlarged & Color) --- */
     footer {
       background: var(--brand-white);
-      padding: 15px 10px calc(var(--safe-bottom) + 15px);
+      padding: 20px 10px calc(var(--safe-bottom) + 20px);
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -122,16 +125,17 @@
     }
 
     footer img {
-      height: 30px;
-      max-width: 75px;
+      height: 40px; /* Increased from 30px */
+      max-width: 90px; /* Increased from 75px */
       object-fit: contain;
+      filter: none;
     }
 
-    /* Overlays */
+    /* Overlays & Modals */
     #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
-    .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 40px; }
-    #fullscreenImg { max-width: 100%; max-height: 90%; }
-    video { width: 100%; height: 80%; }
+    .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 40px; cursor: pointer; }
+    #fullscreenImg { max-width: 95%; max-height: 90%; }
+    video { width: 100%; height: 80%; background: #000; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -154,59 +158,59 @@
 
     <div id="promise" class="screen">
       <div class="content-card" style="text-align: center; border-left-color: var(--brand-blue);">
-        <i data-lucide="play-circle" style="width: 70px; height: 70px; color: var(--brand-gold); margin: 0 auto 15px; cursor: pointer;" onclick="playVideo()"></i>
+        <i data-lucide="play-circle" style="width: 80px; height: 80px; color: var(--brand-gold); margin: 0 auto 15px; cursor: pointer;" onclick="playVideo()"></i>
         <h3>Watch Our Transformation</h3>
-        <p>Experience the care and attention we put into every home. We treat your home exactly as if it were our own[cite: 174].</p>
+        <p>Experience the care and attention we put into every home. We treat your home exactly as if it were our own.</p>
       </div>
     </div>
 
     <div id="gallery" class="screen hidden">
       <div id="albumList"></div>
       <div id="albumImages" class="hidden">
-        <button onclick="loadAlbums()" style="color:var(--brand-blue); background:none; border:1px solid var(--brand-blue); padding:8px 15px; margin-bottom:15px; border-radius:30px; font-weight:bold;">← BACK</button>
-        <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px;"></div>
+        <button onclick="loadAlbums()" style="color:var(--brand-blue); background:var(--brand-gold); border:none; padding:10px 20px; margin-bottom:15px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK</button>
+        <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;"></div>
       </div>
     </div>
 
     <div id="funding" class="screen hidden">
       <div class="content-card">
         <h3>Choice of Funding</h3>
-        <p>Applications are simple and decisions are typically delivered within 24 hours [cite: 17-18].</p>
+        <p>Applications are simple and decisions are typically delivered within 24 hours.</p>
       </div>
       <div class="content-card">
         <h3>11.9% APR Representative</h3>
-        <p>Buy Now Pay Monthly. Spread the cost over 60 months with a 20% deposit [cite: 39-43].</p>
+        <p>Buy Now Pay Monthly. Spread the cost over 60 months with a 20% deposit.</p>
       </div>
       <div class="content-card">
         <h3>10.9% APR Representative</h3>
-        <p>Buy Now Pay in 3 Months. Nothing to pay for three months with a 20% deposit [cite: 41-44].</p>
+        <p>Buy Now Pay in 3 Months. Nothing to pay for three months with a 20% deposit.</p>
       </div>
     </div>
 
     <div id="standards" class="screen hidden">
-      <div class="content-card" style="background: var(--brand-blue); color: white;">
+      <div class="content-card" style="background: var(--brand-blue); color: white; border-left-color: var(--brand-gold);">
         <h3 style="color: var(--brand-gold);">20 Year Guarantee</h3>
-        <p>Total piece of mind for your new investment. We use materials made to go the distance [cite: 149, 153-155].</p>
+        <p>Total piece of mind for your new investment. We use materials made to go the distance.</p>
       </div>
       <div class="content-card">
         <h3>FENSA Approved Installer</h3>
-        <p>Guarantee that every window and door meets strict building and energy regulations[cite: 197].</p>
+        <p>Guarantee that every window and door meets strict building and energy regulations.</p>
       </div>
       <div class="content-card">
         <h3>CHAS Accredited</h3>
-        <p>Independently vetted to ensure health and safety standards are second to none [cite: 179-180].</p>
+        <p>Independently vetted to ensure health and safety standards are second to none.</p>
       </div>
     </div>
 
     <div id="showroom" class="screen hidden">
       <div class="content-card">
         <h3>Doncaster Showroom</h3>
-        <p>Unit 4 Brunel Trade Park, Off York Road, Doncaster, DN5 8PT .</p>
-        <p><strong>Opening Times:</strong><br>Mon-Fri: 9am-5pm<br>Sat-Sun: 10am-4pm [cite: 83-85].</p>
+        <p>Unit 4 Brunel Trade Park, Off York Road, Doncaster, DN5 8PT.</p>
+        <p><strong>Opening Times:</strong><br>Mon-Fri: 9am-5pm | Sat-Sun: 10am-4pm.</p>
       </div>
-      <div class="content-card" style="border-left-color: var(--brand-blue);">
-        <h3>Showroom Exclusive</h3>
-        <p>Book your follow-up appointment in the showroom to claim your £500 off voucher .</p>
+      <div class="content-card" style="background: var(--brand-gold); border-left-color: var(--brand-blue);">
+        <h3 style="color: var(--brand-blue);">Showroom Exclusive</h3>
+        <p>Book your follow-up appointment in the showroom to claim your £500 off voucher.</p>
       </div>
     </div>
   </main>
@@ -248,13 +252,13 @@
     function playVideo() { document.getElementById('videoOverlay').style.display='flex'; document.getElementById('player').play(); }
     function closeVideo() { document.getElementById('player').pause(); document.getElementById('videoOverlay').style.display='none'; }
 
-    // --- Gallery Logic ---
+    // --- Dynamic Gallery ---
     const galleryData = { 
-      "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], 
+      "Edwardian": ["Edwardian Glass", "Edwardian Solid"], 
       "Flat Roof": [], 
-      "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], 
-      "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], 
-      "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] 
+      "Gable End": ["Gable Glass", "Gable Solid"], 
+      "Leanto": ["Leanto Glass", "Leanto Solid"], 
+      "Victorian": ["Victorian Glass", "Victorian Solid"] 
     };
     
     function loadAlbums() {
@@ -269,7 +273,7 @@
 
     function loadSubAlbums(f) {
       const subs = galleryData[f]; if(!subs.length){ loadImages(`Gallery/${f}`); return; }
-      const list = document.getElementById("albumList"); list.innerHTML = `<button onclick="loadAlbums()" style="color:var(--brand-blue); background:none; border:1px solid var(--brand-blue); padding:8px 15px; margin-bottom:15px; border-radius:30px; font-weight:bold;">← BACK</button>`;
+      const list = document.getElementById("albumList"); list.innerHTML = `<button onclick="loadAlbums()" style="color:var(--brand-blue); background:var(--brand-gold); border:none; padding:10px 20px; margin-bottom:15px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK</button>`;
       subs.forEach(s => {
         const d = document.createElement("div"); d.className="content-card"; d.innerHTML=`<h3>${s}</h3>`;
         d.onclick=()=>loadImages(`Gallery/${f}/${s}`); list.appendChild(d);
@@ -283,7 +287,8 @@
       let i=1; function l(){
         const s=`${path}/${i.toString().padStart(2,'0')}.jpg`, img=new Image();
         img.src=s; img.onload=()=>{
-          const t=document.createElement("img"); t.src=s; t.onclick=()=>{ document.getElementById('fullscreenImg').src=s; document.getElementById('imageModal').style.display='flex'; };
+          const t = document.createElement("img"); t.src=s; t.style.width="100%"; t.style.borderRadius="8px";
+          t.onclick=()=>{ document.getElementById('fullscreenImg').src=s; document.getElementById('imageModal').style.display='flex'; };
           grid.appendChild(t); i++; l();
         };
       } l();
