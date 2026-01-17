@@ -17,50 +17,63 @@
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
     .hidden { display: none !important; }
 
-    /* --- Shrunk Top Bar (90px Text) --- */
-    header { padding: calc(var(--safe-top) + 5px) 10px 5px; text-align: center; background: var(--brand-blue); min-height: auto; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-    #page-title { font-size: 90px; font-weight: 900; color: var(--brand-white); text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: -4px; }
+    /* --- App Header (90px Text) --- */
+    header { padding: calc(var(--safe-top) + 5px) 10px 5px; text-align: center; background: var(--brand-blue); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    #page-title { font-size: 80px; font-weight: 900; color: var(--brand-white); text-transform: uppercase; margin: 0; line-height: 1; letter-spacing: -4px; }
 
-    /* --- Compact Nav (Optimized for 7 Items) --- */
-    nav { padding: 2px 4px; background: var(--brand-yellow); display: flex; justify-content: space-between; flex-shrink: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 10px; text-transform: uppercase; padding: 12px 6px; white-space: nowrap; flex-shrink: 0; }
+    /* --- Compact Nav --- */
+    nav { padding: 2px 4px; background: var(--brand-yellow); display: flex; justify-content: space-around; flex-shrink: 0; }
+    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 15px 5px; white-space: nowrap; flex-shrink: 0; }
     nav button.active { text-decoration: underline; text-underline-offset: 4px; }
 
-    /* --- Content Area --- */
+    /* --- Scrollable Content Area --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; }
-    .screen { padding: 20px; }
+    .screen { padding: 0; } /* Padding handled by internal containers */
 
-    /* --- Why Choose Us --- */
+    /* --- WHY CHOOSE US --- */
     .wcu-screen { background-color: var(--brand-blue); color: white; padding: 40px 25px; text-align: center; }
     .wcu-intro h2 { font-size: 32px; font-weight: 800; margin-bottom: 20px; color: var(--brand-yellow); }
-    .wcu-intro p { font-size: 16px; line-height: 1.6; max-width: 800px; margin: 0 auto 30px; }
+    .wcu-intro p { font-size: 16px; line-height: 1.6; margin-bottom: 30px; }
     .video-card { background: rgba(255,255,255,0.1); border: 2px solid var(--brand-yellow); border-radius: 15px; padding: 25px; margin-bottom: 40px; cursor: pointer; display: inline-block; width: 85%; }
-    .wcu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .wcu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; text-align: center; }
     .wcu-item h3 { font-size: 18px; margin: 0 0 10px; font-weight: 800; color: var(--brand-yellow); text-transform: uppercase; }
-    .wcu-item p { font-size: 13px; line-height: 1.5; opacity: 0.9; }
 
-    /* --- Cards & Text (Full Content Integration) --- */
-    .content-card { background: white; border: 1px solid #ddd; border-radius: 15px; padding: 25px; margin-bottom: 20px; border-left: 10px solid var(--brand-yellow); color: var(--brand-blue); }
-    .content-card h3 { margin: 0 0 12px; text-transform: uppercase; font-weight: 900; font-size: 18px; color: var(--brand-blue); }
-    .content-card p { line-height: 1.6; font-size: 14px; }
-    .badge-intro { text-align: center; color: var(--brand-blue); font-weight: 800; text-transform: uppercase; margin: 25px 0 15px; font-size: 16px; }
+    /* --- STANDARDS: BADGES OF HONOR LAYOUT --- */
+    .badges-header { background: var(--brand-blue); padding: 30px 20px; text-align: center; }
+    .badges-header h2 { font-size: 36px; font-weight: 900; color: white; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+    .badges-yellow-bar { height: 8px; background: var(--brand-yellow); width: 100%; margin-bottom: 20px; }
+    
+    .badges-intro { padding: 25px; text-align: center; color: #333; }
+    .badges-intro p { font-size: 14px; line-height: 1.6; margin: 0 auto 15px; max-width: 900px; }
 
-    /* --- Process Step Styling --- */
-    .process-step { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 30px; }
-    .step-num { background: var(--brand-blue); color: var(--brand-yellow); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; flex-shrink: 0; }
-    .step-text h4 { margin: 0 0 5px; text-transform: uppercase; font-weight: 800; color: var(--brand-blue); }
+    .badges-container { 
+      display: flex; flex-direction: column; align-items: center; padding: 0 20px 40px; 
+    }
 
-    /* --- Gallery Grid 3x2 --- */
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .badge-info-block { width: 100%; margin-bottom: 25px; }
+    .badge-info-block h4 { color: #333; font-weight: 900; margin: 0 0 8px; font-size: 16px; text-transform: uppercase; }
+    .badge-info-block p { font-size: 13px; line-height: 1.5; color: #555; margin: 0; }
+
+    /* Central Circle Visual */
+    .central-circle {
+      width: 280px; height: 280px; background: var(--brand-blue); border-radius: 50%;
+      border: 8px solid var(--brand-yellow); margin: 30px 0; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; color: white; position: relative;
+    }
+    .circle-title { font-size: 24px; font-weight: 900; text-transform: uppercase; line-height: 1; }
+    .circle-subtitle { font-size: 10px; font-weight: 700; text-transform: uppercase; border-top: 1px solid white; margin-top: 5px; padding-top: 5px; letter-spacing: 1px; }
+
+    /* --- GALLERY GRID --- */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px; }
     .gallery-box { background: white; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.1); cursor: pointer; }
     .gallery-box img { width: 100%; height: 110px; object-fit: cover; }
     .gallery-box span { padding: 8px 2px; text-align: center; font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 11px; display: block; }
 
-    /* --- Footer (85px Logos) --- */
+    /* --- FOOTER --- */
     footer { background: white; padding: 15px 10px calc(var(--safe-bottom) + 15px); display: flex; justify-content: space-around; border-top: 2px solid #eee; flex-shrink: 0; }
     footer img { height: 85px; max-width: 130px; object-fit: contain; }
 
-    /* Overlays */
     #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; align-items: center; justify-content: center; }
     #videoOverlay video { width: 100%; height: 100%; object-fit: contain; }
     .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 50px; cursor: pointer; z-index: 10000; }
@@ -76,26 +89,25 @@
     <button onclick="navTo('gallery')" id="btn-gallery">Gallery</button>
     <button onclick="navTo('funding')" id="btn-funding">Funding</button>
     <button onclick="navTo('standards')" id="btn-standards">Standards</button>
-    <button onclick="navTo('process')" id="btn-process">Process</button>
+    <button onclick="navTo('safety')" id="btn-safety">Safety</button>
     <button onclick="navTo('reviews')" id="btn-reviews">Reviews</button>
-    <button onclick="navTo('showroom')" id="btn-showroom">Visit Us</button>
   </nav>
 
   <main id="scrollTarget">
     <div id="promise" class="screen wcu-screen">
       <div class="wcu-intro">
         <h2>Why Choose Yorkshire Windows?</h2>
-        <p>At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
+        <p>We combine premium products, expert craftsmanship, and reliable local service. We are dedicated to bringing your vision to life with care, quality, and precision.</p>
         <div class="video-card" onclick="playVideo()">
           <i data-lucide="play-circle" style="width: 70px; height: 70px; color: var(--brand-yellow); margin: 0 auto 10px; display: block;"></i>
-          <div style="font-weight: 800; text-transform: uppercase; font-size: 16px;">A message from our CEO</div>
+          <div style="font-weight: 800; text-transform: uppercase;">A message from our CEO</div>
         </div>
       </div>
       <div class="wcu-grid">
-        <div class="wcu-item"><h3>Premium Standards</h3><p>As a Conservatory Outlet Premium Retailer, we are independently vetted to maintain the very highest standards.</p></div>
-        <div class="wcu-item"><h3>Premium Knowledge</h3><p>With strong local roots, we understand South Yorkshire better than anyone, guiding your home improvement journey.</p></div>
-        <div class="wcu-item"><h3>Premium Guarantee</h3><p>Manufactured with the latest technology and expert craftsmanship, our products are built to last.</p></div>
-        <div class="wcu-item"><h3>Price Promise</h3><p>Transparent pricing. If you find a genuine like-for-like quote elsewhere, we’ll match it—ensuring you always get the best value.</p></div>
+        <div class="wcu-item"><h3>Premium Standards</h3><p>Independently vetted to maintain the highest standards as a Premium Retailer.</p></div>
+        <div class="wcu-item"><h3>Premium Knowledge</h3><p>Strong local roots and decades of experience to guide your journey.</p></div>
+        <div class="wcu-item"><h3>Premium Guarantee</h3><p>Latest technology and expert craftsmanship built to last.</p></div>
+        <div class="wcu-item"><h3>Price Promise</h3><p>Transparent pricing. We match any genuine like-for-like quote.</p></div>
       </div>
     </div>
 
@@ -114,85 +126,73 @@
       </div>
     </div>
 
-    <div id="funding" class="screen hidden">
-        <div class="content-card">
+    <div id="funding" class="screen hidden" style="padding:20px;">
+        <div class="content-card" style="border-left: 10px solid var(--brand-yellow);">
           <h3>FCA Accredited Finance</h3>
-          <p>Our FCA accreditation means we’re officially authorized to offer flexible finance options for your project. It’s your guarantee that we follow strict rules to treat you fairly, provide clear and honest financial information, and help you find a payment plan that truly fits your budget.</p>
+          <p>Our FCA accreditation means we’re officially authorized to offer flexible finance. We follow strict rules to treat you fairly and find a plan that fits your budget.</p>
         </div>
-        <div class="content-card"><h3>11.9% APR Representative</h3><p>Buy Now Pay Monthly over 60 months with a 20% deposit.</p></div>
-        <div class="content-card"><h3>10.9% APR Representative</h3><p>Order today with a 20% deposit and nothing to pay for three months.</p></div>
+        <div class="content-card" style="border-left: 10px solid var(--brand-yellow);"><h3>11.9% APR</h3><p>Buy Now Pay Monthly over 60 months with a 20% deposit.</p></div>
+        <div class="content-card" style="border-left: 10px solid var(--brand-yellow);"><h3>10.9% APR</h3><p>Order today with a 20% deposit and nothing to pay for three months.</p></div>
     </div>
 
     <div id="standards" class="screen hidden">
-        <div class="content-card" style="background:var(--brand-blue); color:white; border-left-color:var(--brand-yellow);">
-          <h3>Our Sanctuary Promise</h3>
+        <div class="badges-header">
+          <h2>Our Badges of Honor (Awards)</h2>
+        </div>
+        <div class="badges-yellow-bar"></div>
+
+        <div class="badges-intro">
           <p>We know that your home is your sanctuary, so we promise to treat it exactly as if it were our own. From the very first conversation to the final finishing touches, we’re here to make sure your project is handled with the care, respect, and attention to detail it deserves.</p>
-        </div>
-        
-        <p style="text-align:center; color:var(--brand-blue); font-size:12px; line-height:1.4; padding:0 10px;">For us, "treating your home like our own" means holding ourselves to the highest possible standards. We’ve gone the extra mile so you can relax, knowing you’re in safe, professional hands.</p>
-        <div class="badge-intro">Our Badges of Honor</div>
-
-        <div class="content-card">
-          <h3>Constructionline Gold</h3>
-          <p>Our Constructionline Gold status is a "Gold Standard" badge of approval, proving we’ve been independently vetted for top-tier safety, quality, and reliability. It’s your shortcut to total peace of mind.</p>
-        </div>
-        <div class="content-card">
-          <h3>FENSA Accredited</h3>
-          <p>Being FENSA accreditation is your guarantee that every window and door we install meets strict building and energy regulations. It provides the essential certificate you’ll need if you ever sell your home, while saving you council hassle.</p>
-        </div>
-        <div class="content-card">
-          <h3>Glass and Glazing Federation (GGF)</h3>
-          <p>As a member of the GGF, we follow the industry’s strictest code of conduct. You’re protected by high technical standards, clear consumer contracts, and a free conciliation service.</p>
-        </div>
-        <div class="content-card"><h3>20 Year Guarantee</h3><p>Manufactured with latest technology and expert craftsmanship, our products are built to last for complete peace of mind.</p></div>
-    </div>
-
-    <div id="process" class="screen hidden">
-        <div class="content-card" style="border-left:none; text-align:center;">
-          <h3>A Seamless Experience</h3>
-          <p>From your first enquiry to the final handover, we ensure every step of your home improvement journey is stress-free and professional.</p>
+          <p>For us, "treating your home like our own" means more than just being tidy—it means holding ourselves to the highest possible standards. We’ve gone the extra mile to earn the industry's most respected accreditations so you can sit back and relax, knowing you’re in safe, professional hands.</p>
+          <p style="font-weight: 800; text-transform: uppercase;">Here is exactly what our "badges of honor" mean for you:</p>
         </div>
 
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <div class="step-text"><h4>Design Consultation</h4><p>We visit your home to discuss your vision, take initial measurements, and help you choose the perfect styles and finishes.</p></div>
-        </div>
+        <div class="badges-container">
+          <div class="badge-info-block">
+            <h4>Being CHAS Accredited</h4>
+            <p>Our way of proving that safety is our top priority. It means we’ve been independently vetted to ensure our health and safety standards are second to none, giving you the confidence that your home project will be managed responsibly, safely, and to the highest professional level.</p>
+          </div>
 
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <div class="step-text"><h4>Technical Survey</h4><p>A specialist surveyor confirms every technical detail and structural requirement to ensure a perfect bespoke fit.</p></div>
-        </div>
+          <div class="badge-info-block">
+            <h4>Glass and Glazing Federation (GGF)</h4>
+            <p>We follow the industry’s strictest code of conduct. This means you’re protected by high technical standards, clear consumer contracts, and a free conciliation service—giving you an extra layer of protection and confidence.</p>
+          </div>
 
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <div class="step-text"><h4>Manufacturing</h4><p>Your products are precision-built in our state-of-the-art facility using the latest technology and expert craftsmanship.</p></div>
-        </div>
+          <div class="central-circle">
+            <span class="circle-title">Our Badges<br>of Honor</span>
+            <span class="circle-subtitle">Trusted. Quality. Security.</span>
+          </div>
 
-        <div class="process-step">
-          <div class="step-num">4</div>
-          <div class="step-text"><h4>Professional Installation</h4><p>Our team arrives to install your project, strictly following our Sanctuary Promise to treat your home like our own.</p></div>
-        </div>
+          <div class="badge-info-block">
+            <h4>Constructionline Gold</h4>
+            <p>Our status is a "Gold Standard" badge of approval, proving we’ve been independently vetted for top-tier safety, quality, and reliability. It’s your shortcut to total peace of mind.</p>
+          </div>
 
-        <div class="process-step">
-          <div class="step-num">5</div>
-          <div class="step-text"><h4>Completion & Support</h4><p>We perform a final walkthrough and hand over your FENSA certificates and 20-year guarantee.</p></div>
+          <div class="badge-info-block">
+            <h4>Being FENSA accreditation</h4>
+            <p>Your guarantee that every window and door we install meets strict building and energy regulations. It provides the essential certificate you’ll need if you ever sell your home, saving you council hassle.</p>
+          </div>
+
+          <div class="badge-info-block">
+            <h4>Our FCA accreditation</h4>
+            <p>Means we’re officially authorized to offer flexible finance options for your project. We follow strict rules to treat you fairly, provide clear and honest financial information, and help you find a payment plan that truly fits your budget.</p>
+          </div>
         </div>
     </div>
 
-    <div id="reviews" class="screen hidden">
-        <div class="content-card" style="font-style:italic;">
-          <p>"Yorkshire Windows lived up to the Sanctuary Promise. They treated our home with incredible respect and the installation is flawless."</p>
-          <span style="font-style:normal; font-weight:800; color:var(--brand-yellow); text-transform:uppercase;">- H. Richards, Sheffield</span>
+    <div id="safety" class="screen hidden" style="padding:20px;">
+        <div class="content-card" style="background:var(--brand-blue); color:white; border-left: 10px solid var(--brand-yellow);">
+          <h3>Safety First Protocol</h3>
+          <p>Your sanctuary remains safe throughout the project. We strictly adhere to CHAS and Constructionline Gold protocols on every site.</p>
         </div>
-        <div class="content-card" style="font-style:italic;">
-          <p>"The Constructionline Gold status gave us confidence from the start. A professional team that delivered a high-quality job."</p>
-          <span style="font-style:normal; font-weight:800; color:var(--brand-yellow); text-transform:uppercase;">- T. Wilson, Rotherham</span>
-        </div>
+        <div class="content-card" style="border-left: 10px solid var(--brand-yellow);"><h3>Trained Installers</h3><p>Our teams are fully trained in secure site management and professional clean-up.</p></div>
     </div>
 
-    <div id="showroom" class="screen hidden">
-        <div class="content-card"><h3>Doncaster Showroom</h3><p>Unit 4 Brunel Trade Park, Off York Road, Doncaster, DN5 8PT.</p><p><strong>Open:</strong> Mon-Fri 9-5 | Sat-Sun 10-4.</p></div>
-        <div class="content-card" style="background:var(--brand-yellow);"><h3>Showroom Exclusive</h3><p>Book a follow-up appointment in our showroom to claim your £500 off voucher.</p></div>
+    <div id="reviews" class="screen hidden" style="padding:20px;">
+        <div class="content-card" style="font-style:italic; border-left: 10px solid var(--brand-yellow);">
+          <p>"The team lived up to their Sanctuary Promise. They treated our home with such care!"</p>
+          <span style="font-style:normal; font-weight:800; color:var(--brand-yellow); text-transform:uppercase; margin-top:10px; display:block;">- Sarah, Doncaster</span>
+        </div>
     </div>
   </main>
 
@@ -206,8 +206,8 @@
 
   <script>
     lucide.createIcons();
-    const screens = ['promise','gallery','funding','standards','process','reviews','showroom'];
-    const titles = { 'promise': 'Why Choose Us', 'gallery': 'GALLERY', 'funding': 'FINANCE', 'standards': 'STANDARDS', 'process': 'OUR PROCESS', 'reviews': 'TESTIMONIALS', 'showroom': 'VISIT US' };
+    const screens = ['promise','gallery','funding','standards','safety','reviews'];
+    const titles = { 'promise': 'Why Choose Us', 'gallery': 'GALLERY', 'funding': 'FINANCE', 'standards': 'STANDARDS', 'safety': 'SAFETY FIRST', 'reviews': 'TESTIMONIALS' };
     const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
 
     function navTo(id) {
@@ -233,7 +233,7 @@
       subList.innerHTML = `<button onclick="resetGallery()" style="color:white; background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold;">← BACK</button>`;
       subList.classList.remove("hidden");
       subs.forEach(s => {
-        const d = document.createElement("div"); d.className = "content-card"; d.innerHTML = `<h3>${s}</h3>`;
+        const d = document.createElement("div"); d.className = "content-card"; d.innerHTML = `<h3>${s}</h3>`; d.style.borderLeft = "10px solid var(--brand-yellow)";
         d.onclick = () => loadImages(`Gallery/${parent}/${s}`); subList.appendChild(d);
       });
     }
