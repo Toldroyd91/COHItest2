@@ -33,24 +33,29 @@
 
     /* --- SHRUNK Top Bar (Blue) --- */
     header {
-      padding: calc(var(--safe-top) + 10px) 10px 10px;
+      padding: calc(var(--safe-top) + 5px) 10px 5px;
       text-align: center;
       background: var(--brand-blue);
       box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 110px;
     }
 
     #page-title {
-      font-size: 42px; /* Large text preserved */
+      font-size: 90px; 
       font-weight: 900;
       color: var(--brand-white);
       text-transform: uppercase;
       margin: 0;
-      line-height: 1;
+      line-height: 0.9;
+      letter-spacing: -3px;
     }
 
     /* --- THIN Navigation Bar (Yellow) --- */
     nav {
-      padding: 4px 5px; /* Minimized padding */
+      padding: 2px 5px; 
       background: var(--brand-gold);
       display: flex;
       justify-content: space-around;
@@ -63,7 +68,7 @@
       font-weight: 900;
       font-size: 13px;
       text-transform: uppercase;
-      padding: 5px 2px;
+      padding: 6px 2px;
     }
 
     nav button.active {
@@ -90,20 +95,20 @@
       pointer-events: none;
     }
 
-    /* --- Gallery Grid Layout --- */
+    /* --- 3x3 Gallery Grid Layout --- */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* Two boxes across */
-      gap: 15px;
-      padding-top: 10px;
+      grid-template-columns: repeat(3, 1fr); /* THREE boxes across */
+      gap: 10px;
+      padding-top: 5px;
     }
 
     .gallery-box {
       background: var(--brand-white);
-      border: 2px solid #eee;
-      border-radius: 12px;
+      border: 1px solid #eee;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
       cursor: pointer;
@@ -111,17 +116,17 @@
 
     .gallery-box img {
       width: 100%;
-      height: 130px;
+      height: 80px; /* Reduced height for 3x3 fit */
       object-fit: cover;
     }
 
     .gallery-box span {
-      padding: 10px;
+      padding: 6px 2px;
       text-align: center;
       font-weight: 800;
       color: var(--brand-blue);
       text-transform: uppercase;
-      font-size: 12px;
+      font-size: 9px; /* Smaller font for narrow columns */
     }
 
     .content-card {
@@ -134,6 +139,14 @@
       color: var(--brand-blue);
     }
 
+    .content-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    /* --- Footer Brand Logos --- */
     footer {
       background: var(--brand-white);
       padding: 15px 10px calc(var(--safe-bottom) + 15px);
@@ -143,7 +156,7 @@
       border-top: 2px solid #eee;
     }
 
-    footer img { height: 60px; max-width: 110px; object-fit: contain; }
+    footer img { height: 65px; max-width: 120px; object-fit: contain; }
 
     #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
     .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 50px; cursor: pointer; }
@@ -215,6 +228,10 @@
         <h3>11.9% APR Representative</h3>
         <p>Buy Now Pay Monthly. Spread the cost over 60 months with a 20% deposit.</p>
       </div>
+      <div class="content-card">
+        <h3>10.9% APR Representative</h3>
+        <p>Buy Now Pay in 3 Months. Nothing to pay for three months with a 20% deposit.</p>
+      </div>
     </div>
 
     <div id="standards" class="screen hidden">
@@ -222,12 +239,21 @@
         <h3 style="color: var(--brand-gold);">20 Year Guarantee</h3>
         <p>Total piece of mind for your investment. We use materials made to go the distance.</p>
       </div>
+      <div class="content-card">
+        <h3>Accreditations</h3>
+        <p>CHAS Accredited for safety. FENSA Approved for regulations. GGF Member for protection.</p>
+      </div>
     </div>
 
     <div id="showroom" class="screen hidden">
       <div class="content-card">
         <h3>Doncaster Showroom</h3>
         <p>Unit 4 Brunel Trade Park, Off York Road, Doncaster, DN5 8PT.</p>
+        <p><strong>Open:</strong> Mon-Fri 9am-5pm | Sat-Sun 10am-4pm.</p>
+      </div>
+      <div class="content-card" style="background: var(--brand-gold); border-left-color: var(--brand-blue);">
+        <h3>Showroom Exclusive</h3>
+        <p>Book your follow-up appointment in the showroom to claim your £500 off voucher.</p>
       </div>
     </div>
   </main>
@@ -266,7 +292,6 @@
     }
 
     function loadSubAlbums(folder) {
-      // This part handles loading the actual high-res photos inside each gallery folder
       loadImages(`Gallery/${folder}`);
     }
 
