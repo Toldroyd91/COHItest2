@@ -1,56 +1,121 @@
 :root {
   --brand-blue: #003b71;
   --brand-gold: #fab51f;
-  --white: #ffffff;
+  --brand-white: #ffffff;
+  --brand-light-gray: #f4f4f4;
   --safe-top: env(safe-area-inset-top, 20px);
   --safe-bottom: env(safe-area-inset-bottom, 20px);
 }
 
 body { 
-  margin: 0; font-family: 'Segoe UI', sans-serif; overflow: hidden; 
-  background: linear-gradient(rgba(0,59,113,0.7), rgba(0,59,113,0.9)), url('background.jpg') center/cover no-repeat fixed;
-  height: 100vh; color: white;
+  margin: 0; 
+  font-family: 'Segoe UI', Roboto, sans-serif; 
+  background-color: var(--brand-white); 
+  height: 100vh; 
+  display: flex; 
+  flex-direction: column;
 }
 
 .hidden { display: none !important; }
 
-/* --- Top Header & Navigation --- */
+/* --- Dynamic Top Title --- */
 header {
-  background: var(--white); padding: calc(var(--safe-top) + 10px) 20px 10px;
-  display: flex; flex-direction: column; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-.co-logo { width: 180px; margin-bottom: 15px; }
-
-nav { display: flex; gap: 15px; overflow-x: auto; width: 100%; padding-bottom: 5px; justify-content: center; }
-nav button { 
-  background: none; border: none; color: var(--brand-blue); font-weight: 700; 
-  text-transform: uppercase; font-size: 11px; white-space: nowrap; padding: 5px 10px;
-}
-nav button.active { border-bottom: 3px solid var(--brand-gold); }
-
-/* --- Main Content Area --- */
-.screen { 
-  height: calc(100vh - 240px); overflow-y: auto; padding: 20px; 
-  box-sizing: border-box; padding-bottom: 100px;
+  padding: calc(var(--safe-top) + 20px) 20px 10px;
+  text-align: center;
+  background: var(--brand-white);
 }
 
-.content-card { background: rgba(255,255,255,0.95); color: var(--brand-blue); border-radius: 12px; padding: 20px; margin-bottom: 15px; border-left: 5px solid var(--brand-gold); }
-.content-card h3 { margin: 0 0 10px; text-transform: uppercase; font-size: 16px; }
+#page-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--brand-blue);
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 1px;
+}
 
-/* --- Gallery Grid --- */
-#imagesGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-#imagesGrid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; }
+/* --- Navigation with Yellow Border --- */
+nav {
+  margin: 10px 20px;
+  padding: 5px;
+  border: 2px solid var(--brand-gold);
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-around;
+  background: var(--brand-white);
+}
 
-/* --- Fixed Bottom Brand Bar --- */
+nav button {
+  background: none;
+  border: none;
+  color: var(--brand-blue);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 10px 5px;
+  transition: all 0.2s;
+}
+
+nav button.active {
+  color: var(--brand-gold);
+}
+
+/* --- Main Content Area with Logo Watermark --- */
+main {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+  background-color: var(--brand-white);
+  padding: 20px;
+  z-index: 1;
+}
+
+/* Background Logo as an Image on the page */
+.page-watermark {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  opacity: 0.05; /* Light watermark effect */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.content-card {
+  background: var(--brand-white);
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  border-left: 5px solid var(--brand-gold);
+}
+
+.content-card h3 {
+  margin: 0 0 10px;
+  color: var(--brand-blue);
+  text-transform: uppercase;
+}
+
+/* --- Footer Brand Bar (Full Color) --- */
 footer {
-  position: fixed; bottom: 0; width: 100%; background: var(--white);
-  padding: 10px 10px calc(var(--safe-bottom) + 10px);
-  display: flex; justify-content: space-around; align-items: center; gap: 5px;
-  box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+  background: var(--brand-white);
+  padding: 15px 10px calc(var(--safe-bottom) + 15px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #eee;
 }
-footer img { height: 25px; max-width: 60px; object-fit: contain; filter: grayscale(1); opacity: 0.7; }
 
-/* --- Overlays --- */
-#imageModal, #videoOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
-#fullscreenImg, video { max-width: 100%; max-height: 90%; }
-.close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 30px; z-index: 10000; }
+footer img {
+  height: 30px;
+  max-width: 75px;
+  object-fit: contain;
+  /* Removed grayscale filter for full color */
+  filter: none; 
+}
+
+/* Modals */
+#videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
+.close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 40px; }
