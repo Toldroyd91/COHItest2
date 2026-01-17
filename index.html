@@ -16,17 +16,33 @@
       --safe-bottom: env(safe-area-inset-bottom, 20px);
     }
 
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    body { 
+      margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; 
+      background-color: var(--brand-white); height: 100vh; 
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+
     .hidden { display: none !important; }
 
-    /* --- Brand Header & Nav --- */
-    header { padding: calc(var(--safe-top) + 5px) 10px 5px; text-align: center; background: var(--brand-blue); display: flex; align-items: center; justify-content: center; min-height: 110px; flex-shrink: 0; }
-    #page-title { font-size: 70px; font-weight: 900; color: var(--brand-white); text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -2px; }
+    header {
+      padding: calc(var(--safe-top) + 5px) 10px 5px;
+      text-align: center; background: var(--brand-blue);
+      display: flex; align-items: center; justify-content: center; min-height: 140px;
+      flex-shrink: 0;
+    }
+
+    #page-title {
+      font-size: 85px; font-weight: 900; color: var(--brand-white);
+      text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -3px;
+    }
+
     nav { padding: 2px 5px; background: var(--brand-gold); display: flex; justify-content: space-around; flex-shrink: 0; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 13px; text-transform: uppercase; padding: 12px 2px; }
+    nav button {
+      background: none; border: none; color: var(--brand-blue);
+      font-weight: 900; font-size: 13px; text-transform: uppercase; padding: 12px 2px;
+    }
     nav button.active { text-decoration: underline; text-underline-offset: 4px; }
 
-    /* --- Scrollable Main Area --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; }
 
     /* --- WHY CHOOSE US (PDF STYLES) --- */
@@ -41,13 +57,14 @@
     .wcu-item h3 { font-size: 18px; margin: 0 0 10px; font-weight: 800; text-transform: uppercase; color: var(--brand-gold); }
     .wcu-item p { font-size: 13px; line-height: 1.5; opacity: 0.85; margin: 0; }
 
-    /* --- Content Cards (Information from PDF) --- */
+    /* --- Accreditations & Standards --- */
     .screen { padding: 20px; }
-    .content-card { background: var(--brand-white); border: 1px solid #ddd; border-radius: 15px; padding: 25px; margin-bottom: 25px; border-left: 10px solid var(--brand-gold); color: var(--brand-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .content-card h3 { margin-top: 0; text-transform: uppercase; font-weight: 900; font-size: 20px; color: var(--brand-blue); }
-    .content-card p { line-height: 1.5; font-size: 15px; margin-bottom: 0; }
+    .content-card { background: var(--brand-white); border: 1px solid #ddd; border-radius: 15px; padding: 25px; margin-bottom: 20px; border-left: 10px solid var(--brand-gold); color: var(--brand-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .content-card h3 { margin: 0 0 12px; text-transform: uppercase; font-weight: 900; font-size: 20px; color: var(--brand-blue); display: flex; align-items: center; gap: 10px; }
+    .content-card p { line-height: 1.6; font-size: 14px; margin-bottom: 0; }
+    .badge-intro { text-align: center; color: var(--brand-blue); font-weight: 800; text-transform: uppercase; margin: 25px 0 15px; font-size: 18px; }
 
-    /* --- Gallery Grid --- */
+    /* Gallery Grid */
     .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .gallery-box { background: white; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.1); cursor: pointer; }
     .gallery-box img { width: 100%; height: 110px; object-fit: cover; }
@@ -81,16 +98,16 @@
     <div id="promise" class="screen wcu-screen">
       <div class="wcu-intro">
         <h2>Why Choose Yorkshire Windows?</h2>
-        <p>We combine premium products, expert craftsmanship, and reliable local service. We are dedicated to bringing your vision to life with care, quality, and precision.</p>
+        <p>At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free.</p>
         <div class="video-card" onclick="playVideo()">
           <i data-lucide="play-circle" style="width: 60px; height: 60px; color: var(--brand-gold); margin: 0 auto 10px; display: block;"></i>
           <div style="font-weight: 800; text-transform: uppercase; color: var(--brand-gold);">Watch Our Showroom Transformation</div>
         </div>
       </div>
       <div class="wcu-grid">
-        <div class="wcu-item"><i data-lucide="award"></i><h3>Premium Standards</h3><p>Independently vetted to maintain the highest standards as a Premium Retailer.</p></div>
-        <div class="wcu-item"><i data-lucide="book-open"></i><h3>Premium Knowledge</h3><p>Strong local roots and decades of experience to guide your journey.</p></div>
-        <div class="wcu-item"><i data-lucide="shield"></i><h3>Premium Guarantee</h3><p>Latest technology and expert craftsmanship built to last.</p></div>
+        <div class="wcu-item"><i data-lucide="award"></i><h3>Premium Standards</h3><p>Independently vetted as a Conservatory Outlet Premium Retailer.</p></div>
+        <div class="wcu-item"><i data-lucide="book-open"></i><h3>Premium Knowledge</h3><p>Decades of experience to guide your South Yorkshire home journey.</p></div>
+        <div class="wcu-item"><i data-lucide="shield"></i><h3>Premium Guarantee</h3><p>Exceptional guarantee for your complete peace of mind.</p></div>
         <div class="wcu-item"><i data-lucide="banknote"></i><h3>Price Promise</h3><p>Transparent pricing. We match any genuine like-for-like quote.</p></div>
       </div>
     </div>
@@ -103,28 +120,51 @@
         <div class="gallery-box" onclick="handleCategory('Leanto')"><img src="Gallery/Thumbnails/Leanto.JPG"><span>Leanto</span></div>
         <div class="gallery-box" onclick="handleCategory('Victorian')"><img src="Gallery/Thumbnails/Victorian.PNG"><span>Victorian</span></div>
       </div>
-      <div id="subFolderList" class="hidden"></div>
-      <div id="albumImages" class="hidden">
+      <div id="subFolderList" class="hidden" style="padding:20px;"></div>
+      <div id="albumImages" class="hidden" style="padding:20px;">
         <button onclick="resetGallery()" style="color:white; background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold;">← BACK</button>
         <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; padding-bottom: 50px;"></div>
       </div>
     </div>
 
     <div id="funding" class="screen hidden">
-        <div class="content-card"><h3>Flexible Options</h3><p>To make life easy, we arrange convenient payment plans. Decisions are typically delivered within 24 hours.</p></div>
+        <div class="content-card"><h3>Flexible Options</h3><p>Authorized by the FCA to offer clear and honest payment plans.</p></div>
         <div class="content-card"><h3>11.9% APR Representative</h3><p>Buy Now Pay Monthly over 60 months with a 20% deposit.</p></div>
-        <div class="content-card"><h3>10.9% APR Representative</h3><p>Buy Now Pay in 3 Months. Nothing to pay for three months with a 20% deposit.</p></div>
+        <div class="content-card"><h3>10.9% APR Representative</h3><p>Nothing to pay for three months with a 20% deposit.</p></div>
     </div>
 
     <div id="standards" class="screen hidden">
-        <div class="content-card" style="background:var(--brand-blue); color:white; border-left-color:var(--brand-gold);"><h3>20 Year Guarantee</h3><p>Total piece of mind. Materials made to go the distance.</p></div>
-        <div class="content-card"><h3>FENSA Approved</h3><p>Installation guaranteed to meet strict energy regulations.</p></div>
-        <div class="content-card"><h3>GGF Member</h3><p>Vetted and protected by a strict code of conduct.</p></div>
+        <div class="content-card" style="background:var(--brand-blue); color:white; border-left-color:var(--brand-gold);">
+          <h3><i data-lucide="home" style="color:var(--brand-gold)"></i> Our Sanctuary Promise</h3>
+          <p>We know that your home is your sanctuary, so we promise to treat it exactly as if it were our own. From the first conversation to the final touches, we handle your project with care, respect, and attention to detail.</p>
+        </div>
+
+        <div class="badge-intro">Our Badges of Honor</div>
+
+        <div class="content-card">
+          <h3><i data-lucide="medal"></i> Constructionline Gold</h3>
+          <p>A "Gold Standard" badge proving we’ve been independently vetted for top-tier safety, quality, and reliability. Your shortcut to total peace of mind.</p>
+        </div>
+
+        <div class="content-card">
+          <h3><i data-lucide="check-circle"></i> FENSA Accredited</h3>
+          <p>Your guarantee that every window and door we install meets strict building and energy regulations. It provides the essential certificate you’ll need if you ever sell your home.</p>
+        </div>
+
+        <div class="content-card">
+          <h3><i data-lucide="users"></i> Glass & Glazing Federation</h3>
+          <p>We follow the industry’s strictest code of conduct. You’re protected by high technical standards, clear contracts, and a free conciliation service.</p>
+        </div>
+
+        <div class="content-card">
+          <h3><i data-lucide="pound-sterling"></i> FCA Authorized</h3>
+          <p>Officially authorized to offer flexible finance. We follow strict rules to treat you fairly, provide honest information, and find a plan that fits your budget.</p>
+        </div>
     </div>
 
     <div id="showroom" class="screen hidden">
         <div class="content-card"><h3>Doncaster Showroom</h3><p>Unit 4 Brunel Trade Park, Off York Road, Doncaster, DN5 8PT.</p><p><strong>Open:</strong> Mon-Fri 9-5 | Sat-Sun 10-4.</p></div>
-        <div class="content-card" style="background:var(--brand-gold);"><h3>Showroom Exclusive</h3><p>Book a follow-up appointment in-store to claim your £500 off voucher.</p></div>
+        <div class="content-card" style="background:var(--brand-gold);"><h3>Showroom Exclusive</h3><p>Claim up to £500 off by booking a follow-up appointment in our showroom.</p></div>
     </div>
   </main>
 
