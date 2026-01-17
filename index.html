@@ -31,47 +31,48 @@
 
     .hidden { display: none !important; }
 
-    /* --- Top Bar (Blue with White Font) --- */
+    /* --- ENLARGED Top Bar (Blue with White Font) --- */
     header {
-      padding: calc(var(--safe-top) + 25px) 20px 15px;
+      padding: calc(var(--safe-top) + 40px) 20px 30px; /* Significantly increased padding */
       text-align: center;
       background: var(--brand-blue);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     #page-title {
-      font-size: 28px;
-      font-weight: 800;
+      font-size: 42px; /* Large, bold title text */
+      font-weight: 900;
       color: var(--brand-white);
       text-transform: uppercase;
       margin: 0;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
     }
 
     /* --- Navigation Bar (Yellow with Blue Font) --- */
     nav {
       margin: 0;
-      padding: 10px 5px;
+      padding: 15px 5px; /* Deeper navigation bar */
       background: var(--brand-gold);
       display: flex;
       justify-content: space-around;
-      border-bottom: 2px solid rgba(0,0,0,0.05);
+      border-bottom: 3px solid rgba(0,0,0,0.1);
     }
 
     nav button {
       background: none;
       border: none;
       color: var(--brand-blue);
-      font-weight: 800;
-      font-size: 11px;
+      font-weight: 900;
+      font-size: 13px; /* Slightly larger menu text */
       text-transform: uppercase;
-      padding: 8px 4px;
-      transition: opacity 0.2s;
+      padding: 10px 6px;
+      transition: transform 0.1s;
     }
 
     nav button.active {
       text-decoration: underline;
-      text-underline-offset: 4px;
+      text-underline-offset: 6px;
+      transform: scale(1.1);
     }
 
     /* --- Main Content Area --- */
@@ -80,18 +81,17 @@
       overflow-y: auto;
       position: relative;
       background-color: var(--brand-white);
-      padding: 20px;
+      padding: 25px;
       z-index: 1;
     }
 
-    /* Fixed Watermark Image */
     .page-watermark {
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 85%;
-      opacity: 0.08;
+      width: 90%;
+      opacity: 0.1;
       z-index: -1;
       pointer-events: none;
     }
@@ -99,42 +99,42 @@
     .content-card {
       background: var(--brand-white);
       border: 1px solid #ddd;
-      border-radius: 12px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-      border-left: 6px solid var(--brand-gold);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      border-left: 8px solid var(--brand-gold);
       color: var(--brand-blue);
     }
 
     .content-card h3 {
-      margin: 0 0 12px;
-      font-size: 18px;
+      margin: 0 0 15px;
+      font-size: 20px;
       text-transform: uppercase;
       font-weight: 800;
     }
 
-    /* --- Footer Brand Bar (Enlarged & Color) --- */
+    /* --- EXTRA LARGE Footer Brand Bar --- */
     footer {
       background: var(--brand-white);
-      padding: 20px 10px calc(var(--safe-bottom) + 20px);
+      padding: 25px 15px calc(var(--safe-bottom) + 25px);
       display: flex;
       justify-content: space-around;
       align-items: center;
-      border-top: 1px solid #eee;
+      border-top: 2px solid #eee;
     }
 
     footer img {
-      height: 40px; /* Increased from 30px */
-      max-width: 90px; /* Increased from 75px */
+      height: 60px; /* Massive brand logos */
+      max-width: 110px;
       object-fit: contain;
       filter: none;
     }
 
     /* Overlays & Modals */
     #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
-    .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 40px; cursor: pointer; }
-    #fullscreenImg { max-width: 95%; max-height: 90%; }
+    .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 50px; cursor: pointer; }
+    #fullscreenImg { max-width: 98%; max-height: 90%; }
     video { width: 100%; height: 80%; background: #000; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -158,7 +158,7 @@
 
     <div id="promise" class="screen">
       <div class="content-card" style="text-align: center; border-left-color: var(--brand-blue);">
-        <i data-lucide="play-circle" style="width: 80px; height: 80px; color: var(--brand-gold); margin: 0 auto 15px; cursor: pointer;" onclick="playVideo()"></i>
+        <i data-lucide="play-circle" style="width: 100px; height: 100px; color: var(--brand-gold); margin: 0 auto 20px; cursor: pointer;" onclick="playVideo()"></i>
         <h3>Watch Our Transformation</h3>
         <p>Experience the care and attention we put into every home. We treat your home exactly as if it were our own.</p>
       </div>
@@ -167,8 +167,8 @@
     <div id="gallery" class="screen hidden">
       <div id="albumList"></div>
       <div id="albumImages" class="hidden">
-        <button onclick="loadAlbums()" style="color:var(--brand-blue); background:var(--brand-gold); border:none; padding:10px 20px; margin-bottom:15px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK</button>
-        <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;"></div>
+        <button onclick="loadAlbums()" style="color:var(--brand-blue); background:var(--brand-gold); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK TO COLLECTIONS</button>
+        <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;"></div>
       </div>
     </div>
 
@@ -273,7 +273,7 @@
 
     function loadSubAlbums(f) {
       const subs = galleryData[f]; if(!subs.length){ loadImages(`Gallery/${f}`); return; }
-      const list = document.getElementById("albumList"); list.innerHTML = `<button onclick="loadAlbums()" style="color:var(--brand-blue); background:var(--brand-gold); border:none; padding:10px 20px; margin-bottom:15px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK</button>`;
+      const list = document.getElementById("albumList"); list.innerHTML = `<button onclick="loadAlbums()" style="color:var(--brand-blue); background:var(--brand-gold); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK</button>`;
       subs.forEach(s => {
         const d = document.createElement("div"); d.className="content-card"; d.innerHTML=`<h3>${s}</h3>`;
         d.onclick=()=>loadImages(`Gallery/${f}/${s}`); list.appendChild(d);
@@ -287,7 +287,7 @@
       let i=1; function l(){
         const s=`${path}/${i.toString().padStart(2,'0')}.jpg`, img=new Image();
         img.src=s; img.onload=()=>{
-          const t = document.createElement("img"); t.src=s; t.style.width="100%"; t.style.borderRadius="8px";
+          const t = document.createElement("img"); t.src=s; t.style.width="100%"; t.style.borderRadius="12px";
           t.onclick=()=>{ document.getElementById('fullscreenImg').src=s; document.getElementById('imageModal').style.display='flex'; };
           grid.appendChild(t); i++; l();
         };
