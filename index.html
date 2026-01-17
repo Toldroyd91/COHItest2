@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CO Home Improvements Showcase</title>
+  <title>Yorkshire Windows Showcase</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
   <style>
     :root {
       --brand-blue: #002f54; 
@@ -14,44 +15,78 @@
       --safe-top: env(safe-area-inset-top, 20px);
       --safe-bottom: env(safe-area-inset-bottom, 20px);
     }
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+    body { 
+      margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; 
+      background-color: var(--brand-white); height: 100vh; 
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+
     .hidden { display: none !important; }
 
-    /* --- Header & Nav --- */
-    header { padding: calc(var(--safe-top) + 5px) 10px 5px; text-align: center; background: var(--brand-blue); display: flex; align-items: center; justify-content: center; min-height: 110px; flex-shrink: 0; }
-    #page-title { font-size: 80px; font-weight: 900; color: var(--brand-white); text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -3px; }
+    /* --- Shrunk Top Bar --- */
+    header {
+      padding: calc(var(--safe-top) + 5px) 10px 5px;
+      text-align: center; background: var(--brand-blue);
+      display: flex; align-items: center; justify-content: center; min-height: 110px;
+      flex-shrink: 0;
+    }
+
+    #page-title {
+      font-size: 70px; font-weight: 900; color: var(--brand-white);
+      text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -2px;
+    }
+
+    /* --- Thin Navigation --- */
     nav { padding: 2px 5px; background: var(--brand-gold); display: flex; justify-content: space-around; flex-shrink: 0; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 13px; text-transform: uppercase; padding: 10px 2px; }
+    nav button {
+      background: none; border: none; color: var(--brand-blue);
+      font-weight: 900; font-size: 13px; text-transform: uppercase; padding: 10px 2px;
+    }
     nav button.active { text-decoration: underline; text-underline-offset: 4px; }
 
-    /* --- Scrollable Content Area --- */
+    /* --- Main Content Area --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; }
 
     /* --- Why Choose Us Screen Styling --- */
-    .wcu-screen { background-color: var(--brand-blue); color: white; padding: 40px 25px; min-height: 100%; text-align: center; }
-    .wcu-intro h2 { font-size: 32px; font-weight: 800; margin-bottom: 20px; }
-    .wcu-intro p { font-size: 16px; line-height: 1.6; max-width: 800px; margin: 0 auto 30px; opacity: 0.9; }
+    .wcu-screen { background-color: var(--brand-blue); color: white; padding: 40px 20px; min-height: 100%; text-align: center; box-sizing: border-box; }
+    .wcu-intro h2 { font-size: 28px; font-weight: 800; margin-bottom: 15px; }
+    .wcu-intro p { font-size: 15px; line-height: 1.6; max-width: 600px; margin: 0 auto 25px; opacity: 0.9; }
     
-    .video-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-bottom: 40px; cursor: pointer; display: inline-block; }
-    .video-card:active { transform: scale(0.98); }
+    .video-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 15px; padding: 15px; margin-bottom: 35px; cursor: pointer; display: inline-block; width: 90%; }
+    .video-card i { margin-bottom: 8px; display: block; }
 
-    .wcu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 20px; text-align: center; }
-    .wcu-item i { width: 50px; height: 50px; color: white; margin-bottom: 15px; stroke-width: 1.5; }
-    .wcu-item h3 { font-size: 20px; margin: 0 0 10px; font-weight: 700; }
-    .wcu-item p { font-size: 13px; line-height: 1.5; opacity: 0.8; margin: 0; }
+    .wcu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 10px; text-align: center; }
+    .wcu-item { display: flex; flex-direction: column; align-items: center; }
+    .wcu-item i { width: 45px; height: 45px; color: var(--brand-gold); margin-bottom: 12px; }
+    .wcu-item h3 { font-size: 16px; margin: 0 0 8px; font-weight: 800; text-transform: uppercase; color: var(--brand-gold); }
+    .wcu-item p { font-size: 12px; line-height: 1.4; opacity: 0.85; margin: 0; }
 
-    /* --- Other Elements --- */
-    .screen { padding: 20px; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .gallery-box { background: white; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.1); cursor: pointer; }
+    /* --- Gallery Grid (3x2 Style) --- */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px; }
+    .gallery-box { background: var(--brand-white); border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; cursor: pointer; }
     .gallery-box img { width: 100%; height: 110px; object-fit: cover; }
-    .gallery-box span { padding: 8px 2px; text-align: center; font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 11px; display: block; }
-    .content-card { background: var(--brand-white); border: 1px solid #ddd; border-radius: 15px; padding: 25px; margin-bottom: 20px; border-left: 10px solid var(--brand-gold); color: var(--brand-blue); }
+    .gallery-box span { padding: 8px 2px; text-align: center; font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 11px; }
+
+    .content-card { background: var(--brand-white); border: 1px solid #ddd; border-radius: 15px; padding: 25px; margin: 20px; border-left: 10px solid var(--brand-gold); color: var(--brand-blue); }
+    .content-card h3 { margin-top: 0; text-transform: uppercase; font-weight: 800; }
+
     footer { background: var(--brand-white); padding: 15px 10px calc(var(--safe-bottom) + 15px); display: flex; justify-content: space-around; align-items: center; border-top: 2px solid #eee; flex-shrink: 0; }
     footer img { height: 85px; max-width: 130px; object-fit: contain; }
 
-    /* Modals */
-    #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; overflow-y: auto; }
+    /* --- Video Overlay (Fixing the full-screen cut-off) --- */
+    #videoOverlay { 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+      background: rgba(0,0,0,0.95); z-index: 9999; display: none; 
+      align-items: center; justify-content: center; 
+    }
+    #videoOverlay video { 
+      width: 100%; height: 100%; 
+      max-width: 100vw; max-height: 100vh;
+      object-fit: contain; /* This prevents the video from being cut off */
+    }
+    
+    #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; overflow-y: auto; }
     .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 50px; cursor: pointer; z-index: 10000; }
     #fullscreenImg { max-width: 100%; height: auto; display: block; }
   </style>
@@ -73,34 +108,34 @@
     <div id="promise" class="screen wcu-screen">
       <div class="wcu-intro">
         <h2>Why Choose Yorkshire Windows?</h2>
-        <p>At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
+        <p>We combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. We're dedicated to bringing your vision to life with care, quality, and precision.</p>
         
         <div class="video-card" onclick="playVideo()">
-          <i data-lucide="play-circle" style="width: 60px; height: 60px; color: var(--brand-gold); margin-bottom: 10px;"></i>
-          <div style="font-weight: 800; font-size: 14px; text-transform: uppercase;">Watch our showroom transformation story</div>
+          <i data-lucide="play-circle" style="width: 50px; height: 50px; color: var(--brand-gold); margin: 0 auto;"></i>
+          <div style="font-weight: 800; font-size: 13px; text-transform: uppercase; margin-top: 10px; color: var(--brand-gold);">Watch our showroom transformation story</div>
         </div>
       </div>
 
       <div class="wcu-grid">
         <div class="wcu-item">
-          <i data-lucide="clipboard-list"></i>
+          <i data-lucide="clipboard-check"></i>
           <h3>Premium Standards</h3>
-          <p>As a Conservatory Outlet Premium Retailer, we are independently vetted to maintain the highest standards throughout surveying and installation.</p>
+          <p>Independently vetted as a Conservatory Outlet Premium Retailer to maintain the highest quality from visit to installation.</p>
         </div>
         <div class="wcu-item">
-          <i data-lucide="lightbulb"></i>
+          <i data-lucide="graduation-cap"></i>
           <h3>Premium Knowledge</h3>
-          <p>With strong local roots, we understand homes across South Yorkshire better than anyone, providing expert guidance for your journey.</p>
+          <p>Backed by decades of local experience, we guide your South Yorkshire home improvement journey with trusted expertise.</p>
         </div>
         <div class="wcu-item">
           <i data-lucide="shield-check"></i>
           <h3>Premium Guarantee</h3>
-          <p>Built with latest technology and expert craftsmanship, every installation comes with an exceptional guarantee for complete peace of mind.</p>
+          <p>Manufactured with latest technology, every installation comes with an exceptional guarantee for complete peace of mind.</p>
         </div>
         <div class="wcu-item">
-          <i data-lucide="tags"></i>
+          <i data-lucide="badge-pound-sterling"></i>
           <h3>Premium Price Promise</h3>
-          <p>We’re committed to transparent pricing. If you find a genuine like-for-like quote elsewhere, we’ll match it – giving you the best value.</p>
+          <p>If you find a genuine like-for-like quote elsewhere, we’ll match it—ensuring you always get the best value.</p>
         </div>
       </div>
     </div>
@@ -113,26 +148,23 @@
         <div class="gallery-box" onclick="handleCategory('Leanto')"><img src="Gallery/Thumbnails/Leanto.JPG"><span>Leanto</span></div>
         <div class="gallery-box" onclick="handleCategory('Victorian')"><img src="Gallery/Thumbnails/Victorian.PNG"><span>Victorian</span></div>
       </div>
-      <div id="subFolderList" class="hidden"></div>
-      <div id="albumImages" class="hidden">
+      <div id="subFolderList" class="hidden" style="padding:20px;"></div>
+      <div id="albumImages" class="hidden" style="padding:20px;">
         <button onclick="resetGallery()" style="color:white; background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold;">← BACK</button>
         <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; padding-bottom: 50px;"></div>
       </div>
     </div>
 
     <div id="funding" class="screen hidden">
-      <div class="content-card"><h3>11.9% APR</h3><p>Buy Now Pay Monthly over 60 months with a 20% deposit.</p></div>
-      <div class="content-card"><h3>10.9% APR</h3><p>Buy Now Pay in 3 Months with a 20% deposit.</p></div>
+        <div class="content-card"><h3>11.9% APR</h3><p>Buy Now Pay Monthly over 60 months with a 20% deposit.</p></div>
+        <div class="content-card"><h3>10.9% APR</h3><p>Buy Now Pay in 3 Months with a 20% deposit.</p></div>
     </div>
-
     <div id="standards" class="screen hidden">
-      <div class="content-card" style="background:var(--brand-blue); color:white; border-left-color:var(--brand-gold);"><h3>20 Year Guarantee</h3><p>Total piece of mind for your investment.</p></div>
-      <div class="content-card"><h3>Accreditations</h3><p>Vetted by CHAS, FENSA, and GGF.</p></div>
+        <div class="content-card" style="background:var(--brand-blue); color:white; border-left-color:var(--brand-gold);"><h3>20 Year Guarantee</h3><p>Total piece of mind for your investment.</p></div>
+        <div class="content-card"><h3>Accreditations</h3><p>Vetted by CHAS, FENSA, and GGF.</p></div>
     </div>
-
     <div id="showroom" class="screen hidden">
-      <div class="content-card"><h3>Doncaster Showroom</h3><p>Unit 4 Brunel Trade Park, Doncaster, DN5 8PT.</p></div>
-      <div class="content-card" style="background:var(--brand-gold);"><h3>£500 Voucher</h3><p>Claim by booking a follow-up appointment in our showroom.</p></div>
+        <div class="content-card"><h3>Doncaster Showroom</h3><p>Unit 4 Brunel Trade Park, Doncaster, DN5 8PT.</p><p><strong>Open:</strong> Mon-Fri 9-5 | Sat-Sun 10-4.</p></div>
     </div>
   </main>
 
@@ -141,7 +173,7 @@
     <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
   </footer>
 
-  <div id="videoOverlay"><span class="close-btn" onclick="closeVideo()">&times;</span><video id="player" controls style="width:100%;"><source src="intro.mp4"></video></div>
+  <div id="videoOverlay"><span class="close-btn" onclick="closeVideo()">&times;</span><video id="player" controls><source src="intro.mp4"></video></div>
   <div id="imageModal"><span class="close-btn" onclick="document.getElementById('imageModal').style.display='none'">&times;</span><img id="fullscreenImg"></div>
 
   <script>
