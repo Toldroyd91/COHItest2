@@ -31,36 +31,29 @@
 
     .hidden { display: none !important; }
 
-    /* --- MAXIMIZED Header (Text fills height) --- */
+    /* --- SHRUNK Top Bar (Blue) --- */
     header {
-      padding: calc(var(--safe-top) + 5px) 10px 5px;
+      padding: calc(var(--safe-top) + 10px) 10px 10px;
       text-align: center;
       background: var(--brand-blue);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 140px; /* Increased height for massive text */
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
     #page-title {
-      font-size: 90px; /* Maximized to fill the bar */
+      font-size: 42px; /* Large text preserved */
       font-weight: 900;
       color: var(--brand-white);
       text-transform: uppercase;
       margin: 0;
-      letter-spacing: -3px; 
-      line-height: 0.9;
+      line-height: 1;
     }
 
-    /* --- COMPRESSED Navigation (Thin Yellow Bar) --- */
+    /* --- THIN Navigation Bar (Yellow) --- */
     nav {
-      margin: 0;
-      padding: 2px 5px; /* Thinner profile */
+      padding: 4px 5px; /* Minimized padding */
       background: var(--brand-gold);
       display: flex;
       justify-content: space-around;
-      border-bottom: 2px solid rgba(0,0,0,0.1);
     }
 
     nav button {
@@ -68,9 +61,9 @@
       border: none;
       color: var(--brand-blue);
       font-weight: 900;
-      font-size: 13px; 
+      font-size: 13px;
       text-transform: uppercase;
-      padding: 6px 2px;
+      padding: 5px 2px;
     }
 
     nav button.active {
@@ -82,10 +75,8 @@
     main {
       flex: 1;
       overflow-y: auto;
+      padding: 20px;
       position: relative;
-      background-color: var(--brand-white);
-      padding: 25px;
-      z-index: 1;
     }
 
     .page-watermark {
@@ -93,10 +84,44 @@
       top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 95%;
+      width: 90%;
       opacity: 0.08;
       z-index: -1;
       pointer-events: none;
+    }
+
+    /* --- Gallery Grid Layout --- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two boxes across */
+      gap: 15px;
+      padding-top: 10px;
+    }
+
+    .gallery-box {
+      background: var(--brand-white);
+      border: 2px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .gallery-box img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+    }
+
+    .gallery-box span {
+      padding: 10px;
+      text-align: center;
+      font-weight: 800;
+      color: var(--brand-blue);
+      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .content-card {
@@ -105,41 +130,24 @@
       border-radius: 15px;
       padding: 25px;
       margin-bottom: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
       border-left: 10px solid var(--brand-gold);
       color: var(--brand-blue);
     }
 
-    .content-card h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      text-transform: uppercase;
-      font-weight: 900;
-    }
-
-    /* --- MASSIVE Footer Brand Logos --- */
     footer {
       background: var(--brand-white);
-      padding: 20px 10px calc(var(--safe-bottom) + 20px);
+      padding: 15px 10px calc(var(--safe-bottom) + 15px);
       display: flex;
       justify-content: space-around;
       align-items: center;
       border-top: 2px solid #eee;
-      flex-wrap: nowrap;
     }
 
-    footer img {
-      height: 85px; /* Extremely large logos */
-      max-width: 140px; 
-      object-fit: contain;
-      filter: none;
-    }
+    footer img { height: 60px; max-width: 110px; object-fit: contain; }
 
-    /* Modals */
     #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
     .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 50px; cursor: pointer; }
     #fullscreenImg { max-width: 98%; max-height: 90%; }
-    video { width: 100%; height: 80%; background: #000; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -163,31 +171,49 @@
     <div id="promise" class="screen">
       <div class="content-card" style="text-align: center; border-left-color: var(--brand-blue);">
         <i data-lucide="play-circle" style="width: 100px; height: 100px; color: var(--brand-gold); margin: 0 auto 20px; cursor: pointer;" onclick="playVideo()"></i>
-        <h3>Watch Our Transformation</h3>
+        <h3 style="text-transform:uppercase; font-weight:900;">Watch Our Transformation</h3>
         <p>Experience the care and attention we put into every home. We treat your home exactly as if it were our own.</p>
       </div>
     </div>
 
     <div id="gallery" class="screen hidden">
-      <div id="albumList"></div>
+      <div id="albumList" class="gallery-grid">
+        <div class="gallery-box" onclick="loadSubAlbums('Edwardian')">
+          <img src="Gallery/Thumbnails/Edwardian.jpg">
+          <span>Edwardian</span>
+        </div>
+        <div class="gallery-box" onclick="loadSubAlbums('Flat Roof')">
+          <img src="Gallery/Thumbnails/Flat Roof.JPG">
+          <span>Flat Roof</span>
+        </div>
+        <div class="gallery-box" onclick="loadSubAlbums('Gable End')">
+          <img src="Gallery/Thumbnails/Gable End.jpeg">
+          <span>Gable End</span>
+        </div>
+        <div class="gallery-box" onclick="loadSubAlbums('Leanto')">
+          <img src="Gallery/Thumbnails/Leanto.JPG">
+          <span>Leanto</span>
+        </div>
+        <div class="gallery-box" onclick="loadSubAlbums('Victorian')">
+          <img src="Gallery/Thumbnails/Victorian.PNG">
+          <span>Victorian</span>
+        </div>
+      </div>
+      
       <div id="albumImages" class="hidden">
-        <button onclick="loadAlbums()" style="color:var(--brand-white); background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK</button>
+        <button onclick="loadAlbums()" style="color:white; background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold;">← BACK</button>
         <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;"></div>
       </div>
     </div>
 
     <div id="funding" class="screen hidden">
       <div class="content-card">
-        <h3>Simple Application</h3>
-        <p>Decisions are typically delivered within 24 hours.</p>
+        <h3>Choice of Funding</h3>
+        <p>Applications are simple and decisions are typically delivered within 24 hours.</p>
       </div>
       <div class="content-card">
         <h3>11.9% APR Representative</h3>
         <p>Buy Now Pay Monthly. Spread the cost over 60 months with a 20% deposit.</p>
-      </div>
-      <div class="content-card">
-        <h3>10.9% APR Representative</h3>
-        <p>Buy Now Pay in 3 Months. Nothing to pay for three months with a 20% deposit.</p>
       </div>
     </div>
 
@@ -196,21 +222,12 @@
         <h3 style="color: var(--brand-gold);">20 Year Guarantee</h3>
         <p>Total piece of mind for your investment. We use materials made to go the distance.</p>
       </div>
-      <div class="content-card">
-        <h3>Accreditations</h3>
-        <p>CHAS Accredited for safety. FENSA Approved for regulations. GGF Member for protection.</p>
-      </div>
     </div>
 
     <div id="showroom" class="screen hidden">
       <div class="content-card">
         <h3>Doncaster Showroom</h3>
         <p>Unit 4 Brunel Trade Park, Off York Road, Doncaster, DN5 8PT.</p>
-        <p><strong>Open:</strong> Mon-Fri 9am-5pm | Sat-Sun 10am-4pm.</p>
-      </div>
-      <div class="content-card" style="background: var(--brand-gold); border-left-color: var(--brand-blue);">
-        <h3 style="color: var(--brand-blue);">Showroom Exclusive</h3>
-        <p>Book your follow-up appointment in the showroom to claim your £500 off voucher.</p>
       </div>
     </div>
   </main>
@@ -230,19 +247,10 @@
   <script>
     lucide.createIcons();
     const screens = ['promise','gallery','funding','standards','showroom'];
-    const titles = {
-      'promise': 'PROMISE',
-      'gallery': 'GALLERY',
-      'funding': 'FINANCE',
-      'standards': 'STANDARDS',
-      'showroom': 'VISIT US'
-    };
+    const titles = { 'promise': 'PROMISE', 'gallery': 'GALLERY', 'funding': 'FINANCE', 'standards': 'STANDARDS', 'showroom': 'VISIT US' };
     
     function navTo(id) {
-      screens.forEach(s => {
-        document.getElementById(s).classList.add('hidden');
-        document.getElementById('btn-'+s).classList.remove('active');
-      });
+      screens.forEach(s => { document.getElementById(s).classList.add('hidden'); document.getElementById('btn-'+s).classList.remove('active'); });
       document.getElementById(id).classList.remove('hidden');
       document.getElementById('btn-'+id).classList.add('active');
       document.getElementById('page-title').innerText = titles[id];
@@ -252,31 +260,14 @@
     function playVideo() { document.getElementById('videoOverlay').style.display='flex'; document.getElementById('player').play(); }
     function closeVideo() { document.getElementById('player').pause(); document.getElementById('videoOverlay').style.display='none'; }
 
-    const galleryData = { 
-      "Edwardian": ["Edwardian Glass", "Edwardian Solid"], 
-      "Flat Roof": [], 
-      "Gable End": ["Gable Glass", "Gable Solid"], 
-      "Leanto": ["Leanto Glass", "Leanto Solid"], 
-      "Victorian": ["Victorian Glass", "Victorian Solid"] 
-    };
-    
     function loadAlbums() {
-      const list = document.getElementById("albumList"); list.innerHTML = "";
+      document.getElementById("albumList").classList.remove("hidden");
       document.getElementById("albumImages").classList.add("hidden");
-      list.classList.remove("hidden");
-      Object.keys(galleryData).forEach(f => {
-        const d = document.createElement("div"); d.className="content-card"; d.innerHTML=`<h3>${f}</h3><p>Tap to view collection</p>`;
-        d.onclick=()=>loadSubAlbums(f); list.appendChild(d);
-      });
     }
 
-    function loadSubAlbums(f) {
-      const subs = galleryData[f]; if(!subs.length){ loadImages(`Gallery/${f}`); return; }
-      const list = document.getElementById("albumList"); list.innerHTML = `<button onclick="loadAlbums()" style="color:var(--brand-white); background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold; cursor:pointer;">← BACK</button>`;
-      subs.forEach(s => {
-        const d = document.createElement("div"); d.className="content-card"; d.innerHTML=`<h3>${s}</h3>`;
-        d.onclick=()=>loadImages(`Gallery/${f}/${s}`); list.appendChild(d);
-      });
+    function loadSubAlbums(folder) {
+      // This part handles loading the actual high-res photos inside each gallery folder
+      loadImages(`Gallery/${folder}`);
     }
 
     function loadImages(path) {
