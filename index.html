@@ -17,26 +17,15 @@
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
     .hidden { display: none !important; }
 
-    /* --- Header Bar (Big Logo) --- */
+    /* --- Header (Big Logo + Centered Title) --- */
     header { 
       padding: calc(var(--safe-top) + 0px) 10px 0px; 
-      text-align: center; 
-      background: var(--brand-blue); 
-      flex-shrink: 0; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      position: relative;
-      height: 120px; /* Set height for the bar */
+      text-align: center; background: var(--brand-blue); 
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center; 
+      position: relative; height: 110px; 
     }
-    .header-logo { 
-      position: absolute; 
-      left: 10px; 
-      height: 100%; /* Scale to full height of blue bar */
-      width: auto; 
-      object-fit: contain; 
-    }
-    #page-title { font-size: 70px; font-weight: 900; color: var(--brand-white); text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -4px; }
+    .header-logo { position: absolute; left: 10px; height: 100%; width: auto; object-fit: contain; }
+    #page-title { font-size: 60px; font-weight: 900; color: var(--brand-white); text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -3px; }
 
     /* --- Navigation --- */
     nav { padding: 2px 4px; background: var(--brand-yellow); display: flex; justify-content: space-around; flex-shrink: 0; }
@@ -45,53 +34,64 @@
 
     /* --- Content Area --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; }
-    .screen { padding: 0; }
+    .screen { width: 100%; box-sizing: border-box; }
 
-    /* --- Common Layout Components --- */
-    .content-padding { padding: 25px; }
-    .content-card { background: white; border: 1px solid #ddd; border-radius: 15px; padding: 15px; border-left: 10px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: center; }
-    .content-card h3 { margin: 0 0 8px; text-transform: uppercase; font-weight: 900; font-size: 14px; line-height: 1.2; }
+    /* --- GRID 2x2 (Home & Funding) --- */
+    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .content-card { 
+      background: white; border: 1px solid #ddd; border-radius: 15px; padding: 15px; 
+      border-left: 10px solid var(--brand-yellow); color: var(--brand-blue); 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: center; 
+    }
+    .content-card h3 { margin: 0 0 8px; text-transform: uppercase; font-weight: 900; font-size: 14px; }
     .content-card p { margin: 0; line-height: 1.4; font-size: 12px; }
-    .apr-badge { color: #d00; font-weight: 900; font-size: 13px; margin-bottom: 4px; display: block; }
 
-    /* --- Funding Page (2x2 Grid) --- */
-    .funding-container { text-align: center; color: var(--brand-blue); }
-    .funding-intro { font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
-    .ecof-link { color: var(--brand-blue); font-weight: 800; text-decoration: underline; cursor: pointer; }
-    
-    .funding-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center; }
-    .footnote { font-size: 11px; font-style: italic; color: #666; margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; text-align: center; }
-
-    /* --- Home (Why Choose Us) --- */
+    /* --- HOME SCREEN --- */
     .wcu-screen { background-color: var(--brand-blue); color: white; padding: 40px 25px; text-align: center; }
-    .video-card { background: rgba(255,255,255,0.1); border: 2px solid var(--brand-yellow); border-radius: 15px; padding: 25px; margin-bottom: 40px; cursor: pointer; display: inline-block; width: 85%; }
-    .wcu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-    .wcu-item h3 { font-size: 18px; margin: 0 0 10px; font-weight: 800; color: var(--brand-yellow); text-transform: uppercase; }
+    .video-card { background: rgba(255,255,255,0.1); border: 2px solid var(--brand-yellow); border-radius: 15px; padding: 20px; margin-bottom: 30px; cursor: pointer; display: inline-block; width: 85%; }
+    .wcu-grid-item h3 { color: var(--brand-yellow); }
 
-    /* --- Gallery --- */
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px; }
-    .gallery-box { background: white; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.1); cursor: pointer; }
-    .gallery-box img { width: 100%; height: 110px; object-fit: cover; }
-    .gallery-box span { padding: 8px 2px; text-align: center; font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 11px; display: block; }
+    /* --- FUNDING SCREEN --- */
+    .funding-container { text-align: center; color: var(--brand-blue); padding: 25px; }
+    .apr-badge { color: #d00; font-weight: 900; font-size: 13px; margin-bottom: 4px; display: block; }
+    .ecof-link { color: var(--brand-blue); font-weight: 800; text-decoration: underline; cursor: pointer; }
 
-    /* --- Overlays --- */
+    /* --- STANDARDS (PDF STYLE) --- */
+    .badges-header { background: var(--brand-blue); padding: 20px; text-align: center; color: white; text-transform: uppercase; }
+    .badges-yellow-bar { height: 8px; background: var(--brand-yellow); width: 100%; }
+    .central-circle { width: 240px; height: 240px; background: var(--brand-blue); border-radius: 50%; border: 6px solid var(--brand-yellow); margin: 20px auto; display: flex; align-items: center; justify-content: center; text-align: center; color: white; font-weight: 900; text-transform: uppercase; }
+
+    /* --- BROCHURES SCREEN (Fixed) --- */
+    .brochure-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 25px; align-items: start; }
+    .brochure-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
+    .brochure-item img { width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 8px; border: 1px solid #eee; }
+    .brochure-item span { font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 10px; line-height: 1.2; }
+
+    /* --- GALLERY --- */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
+    .gallery-box { background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; text-align: center; cursor: pointer; }
+    .gallery-box img { width: 100%; height: 90px; object-fit: cover; }
+    .gallery-box span { font-size: 10px; font-weight: 800; padding: 5px 0; display: block; color: var(--brand-blue); text-transform: uppercase; }
+
+    /* --- OVERLAYS --- */
     #pdfOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; display: none; flex-direction: column; }
     #pdfFrame { flex: 1; width: 100%; border: none; background: white; }
     .pdf-controls { background: var(--brand-blue); padding: 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
-    #videoOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; align-items: center; justify-content: center; }
+    #videoOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
     #videoOverlay video { width: 100%; height: 100%; object-fit: contain; }
-    .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 50px; cursor: pointer; z-index: 10000; }
+    .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 40px; cursor: pointer; z-index: 10000; }
+    #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
 
-    /* --- Footer --- */
-    footer { background: white; padding: 15px 10px calc(var(--safe-bottom) + 15px); display: flex; justify-content: space-around; border-top: 2px solid #eee; flex-shrink: 0; }
-    footer img { height: 85px; max-width: 130px; object-fit: contain; }
+    /* --- FOOTER --- */
+    footer { background: white; padding: 10px 5px calc(var(--safe-bottom) + 10px); display: flex; justify-content: space-around; border-top: 1px solid #eee; flex-shrink: 0; }
+    footer img { height: 60px; max-width: 100px; object-fit: contain; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body onload="initApp()">
 
   <header>
-    <img src="Logo/co-logo.png" class="header-logo" alt="COHI Logo">
+    <img src="Logo/co-logo.png" class="header-logo" alt="COHI">
     <h1 id="page-title">Why Choose Us</h1>
   </header>
 
@@ -106,57 +106,81 @@
   <main id="scrollTarget">
     <div id="home" class="screen wcu-screen">
       <div class="wcu-intro">
-        <h2 style="font-size:32px; font-weight:800; margin-bottom:20px; color:var(--brand-yellow);">Why Choose Yorkshire Windows?</h2>
-        <p style="font-size:16px; line-height:1.6; margin-bottom:30px;">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
+        <h2 style="color:var(--brand-yellow);">Why Choose Yorkshire Windows?</h2>
+        <p>At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service. We’re dedicated to bringing your vision to life with care, quality, and precision.</p>
         <div class="video-card" onclick="playVideo()">
-          <i data-lucide="play-circle" style="width: 70px; height: 70px; color: var(--brand-yellow); margin: 0 auto 10px; display: block;"></i>
+          <i data-lucide="play-circle" style="width: 50px; height: 50px; color: var(--brand-yellow); margin: 0 auto 5px; display: block;"></i>
           <div style="font-weight: 800; text-transform: uppercase;">A message from our CEO</div>
         </div>
       </div>
-      <div class="wcu-grid">
-        <div class="wcu-item"><h3>Premium Standards</h3><p>Independently vetted as a Premium Retailer.</p></div>
-        <div class="wcu-item"><h3>Premium Knowledge</h3><p>Strong local roots and decades of experience.</p></div>
-        <div class="wcu-item"><h3>Premium Guarantee</h3><p>Latest technology and craftsmanship built to last.</p></div>
-        <div class="wcu-item"><h3>Price Promise</h3><p>We match any genuine like-for-like quote.</p></div>
+      <div class="grid-2x2 wcu-grid-item">
+        <div class="content-card"><h3>Premium Standards</h3><p>Vetted as a Premium Retailer.</p></div>
+        <div class="content-card"><h3>Premium Knowledge</h3><p>Strong South Yorkshire local roots.</p></div>
+        <div class="content-card"><h3>Premium Guarantee</h3><p>Latest technology built to last.</p></div>
+        <div class="content-card"><h3>Price Promise</h3><p>We match genuine like-for-like quotes.</p></div>
       </div>
     </div>
 
-    <div id="funding" class="screen hidden content-padding funding-container">
-        <div class="funding-intro">
+    <div id="funding" class="screen hidden funding-container">
+        <div style="margin-bottom: 25px; line-height: 1.6;">
           To make life easy for you, at Yorkshire Windows we can arrange a variety of convenient easy payment finance options (subject to application & affordability).<br><br>
-          Making an application is simple and we promise you a quick decision. Everything can be sorted out with you in the comfort of your home or at our Doncaster showroom and you should get an answer to your application within 24 hours, so you can enjoy whatever you’ve set your heart on right away.<br><br>
-          Explore the different ways to finance your home improvement with Yorkshire Windows with one of the four finance options below.<br><br>
-          To make sure you are getting all the information you need, we will always complete an <span class="ecof-link" onclick="window.open('https://ecof.online', '_blank')">ECOF (Electronic Choice of Funding)</span> with you to guarantee you have all the information you could need.
+          Everything can be sorted in the comfort of your home or showroom and you should get an answer within 24 hours.<br><br>
+          We will always complete an <span class="ecof-link" onclick="window.open('https://ecof.online', '_blank')">ECOF (Electronic Choice of Funding)</span> with you.
         </div>
 
-        <div class="funding-grid">
+        <div class="grid-2x2">
           <div class="content-card">
             <h3>Buy Now Pay Monthly</h3>
             <span class="apr-badge">11.9% APR Representative</span>
-            <p>Order today with a 20% deposit and spread the cost over 60 months.</p>
+            <p>Spread the cost over 60 months with a 20% deposit.</p>
           </div>
-
           <div class="content-card">
             <h3>Buy Now Pay in 3 Months</h3>
             <span class="apr-badge">10.9% APR Representative</span>
-            <p>Order today with a 20% deposit and nothing to pay for three months*.</p>
+            <p>20% deposit and nothing to pay for three months*.</p>
           </div>
-
           <div class="content-card">
             <h3>Buy Now Pay in 6 Months</h3>
             <span class="apr-badge">19.9% APR Representative</span>
-            <p>Order today with a 20% deposit and defer your payments for up to six months.*</p>
+            <p>20% deposit and defer payments for six months.*</p>
           </div>
-
           <div class="content-card">
             <h3>Self Funding</h3>
-            <p>Order today with a 20% deposit and then the remainder is split over up to 4 additional stage payments.</p>
+            <p>20% deposit and remainder split over 4 stage payments.</p>
           </div>
         </div>
+        <div style="font-size: 10px; font-style: italic; margin-top: 20px;">*£29 admin fee applies if paid early. Build starts from "Wind and Water Tight".</div>
+    </div>
 
-        <div class="footnote">
-          *reprisents the fact that there is a £29 admin fee to pay if the balance is paid early, and also that the 3 months/6 months starts from when the build is "Wind and Water Tight"
+    <div id="standards" class="screen hidden">
+        <div class="badges-header"><h2>Our Badges of Honor</h2></div>
+        <div class="badges-yellow-bar"></div>
+        <div style="padding: 20px; text-align: center; font-size: 13px;">
+          We promise to treat your home exactly as if it were our own.
         </div>
+        <div class="central-circle">Our Badges<br>of Honor</div>
+        <div style="padding: 0 20px 40px;">
+          <div class="content-card" style="margin-bottom:10px;"><h3>FENSA</h3><p>Guarantee that every installation meets energy regulations.</p></div>
+          <div class="content-card" style="margin-bottom:10px;"><h3>CHAS</h3><p>Safety standards independently vetted to be second to none.</p></div>
+          <div class="content-card" style="margin-bottom:10px;"><h3>GGF</h3><p>Protected by high technical standards and clear contracts.</p></div>
+        </div>
+    </div>
+
+    <div id="brochures" class="screen hidden">
+      <div class="brochure-grid">
+        <div class="brochure-item" onclick="openPDF('brochures/featuredoors.pdf')">
+          <img src="Gallery/Thumbnails/featuredoors.png">
+          <span>Feature Doors</span>
+        </div>
+        <div class="brochure-item" onclick="openPDF('brochures/nl.pdf')">
+          <img src="Gallery/Thumbnails/nls.png">
+          <span>Living Spaces</span>
+        </div>
+        <div class="brochure-item" onclick="openPDF('brochures/windows.pdf')">
+          <img src="Gallery/Thumbnails/windows.png">
+          <span>Windows</span>
+        </div>
+      </div>
     </div>
 
     <div id="gallery" class="screen hidden">
@@ -169,45 +193,19 @@
       </div>
       <div id="subFolderList" class="hidden"></div>
       <div id="albumImages" class="hidden" style="padding:20px;">
-        <button onclick="resetGallery()" style="color:white; background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold;">← BACK</button>
-        <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; padding-bottom: 50px;"></div>
-      </div>
-    </div>
-
-    <div id="standards" class="screen hidden">
-        <div class="badges-header"><h2>Our Badges of Honor (Awards)</h2></div>
-        <div class="badges-yellow-bar"></div>
-        <div class="badges-intro" style="padding:25px; text-align:center;">
-          <p style="font-size:14px; line-height:1.6; margin-bottom:15px;">We promise to treat your home exactly as if it were our own, holding ourselves to the highest possible standards.</p>
-        </div>
-        <div class="badges-container">
-          <div class="badge-info-block" style="padding:0 20px;"><h4>CHAS Accredited</h4><p style="font-size:13px; line-height:1.5;">Vetted to ensure our health and safety standards are second to none.</p></div>
-          <div class="badge-info-block" style="padding:0 20px;"><h4>GGF Member</h4><p style="font-size:13px; line-height:1.5;">Protected by technical standards, clear contracts, and free conciliation.</p></div>
-          <div class="central-circle"><span class="circle-title">Our Badges<br>of Honor</span></div>
-          <div class="badge-info-block" style="padding:0 20px;"><h4>Constructionline Gold</h4><p style="font-size:13px; line-height:1.5;">Independent vetting for top-tier safety and quality.</p></div>
-          <div class="badge-info-block" style="padding:0 20px;"><h4>FENSA Accredited</h4><p style="font-size:13px; line-height:1.5;">Guarantee that every installation meets strict energy regulations.</p></div>
-        </div>
-    </div>
-
-    <div id="brochures" class="screen hidden">
-      <div class="brochure-grid">
-        <div class="brochure-item" onclick="openPDF('brochures/featuredoors.pdf')"><img src="Gallery/Thumbnails/featuredoors.png"><span>Feature Doors</span></div>
-        <div class="brochure-item" onclick="openPDF('brochures/nl.pdf')"><img src="Gallery/Thumbnails/nls.png"><span>Living Spaces</span></div>
-        <div class="brochure-item" onclick="openPDF('brochures/windows.pdf')"><img src="Gallery/Thumbnails/windows.png"><span>Windows</span></div>
+        <button onclick="resetGallery()" style="color:white; background:var(--brand-blue); border:none; padding:10px 20px; margin-bottom:15px; border-radius:30px; font-weight:bold;">← BACK</button>
+        <div id="imagesGrid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; padding-bottom: 40px;"></div>
       </div>
     </div>
   </main>
 
   <footer>
     <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png">
-    <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
+    <img src="Logo/yorkshire.png">
   </footer>
 
   <div id="pdfOverlay">
-    <div class="pdf-controls">
-      <span style="font-weight: 800; text-transform: uppercase;">Viewing Brochure</span>
-      <span onclick="closePDF()" style="font-size: 30px; cursor: pointer;">&times;</span>
-    </div>
+    <div class="pdf-controls"><span style="font-weight: 800; text-transform: uppercase;">Viewing Brochure</span><span onclick="closePDF()" style="font-size: 30px; cursor: pointer;">&times;</span></div>
     <iframe id="pdfFrame" src=""></iframe>
   </div>
   <div id="videoOverlay"><span class="close-btn" onclick="closeVideo()">&times;</span><video id="player" controls><source src="intro.mp4"></video></div>
@@ -226,29 +224,23 @@
       document.getElementById('page-title').innerText = titles[id];
       if(id === 'gallery') resetGallery();
     }
-    function resetGallery() {
-      document.getElementById("albumList").classList.remove("hidden");
-      document.getElementById("subFolderList").classList.add("hidden");
-      document.getElementById("albumImages").classList.add("hidden");
-      document.getElementById("scrollTarget").scrollTop = 0;
-    }
+    function resetGallery() { document.getElementById("albumList").classList.remove("hidden"); document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumImages").classList.add("hidden"); }
     function openPDF(path) { document.getElementById('pdfFrame').src = path; document.getElementById('pdfOverlay').style.display = 'flex'; }
     function closePDF() { document.getElementById('pdfOverlay').style.display = 'none'; document.getElementById('pdfFrame').src = ''; }
     function handleCategory(cat) { const subs = galleryMap[cat]; if (subs.length === 0) { loadImages(`Gallery/${cat}`); } else { showSubFolders(cat, subs); } }
     function showSubFolders(parent, subs) {
       document.getElementById("albumList").classList.add("hidden");
       const subList = document.getElementById("subFolderList");
-      subList.innerHTML = `<button onclick="resetGallery()" style="color:white; background:var(--brand-blue); border:none; padding:12px 25px; margin-bottom:20px; border-radius:30px; font-weight:bold;">← BACK</button>`;
+      subList.innerHTML = `<button onclick="resetGallery()" style="color:white; background:var(--brand-blue); border:none; padding:15px 25px; margin:20px; border-radius:30px; font-weight:bold;">← BACK</button>`;
       subList.classList.remove("hidden");
       subs.forEach(s => {
-        const d = document.createElement("div"); d.style = "background:white; border-radius:15px; padding:25px; margin:20px; border:1px solid #ddd; border-left:10px solid var(--brand-yellow); color:var(--brand-blue);";
-        d.innerHTML = `<h3 style="margin:0; text-transform:uppercase;">${s}</h3>`;
+        const d = document.createElement("div"); d.className = "content-card"; d.style.margin = "20px";
+        d.innerHTML = `<h3 style="margin:0;">${s}</h3>`;
         d.onclick = () => loadImages(`Gallery/${parent}/${s}`); subList.appendChild(d);
       });
     }
     function loadImages(path) {
-      document.getElementById("subFolderList").classList.add("hidden");
-      document.getElementById("albumList").classList.add("hidden");
+      document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumList").classList.add("hidden");
       const imgView = document.getElementById("albumImages"); imgView.classList.remove("hidden");
       const grid = document.getElementById("imagesGrid"); grid.innerHTML = "";
       const extensions = ['.jpg', '.JPG', '.jpeg', '.png', '.PNG'];
@@ -259,7 +251,7 @@
           const src = `${path}/${index.toString().padStart(2, '0')}${extensions[extIdx]}`;
           const img = new Image();
           img.onload = () => {
-            const t = document.createElement("img"); t.src = src; t.style.width = "100%"; t.style.borderRadius = "12px";
+            const t = document.createElement("img"); t.src = src; t.style.width = "100%"; t.style.borderRadius = "8px";
             t.onclick = () => { document.getElementById('fullscreenImg').src = src; document.getElementById('imageModal').style.display = 'flex'; };
             grid.appendChild(t); tryLoad(index + 1);
           };
