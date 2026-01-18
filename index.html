@@ -17,9 +17,9 @@
     body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
     .hidden { display: none !important; }
 
-    /* --- Header Bar --- */
+    /* --- Header Bar (Big Logo) --- */
     header { 
-      padding: calc(var(--safe-top) + 5px) 10px 5px; 
+      padding: calc(var(--safe-top) + 0px) 10px 0px; 
       text-align: center; 
       background: var(--brand-blue); 
       flex-shrink: 0; 
@@ -27,9 +27,15 @@
       align-items: center; 
       justify-content: center; 
       position: relative;
-      min-height: 110px;
+      height: 120px; /* Set height for the bar */
     }
-    .header-logo { position: absolute; left: 20px; height: 70px; width: auto; object-fit: contain; }
+    .header-logo { 
+      position: absolute; 
+      left: 10px; 
+      height: 100%; /* Scale to full height of blue bar */
+      width: auto; 
+      object-fit: contain; 
+    }
     #page-title { font-size: 70px; font-weight: 900; color: var(--brand-white); text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -4px; }
 
     /* --- Navigation --- */
@@ -41,43 +47,32 @@
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; }
     .screen { padding: 0; }
 
-    /* --- Content Components --- */
+    /* --- Common Layout Components --- */
     .content-padding { padding: 25px; }
-    .content-card { background: white; border: 1px solid #ddd; border-radius: 15px; padding: 25px; margin-bottom: 20px; border-left: 10px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .content-card h3 { margin: 0 0 10px; text-transform: uppercase; font-weight: 900; font-size: 18px; }
-    .content-card p { margin: 0; line-height: 1.5; font-size: 14px; }
-    .apr-badge { color: #d00; font-weight: 900; font-size: 16px; margin-bottom: 5px; display: block; }
-    
-    /* --- Choice of Funding Layout --- */
-    .funding-intro { font-size: 15px; line-height: 1.6; color: var(--brand-blue); margin-bottom: 25px; }
-    .ecof-link { color: var(--brand-blue); font-weight: 800; text-decoration: underline; cursor: pointer; }
-    .footnote { font-size: 12px; font-style: italic; color: #666; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; }
+    .content-card { background: white; border: 1px solid #ddd; border-radius: 15px; padding: 15px; border-left: 10px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: center; }
+    .content-card h3 { margin: 0 0 8px; text-transform: uppercase; font-weight: 900; font-size: 14px; line-height: 1.2; }
+    .content-card p { margin: 0; line-height: 1.4; font-size: 12px; }
+    .apr-badge { color: #d00; font-weight: 900; font-size: 13px; margin-bottom: 4px; display: block; }
 
-    /* --- Why Choose Us --- */
+    /* --- Funding Page (2x2 Grid) --- */
+    .funding-container { text-align: center; color: var(--brand-blue); }
+    .funding-intro { font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
+    .ecof-link { color: var(--brand-blue); font-weight: 800; text-decoration: underline; cursor: pointer; }
+    
+    .funding-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center; }
+    .footnote { font-size: 11px; font-style: italic; color: #666; margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; text-align: center; }
+
+    /* --- Home (Why Choose Us) --- */
     .wcu-screen { background-color: var(--brand-blue); color: white; padding: 40px 25px; text-align: center; }
     .video-card { background: rgba(255,255,255,0.1); border: 2px solid var(--brand-yellow); border-radius: 15px; padding: 25px; margin-bottom: 40px; cursor: pointer; display: inline-block; width: 85%; }
     .wcu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
     .wcu-item h3 { font-size: 18px; margin: 0 0 10px; font-weight: 800; color: var(--brand-yellow); text-transform: uppercase; }
-
-    /* --- Standards: Badges Layout --- */
-    .badges-header { background: var(--brand-blue); padding: 30px 20px; text-align: center; }
-    .badges-header h2 { font-size: 36px; font-weight: 900; color: white; margin: 0; text-transform: uppercase; }
-    .badges-yellow-bar { height: 8px; background: var(--brand-yellow); width: 100%; margin-bottom: 20px; }
-    .badges-container { display: flex; flex-direction: column; align-items: center; padding: 0 20px 40px; }
-    .badge-info-block { width: 100%; margin-bottom: 25px; }
-    .badge-info-block h4 { color: #333; font-weight: 900; margin-bottom: 8px; font-size: 16px; text-transform: uppercase; }
-    .central-circle { width: 280px; height: 280px; background: var(--brand-blue); border-radius: 50%; border: 8px solid var(--brand-yellow); margin: 30px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; }
 
     /* --- Gallery --- */
     .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px; }
     .gallery-box { background: white; border: 1px solid #eee; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.1); cursor: pointer; }
     .gallery-box img { width: 100%; height: 110px; object-fit: cover; }
     .gallery-box span { padding: 8px 2px; text-align: center; font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 11px; display: block; }
-
-    /* --- Brochures --- */
-    .brochure-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 25px; }
-    .brochure-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
-    .brochure-item img { width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); margin-bottom: 10px; }
 
     /* --- Overlays --- */
     #pdfOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; display: none; flex-direction: column; }
@@ -86,7 +81,6 @@
     #videoOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; align-items: center; justify-content: center; }
     #videoOverlay video { width: 100%; height: 100%; object-fit: contain; }
     .close-btn { position: absolute; top: 40px; right: 20px; color: white; font-size: 50px; cursor: pointer; z-index: 10000; }
-    #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: none; align-items: center; justify-content: center; }
 
     /* --- Footer --- */
     footer { background: white; padding: 15px 10px calc(var(--safe-bottom) + 15px); display: flex; justify-content: space-around; border-top: 2px solid #eee; flex-shrink: 0; }
@@ -127,7 +121,7 @@
       </div>
     </div>
 
-    <div id="funding" class="screen hidden content-padding">
+    <div id="funding" class="screen hidden content-padding funding-container">
         <div class="funding-intro">
           To make life easy for you, at Yorkshire Windows we can arrange a variety of convenient easy payment finance options (subject to application & affordability).<br><br>
           Making an application is simple and we promise you a quick decision. Everything can be sorted out with you in the comfort of your home or at our Doncaster showroom and you should get an answer to your application within 24 hours, so you can enjoy whatever you’ve set your heart on right away.<br><br>
@@ -135,27 +129,29 @@
           To make sure you are getting all the information you need, we will always complete an <span class="ecof-link" onclick="window.open('https://ecof.online', '_blank')">ECOF (Electronic Choice of Funding)</span> with you to guarantee you have all the information you could need.
         </div>
 
-        <div class="content-card">
-          <h3>Buy Now Pay Monthly</h3>
-          <span class="apr-badge">11.9% APR Representative</span>
-          <p>Order today with a 20% deposit and then spread the cost over 60 months.</p>
-        </div>
+        <div class="funding-grid">
+          <div class="content-card">
+            <h3>Buy Now Pay Monthly</h3>
+            <span class="apr-badge">11.9% APR Representative</span>
+            <p>Order today with a 20% deposit and spread the cost over 60 months.</p>
+          </div>
 
-        <div class="content-card">
-          <h3>Buy Now Pay in 3 Months</h3>
-          <span class="apr-badge">10.9% APR Representative</span>
-          <p>Order today with a 20% deposit and nothing to pay for three months*</p>
-        </div>
+          <div class="content-card">
+            <h3>Buy Now Pay in 3 Months</h3>
+            <span class="apr-badge">10.9% APR Representative</span>
+            <p>Order today with a 20% deposit and nothing to pay for three months*.</p>
+          </div>
 
-        <div class="content-card">
-          <h3>Buy Now Pay in 6 Months</h3>
-          <span class="apr-badge">19.9% APR Representative</span>
-          <p>Order today with a 20% deposit and defer your payments for up to six months.*</p>
-        </div>
+          <div class="content-card">
+            <h3>Buy Now Pay in 6 Months</h3>
+            <span class="apr-badge">19.9% APR Representative</span>
+            <p>Order today with a 20% deposit and defer your payments for up to six months.*</p>
+          </div>
 
-        <div class="content-card">
-          <h3>Self Funding</h3>
-          <p>Order today with a 20% deposit and then the remainder is split over up to 4 additional stage payments.</p>
+          <div class="content-card">
+            <h3>Self Funding</h3>
+            <p>Order today with a 20% deposit and then the remainder is split over up to 4 additional stage payments.</p>
+          </div>
         </div>
 
         <div class="footnote">
@@ -185,11 +181,11 @@
           <p style="font-size:14px; line-height:1.6; margin-bottom:15px;">We promise to treat your home exactly as if it were our own, holding ourselves to the highest possible standards.</p>
         </div>
         <div class="badges-container">
-          <div class="badge-info-block"><h4>CHAS Accredited</h4><p style="font-size:13px; line-height:1.5;">Vetted to ensure our health and safety standards are second to none.</p></div>
-          <div class="badge-info-block"><h4>GGF Member</h4><p style="font-size:13px; line-height:1.5;">Protected by technical standards, clear contracts, and free conciliation.</p></div>
+          <div class="badge-info-block" style="padding:0 20px;"><h4>CHAS Accredited</h4><p style="font-size:13px; line-height:1.5;">Vetted to ensure our health and safety standards are second to none.</p></div>
+          <div class="badge-info-block" style="padding:0 20px;"><h4>GGF Member</h4><p style="font-size:13px; line-height:1.5;">Protected by technical standards, clear contracts, and free conciliation.</p></div>
           <div class="central-circle"><span class="circle-title">Our Badges<br>of Honor</span></div>
-          <div class="badge-info-block"><h4>Constructionline Gold</h4><p style="font-size:13px; line-height:1.5;">Independent vetting for top-tier safety and quality.</p></div>
-          <div class="badge-info-block"><h4>FENSA Accredited</h4><p style="font-size:13px; line-height:1.5;">Guarantee that every installation meets strict energy regulations.</p></div>
+          <div class="badge-info-block" style="padding:0 20px;"><h4>Constructionline Gold</h4><p style="font-size:13px; line-height:1.5;">Independent vetting for top-tier safety and quality.</p></div>
+          <div class="badge-info-block" style="padding:0 20px;"><h4>FENSA Accredited</h4><p style="font-size:13px; line-height:1.5;">Guarantee that every installation meets strict energy regulations.</p></div>
         </div>
     </div>
 
@@ -214,7 +210,6 @@
     </div>
     <iframe id="pdfFrame" src=""></iframe>
   </div>
-
   <div id="videoOverlay"><span class="close-btn" onclick="closeVideo()">&times;</span><video id="player" controls><source src="intro.mp4"></video></div>
   <div id="imageModal"><span class="close-btn" onclick="document.getElementById('imageModal').style.display='none'">&times;</span><img id="fullscreenImg" style="max-width:100%;"></div>
 
