@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
   <style>
     :root {
       --brand-blue: #002f54; 
@@ -13,82 +14,98 @@
       --brand-white: #ffffff;
       --safe-top: env(safe-area-inset-top, 20px);
     }
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+    body { 
+      margin: 0; font-family: 'Segoe UI', sans-serif; 
+      background-color: var(--brand-white); height: 100vh; 
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+
     .hidden { display: none !important; }
 
-    /* --- Auto-Scaling Responsive Header --- */
+    /* --- Responsive Auto-Scaling Header --- */
     header { 
-      padding: calc(var(--safe-top) + 10px) 15px 10px; 
       background: var(--brand-blue); 
       flex-shrink: 0; 
       display: flex; 
       align-items: center; 
-      justify-content: center;
+      justify-content: center; 
       position: relative;
-      min-height: 80px;
+      padding-top: var(--safe-top);
+      height: 120px; /* Base height */
     }
+    
     .header-logo { 
-      position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-      height: 70%; width: auto; object-fit: contain; 
+      position: absolute; left: 10px; bottom: 5px;
+      height: 90%; width: auto; object-fit: contain; 
     }
+
     #page-title { 
-      font-size: clamp(30px, 8vw, 60px); 
-      font-weight: 900; color: var(--brand-white); 
-      text-transform: uppercase; margin: 0; letter-spacing: -2px; 
+      font-size: clamp(35px, 10vw, 80px); 
+      font-weight: 900; color: white; 
+      text-transform: uppercase; margin: 0; letter-spacing: -3px; 
     }
 
-    /* Vertical Orientation Adjustments */
-    @media (orientation: portrait) {
-      header { height: 12vh; }
-      #page-title { font-size: 10vw; }
+    /* --- Mobile Navigation --- */
+    nav { 
+      padding: 5px; background: var(--brand-yellow); 
+      display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; 
+      gap: 5px; flex-shrink: 0; border-bottom: 2px solid rgba(0,0,0,0.1);
     }
-    /* Horizontal Orientation Adjustments */
-    @media (orientation: landscape) {
-      header { height: 15vh; }
-      #page-title { font-size: 6vh; }
+    nav button { 
+      background: none; border: none; color: var(--brand-blue); 
+      font-weight: 900; font-size: 11px; text-transform: uppercase; 
+      padding: 12px 10px; white-space: nowrap; flex-shrink: 0;
     }
-
-    /* --- Compact Nav (Scrollable for 6 buttons) --- */
-    nav { padding: 5px; background: var(--brand-yellow); display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 10px; flex-shrink: 0; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 12px 15px; white-space: nowrap; }
     nav button.active { text-decoration: underline; text-underline-offset: 4px; }
 
+    /* --- Scrollable Main Area --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; }
-    .screen { padding: 25px; box-sizing: border-box; }
+    .screen { padding: 25px; width: 100%; box-sizing: border-box; }
 
-    /* --- Grid Layouts --- */
-    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, auto); gap: 15px; }
-    @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); } }
+    /* --- 2x2 and 3x2 Grids --- */
+    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); } }
 
-    .content-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    
-    /* Case Study Item */
-    .cs-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
-    .cs-item .thumb-placeholder { width: 100%; aspect-ratio: 1/1; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #999; font-weight: bold; margin-bottom: 8px; border: 1px dashed #ccc; }
+    .content-card { 
+      background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; 
+      border-left: 8px solid var(--brand-yellow); color: var(--brand-blue); 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: center;
+    }
+    .content-card h3 { margin: 0 0 5px; font-size: 14px; text-transform: uppercase; font-weight: 900; }
+    .content-card p { margin: 0; font-size: 11px; line-height: 1.4; }
 
-    /* --- Finance Styling --- */
-    .funding-container { text-align: center; color: var(--brand-blue); }
-    .footnote { font-size: 12px; font-style: italic; color: #555; margin-top: 30px; line-height: 1.4; border-top: 1px solid #eee; padding-top: 15px; }
+    /* --- Standards Page (PDF Style) --- */
+    .badges-header { background: var(--brand-blue); padding: 20px; text-align: center; color: white; font-weight: 900; text-transform: uppercase; }
+    .badges-yellow-bar { height: 8px; background: var(--brand-yellow); }
+    .central-circle { 
+      width: 220px; height: 220px; background: var(--brand-blue); border-radius: 50%; 
+      border: 6px solid var(--brand-yellow); margin: 30px auto; 
+      display: flex; align-items: center; justify-content: center; 
+      text-align: center; color: white; font-weight: 900; text-transform: uppercase;
+    }
 
-    /* Standard Badge Elements Retained... */
-    .central-circle { width: 200px; height: 200px; background: var(--brand-blue); border-radius: 50%; border: 6px solid var(--brand-yellow); margin: 20px auto; display: flex; align-items: center; justify-content: center; text-align: center; color: white; font-weight: 900; text-transform: uppercase; }
-
-    /* Overlay styles... */
-    #pdfOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; display: none; flex-direction: column; }
-    #pdfFrame { flex: 1; width: 100%; border: none; background: white; }
+    /* --- Overlays --- */
+    #pdfOverlay, #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; }
+    #pdfOverlay { flex-direction: column; }
     .pdf-controls { background: var(--brand-blue); padding: 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
+    .close-btn { color: white; font-size: 40px; cursor: pointer; padding: 10px; }
+
+    /* --- Footer --- */
+    footer { background: white; padding: 10px; display: flex; justify-content: space-around; border-top: 1px solid #eee; flex-shrink: 0; }
+    footer img { height: 50px; max-width: 80px; object-fit: contain; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body onload="initApp()">
 
   <header>
-    <img src="Logo/co-logo.png" class="header-logo" alt="COHI Logo">
+    <img src="Logo/co-logo.png" class="header-logo">
     <h1 id="page-title">Why Choose Us</h1>
   </header>
 
-  <nav>
+  <nav id="main-nav">
     <button onclick="navTo('home')" id="btn-home">Home</button>
     <button onclick="navTo('gallery')" id="btn-gallery">Gallery</button>
     <button onclick="navTo('funding')" id="btn-funding">Choice of Funding</button>
@@ -98,55 +115,56 @@
   </nav>
 
   <main id="scrollTarget">
-    <div id="funding" class="screen hidden funding-container">
-        <p style="margin-bottom: 25px; line-height: 1.6;">At Yorkshire Windows, we offer convenient finance options to suit your needs. Applications are processed quickly, often providing a decision within 24 hours.</p>
-        
-        <div class="grid-2x2">
-          <div class="content-card"><h3>Buy Now Pay Monthly</h3><p>11.9% APR Representative.</p></div>
-          <div class="content-card"><h3>Buy Now Pay 3 Months</h3><p>10.9% APR Representative*.</p></div>
-          <div class="content-card"><h3>Buy Now Pay 6 Months</h3><p>19.9% APR Representative*.</p></div>
-          <div class="content-card"><h3>Self Funding</h3><p>20% Deposit, 4 stage payments.</p></div>
+    <div id="home" class="screen">
+      <div style="text-align:center; color:var(--brand-blue);">
+        <h2 style="font-weight:900;">Why Choose Yorkshire Windows?</h2>
+        <p style="line-height:1.6;">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service.</p>
+        <div style="background:var(--brand-blue); color:white; padding:20px; border-radius:15px; margin:20px 0; border:2px solid var(--brand-yellow);" onclick="playVideo()">
+          <i data-lucide="play-circle" style="width:40px; height:40px; color:var(--brand-yellow); margin-bottom:10px;"></i>
+          <div style="font-weight:800; text-transform:uppercase;">A message from our CEO</div>
         </div>
+      </div>
+      <div class="grid-2x2">
+        <div class="content-card"><h3>Standards</h3><p>Vetted Premium Retailer.</p></div>
+        <div class="content-card"><h3>Knowledge</h3><p>South Yorkshire Roots.</p></div>
+        <div class="content-card"><h3>Guarantee</h3><p>Built to Last.</p></div>
+        <div class="content-card"><h3>Price</h3><p>We match like-for-like quotes.</p></div>
+      </div>
+    </div>
 
-        <div class="footnote">
+    <div id="funding" class="screen hidden" style="text-align:center;">
+        <p style="font-size:14px; line-height:1.6; color:var(--brand-blue);">
+          To make life easy for you, at Yorkshire Windows we can arrange a variety of convenient easy payment finance options (subject to application & affordability). 
+          We promise a quick decision, typically within 24 hours.
+        </p>
+        <div class="grid-2x2">
+          <div class="content-card"><h3>Monthly</h3><p>11.9% APR Representative.</p></div>
+          <div class="content-card"><h3>3 Months</h3><p>10.9% APR Representative*.</p></div>
+          <div class="content-card"><h3>6 Months</h3><p>19.9% APR Representative*.</p></div>
+          <div class="content-card"><h3>Self Fund</h3><p>20% Deposit, stage payments.</p></div>
+        </div>
+        <div style="font-size:10px; margin-top:30px; border-top:1px solid #eee; padding-top:10px; font-style:italic;">
           *Terms and Conditions: A nominal £29 administration fee is applicable should the balance be settled in full prior to the end of the term. The commencement of the deferral period is defined as the point at which the installation reaches the 'Wind and Water Tight' stage of construction.
         </div>
     </div>
 
     <div id="casestudies" class="screen hidden">
         <div class="grid-3x2">
-            <div class="cs-item" onclick="openPDF('brochures/largecs.pdf')">
-                <div class="thumb-placeholder">CS THUMB</div>
-                <span style="font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 11px;">Large Project</span>
+            <div style="text-align:center;" onclick="openPDF('brochures/largecs.pdf')">
+                <div style="width:100%; aspect-ratio:1/1; background:#eee; border-radius:10px; display:flex; align-items:center; justify-content:center; border:1px dashed #ccc;">PDF</div>
+                <span style="font-weight:800; font-size:10px; text-transform:uppercase; margin-top:5px; display:block;">Large CS</span>
             </div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
         </div>
     </div>
 
-    </main>
+    <div id="standards" class="screen hidden">
+        <div class="badges-header">Our Badges of Honor</div>
+        <div class="badges-yellow-bar"></div>
+        <div class="central-circle">Badges of Honor</div>
+        <div class="content-card" style="margin-bottom:10px;"><h3>FENSA</h3><p>Meets building and energy regulations.</p></div>
+        <div class="content-card"><h3>GGF</h3><p>Technical standards and clear contracts.</p></div>
+    </div>
 
-  <div id="pdfOverlay">
-    <div class="pdf-controls"><span style="font-weight: 800; text-transform: uppercase;">Viewing Document</span><span onclick="closePDF()" style="font-size: 30px; cursor: pointer;">&times;</span></div>
-    <iframe id="pdfFrame" src=""></iframe>
-  </div>
-
-  <script>
-    const screens = ['home','gallery','funding','standards','brochures', 'casestudies'];
-    const titles = { 'home': 'Why Choose Us', 'gallery': 'GALLERY', 'funding': 'CHOICE OF FUNDING', 'standards': 'STANDARDS', 'brochures': 'BROCHURES', 'casestudies': 'CASE STUDIES' };
-    
-    function navTo(id) {
-      screens.forEach(s => { document.getElementById(s).classList.add('hidden'); document.getElementById('btn-'+s).classList.remove('active'); });
-      document.getElementById(id).classList.remove('hidden');
-      document.getElementById('btn-'+id).classList.add('active');
-      document.getElementById('page-title').innerText = titles[id];
-    }
-    function openPDF(path) { document.getElementById('pdfFrame').src = path; document.getElementById('pdfOverlay').style.display = 'flex'; }
-    function closePDF() { document.getElementById('pdfOverlay').style.display = 'none'; document.getElementById('pdfFrame').src = ''; }
-    function initApp() { navTo('home'); lucide.createIcons(); }
-  </script>
-</body>
-</html>
+    <div id="gallery" class="screen hidden">
+      <div id="albumList" class="grid-3x2" style="gap:10px;">
+        <div onclick="handleCategory('Edwardian')" style="background:#f4f4f4; padding:10px; border-radius:10px; text-align:center
