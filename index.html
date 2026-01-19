@@ -17,52 +17,53 @@
     body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
     .hidden { display: none !important; }
 
-    /* --- RESPONSIVE HEADER --- */
+    /* --- RESPONSIVE AUTO-SCALING HEADER --- */
     header { 
       background: var(--brand-blue); padding-top: var(--safe-top);
       height: 120px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center; position: relative; z-index: 100;
     }
     .header-logo { position: absolute; left: 0; height: 100%; width: auto; object-fit: contain; padding: 5px; }
-    #page-title { font-size: clamp(20px, 6vw, 65px); font-weight: 900; color: white; text-transform: uppercase; margin: 0; letter-spacing: -2px; }
-    .settings-btn { position: absolute; right: 15px; color: white; opacity: 0.4; cursor: pointer; padding: 10px; }
+    #page-title { font-size: clamp(18px, 6vw, 65px); font-weight: 900; color: white; text-transform: uppercase; margin: 0; letter-spacing: -2px; }
+    .settings-btn { position: absolute; right: 15px; color: white; opacity: 0.3; cursor: pointer; padding: 10px; }
 
     /* --- NAVIGATION --- */
     nav { background: var(--brand-yellow); display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-shrink: 0; z-index: 101; border-bottom: 2px solid rgba(0,0,0,0.1); }
     nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 15px 12px; white-space: nowrap; flex-shrink: 0; }
     nav button.active { text-decoration: underline; text-underline-offset: 5px; }
 
-    /* --- CONTENT --- */
+    /* --- MAIN CONTENT AREA --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; z-index: 1; }
     .screen { padding: 25px; min-height: 100%; }
 
-    /* --- HOME SCREEN (VERBATIM) --- */
+    /* --- HOME SCREEN (VERBATIM TEXT) --- */
     .wcu-screen { background-color: var(--brand-blue); color: white; text-align: center; }
     .wcu-intro { font-size: 16px; line-height: 1.6; margin-bottom: 30px; }
-    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center; }
     .wcu-item h3 { color: var(--brand-yellow); font-size: 16px; text-transform: uppercase; margin-bottom: 8px; font-weight: 800; }
-    .wcu-item p { font-size: 11px; line-height: 1.5; opacity: 0.95; margin: 0; text-align: center; }
+    .wcu-item p { font-size: 11px; line-height: 1.5; opacity: 0.95; margin: 0; }
 
-    /* --- ABOUT ME PAGE --- */
+    /* --- ABOUT ME (DYNAMIC DESIGNER PROFILES) --- */
     .profile-header { text-align: center; margin-bottom: 20px; }
-    .headshot-frame { width: 160px; height: 160px; border-radius: 50%; border: 5px solid var(--brand-yellow); margin: 0 auto 15px; overflow: hidden; background: #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .headshot-frame { width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--brand-yellow); margin: 0 auto 15px; overflow: hidden; background: #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
     .headshot-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .content-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
     /* --- GALLERY & BROCHURES --- */
     .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
     @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); } }
-    .content-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .thumb-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
-    .thumb-item img { width: 100%; border-radius: 10px; margin-bottom: 8px; border: 1px solid #eee; }
+    .thumb-item img, .cs-placeholder { width: 100%; border-radius: 10px; margin-bottom: 8px; border: 1px solid #eee; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
     .thumb-item span { font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 10px; }
+    .cs-placeholder { aspect-ratio: 1/1; background: #eee; display: flex; align-items: center; justify-content: center; border: 1px dashed #ccc; color: #999; font-weight: 800; }
 
-    /* --- MODALS --- */
+    /* --- MODALS & OVERLAYS --- */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; }
     .designer-select-card { background: white; padding: 30px; border-radius: 20px; width: 85%; max-width: 400px; text-align: center; }
     .designer-btn { padding: 15px; margin: 10px 0; border: 2px solid var(--brand-blue); border-radius: 12px; font-weight: 900; color: var(--brand-blue); cursor: pointer; }
     .designer-btn.active { background: var(--brand-yellow); border-color: var(--brand-yellow); }
 
-    /* --- FOOTER --- */
+    /* --- FOOTER (BRAND + ACCREDITATION LOGOS) --- */
     footer { background: white; padding: 10px; border-top: 1px solid #eee; flex-shrink: 0; }
     .footer-row { display: flex; justify-content: space-around; align-items: center; margin-bottom: 5px; }
     .footer-row img { height: 32px; max-width: 55px; object-fit: contain; }
@@ -72,7 +73,7 @@
 <body onload="initApp()">
 
   <header>
-    <img src="Logo/co-logo.png" class="header-logo">
+    <img src="Logo/co-logo.png" class="header-logo" alt="Yorkshire Windows">
     <h1 id="page-title">Why Choose Us</h1>
     <div class="settings-btn" onclick="toggleProfiles()"><i data-lucide="user-cog"></i></div>
   </header>
@@ -91,16 +92,11 @@
     <div id="home" class="screen wcu-screen">
       <div class="wcu-intro">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</div>
       <div class="grid-2x2">
-        <div class="wcu-item"><h3>Premium Standards</h3><p>As a Conservatory Outlet Premium Retailer, Yorkshire Windows is independently vetted to maintain the very highest standards. From your first enquiry through to aftercare, we deliver excellence at every stage.</p></div>
-        <div class="wcu-item"><h3>Premium Knowledge</h3><p>With strong local roots, we understand homes across South Yorkshire better than anyone. Backed by years of experience and trusted references.</p></div>
-        <div class="wcu-item"><h3>Premium Guarantee</h3><p>Manufactured with the latest technology and expert craftsmanship, our products are built to last with an exceptional guarantee.</p></div>
-        <div class="wcu-item"><h3>Premium Price Promise</h3><p>We’re committed to honest, transparent pricing. If you find a genuine like-for-like quote elsewhere, we’ll match it.</p></div>
+        <div class="wcu-item"><h3>Premium Standards</h3><p>As a Conservatory Outlet Premium Retailer, Yorkshire Windows is independently vetted to maintain the very highest standards.</p></div>
+        <div class="wcu-item"><h3>Premium Knowledge</h3><p>With strong local roots, we understand homes across South Yorkshire better than anyone.</p></div>
+        <div class="wcu-item"><h3>Premium Guarantee</h3><p>Manufactured with the latest technology, our products are built to last with an exceptional guarantee.</p></div>
+        <div class="wcu-item"><h3>Premium Price Promise</h3><p>If you find a genuine like-for-like quote elsewhere, we’ll match it – giving you the best value.</p></div>
       </div>
-    </div>
-
-    <div id="about" class="screen hidden">
-      <div class="profile-header"><div class="headshot-frame"><img id="designer-img" src=""></div><h2 id="designer-name" style="color:var(--brand-blue); font-weight:900;"></h2></div>
-      <div class="content-card"><p id="designer-bio" style="line-height:1.7; font-size:15px; color:#333; margin:0;"></p></div>
     </div>
 
     <div id="gallery" class="screen hidden">
@@ -115,38 +111,50 @@
       <div id="albumImages" class="hidden"><button onclick="resetGallery()" style="margin-bottom:15px; padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px; font-weight:bold;">← BACK</button><div id="imagesGrid" class="grid-3x2"></div></div>
     </div>
 
+    <div id="about" class="screen hidden">
+      <div class="profile-header"><div class="headshot-frame"><img id="designer-img" src=""></div><h2 id="designer-name" style="color:var(--brand-blue); font-weight:900; margin:0; text-transform:uppercase;"></h2></div>
+      <div class="content-card"><p id="designer-bio" style="line-height:1.7; font-size:15px; color:#333; margin:0; text-align:center;"></p></div>
+    </div>
+
     <div id="funding" class="screen hidden" style="text-align:center;">
-        <div class="grid-2x2" style="margin-bottom:20px;">
-          <div class="content-card"><h3>Pay Monthly</h3><span style="color:#d00; font-weight:900;">11.9% APR</span></div>
-          <div class="content-card"><h3>Pay in 3</h3><span style="color:#d00; font-weight:900;">10.9% APR</span></div>
-          <div class="content-card"><h3>Pay in 6</h3><span style="color:#d00; font-weight:900;">19.9% APR</span></div>
-          <div class="content-card"><h3>Self Fund</h3><p>4 Stages</p></div>
+        <p style="font-size:14px; line-height:1.6; color:var(--brand-blue); margin-bottom:20px;">We arrange convenient easy payment options with quick decisions typically within 24 hours.<br><br>We will always complete an <span style="text-decoration:underline; font-weight:800; cursor:pointer;" onclick="window.open('https://ecof.online', '_blank')">ECOF</span> with you.</p>
+        <div class="grid-2x2" style="margin-bottom:25px;">
+          <div class="content-card"><h3>Monthly</h3><span style="color:#d00; font-weight:900;">11.9% APR</span><p>Spread over 60 months.</p></div>
+          <div class="content-card"><h3>Pay in 3</h3><span style="color:#d00; font-weight:900;">10.9% APR</span><p>Nothing for 3 months*.</p></div>
+          <div class="content-card"><h3>Pay in 6</h3><span style="color:#d00; font-weight:900;">19.9% APR</span><p>Defer for 6 months*.</p></div>
+          <div class="content-card"><h3>Self Fund</h3><p>20% Deposit, 4 stages.</p></div>
         </div>
-        <p style="font-size:11px; font-style:italic; border-top:1px solid #eee; padding-top:15px;">*Terms: £29 fee if paid early. Build starts from "Wind and Water Tight" stage.</p>
+        <p style="font-size:10px; font-style:italic; border-top:1px solid #eee; padding-top:15px;">*Terms: £29 fee if paid early. Deferral begins at the 'Wind and Water Tight' stage.</p>
     </div>
 
     <div id="standards" class="screen hidden">
-        <div style="background:var(--brand-blue); color:white; padding:15px; text-align:center; font-weight:900; text-transform:uppercase;">Badges of Honor</div>
-        <div style="height:8px; background:var(--brand-yellow); margin-bottom:25px;"></div>
-        <div style="width:180px; height:180px; border-radius:50%; border:6px solid var(--brand-yellow); margin:0 auto 25px; display:flex; align-items:center; justify-content:center; text-align:center; color:var(--brand-blue); font-weight:900; background:var(--brand-blue); color:white;">BADGES<br>OF HONOR</div>
-        <div class="content-card" style="margin-bottom:10px;"><h3>FENSA</h3><p>Meets building and energy regulations.</p></div>
-        <div class="content-card"><h3>CHAS</h3><p>Health and safety standards independently vetted.</p></div>
+        <div style="background:var(--brand-blue); color:white; padding:15px; text-align:center; font-weight:900;">BADGES OF HONOR</div>
+        <div style="height:6px; background:var(--brand-yellow); margin-bottom:20px;"></div>
+        <div style="width:180px; height:180px; border-radius:50%; border:6px solid var(--brand-yellow); margin:0 auto 25px; display:flex; align-items:center; justify-content:center; text-align:center; color:white; font-weight:900; background:var(--brand-blue);">BADGES<br>OF HONOR</div>
+        <div class="content-card" style="margin-bottom:10px;"><h3>FENSA</h3><p>Guaranteed to meet strict building and energy regulations.</p></div>
+        <div class="content-card"><h3>GGF</h3><p>Protected by industry-standard code of conduct.</p></div>
     </div>
 
     <div id="brochures" class="screen hidden"><div class="grid-3x2" id="brochure-grid"></div></div>
 
-    <div id="casestudies" class="screen hidden"><div class="grid-3x2"><div class="thumb-item" onclick="openPDF('brochures/largecs.pdf')"><div style="width:100%; aspect-ratio:1/1; background:#eee; border-radius:10px; display:flex; align-items:center; justify-content:center;">PDF</div><span>Large Project</span></div></div></div>
+    <div id="casestudies" class="screen hidden">
+      <div class="grid-3x2">
+        <div class="thumb-item" onclick="openPDF('brochures/largecs.pdf')"><div class="cs-placeholder">PDF</div><span>Large Project</span></div>
+        <div class="thumb-item"><div class="cs-placeholder">+</div><span>Coming Soon</span></div>
+      </div>
+    </div>
   </main>
 
   <div id="profileOverlay" class="modal-overlay">
     <div class="designer-select-card">
-      <h2 style="color:var(--brand-blue);">Switch Designer</h2>
+      <h2 style="color:var(--brand-blue); margin-bottom:20px;">Switch Designer</h2>
       <div class="designer-btn" onclick="setDesigner('Tom')">TOM</div>
       <div class="designer-btn" onclick="setDesigner('Soban')">SOBAN</div>
       <div class="designer-btn" onclick="setDesigner('WYW')">WYW (GENERAL)</div>
-      <p onclick="toggleProfiles()" style="margin-top:20px; color:#999; cursor:pointer;">Close</p>
+      <p onclick="toggleProfiles()" style="margin-top:20px; color:#999; cursor:pointer; font-size:12px;">Close Settings</p>
     </div>
   </div>
+
   <div id="pdfOverlay" class="modal-overlay" style="display:none;"><div style="width:100%; height:100%; display:flex; flex-direction:column;"><div style="background:var(--brand-blue); padding:15px; display:flex; justify-content:space-between; color:white;"><span>Viewer</span><span onclick="closePDF()" style="cursor:pointer; font-size:25px;">&times;</span></div><iframe id="pdfFrame" style="flex:1; width:100%; border:none; background:white;"></iframe></div></div>
 
   <footer>
@@ -156,9 +164,9 @@
 
   <script>
     const designerData = {
-      'Tom': { name: 'Tom', headshot: 'Logo/tom.png', bio: 'Tom specializes in thermal efficiency and high-performance conservatory design across South Yorkshire.', brochures: [{ title: 'Featured Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' }, { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }] },
-      'Soban': { name: 'Soban', headshot: 'Logo/soban.png', bio: 'Soban leads our technical design team, ensuring every Gable and Flat Roof project meets perfect specifications.', brochures: [{ title: 'Living Spaces', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' }, { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }] },
-      'WYW': { name: 'Yorkshire Windows', headshot: 'Logo/yorkshire.png', bio: 'Established in South Yorkshire, we combine premium products and craftsmanship to bring your vision to life.', brochures: [{ title: 'Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' }, { title: 'Living', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' }, { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }] }
+      'Tom': { name: 'Tom', headshot: 'Logo/tom.png', bio: 'Tom has over 10 years of experience in South Yorkshire home design. He specializes in thermal efficiency and Victorian-style conservatories.', brochures: [{ title: 'Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' }, { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }] },
+      'Soban': { name: 'Soban', headshot: 'Logo/soban.png', bio: 'Soban leads our technical design team, known for precision in Gable End and modern Flat Roof designs.', brochures: [{ title: 'Living Spaces', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' }, { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }] },
+      'WYW': { name: 'Yorkshire Windows', headshot: 'Logo/yorkshire.png', bio: 'We combine premium products and craftsmanship to bring your vision to life with care, quality, and precision.', brochures: [{ title: 'Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' }, { title: 'Living', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' }, { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }] }
     };
 
     function setDesigner(key) {
@@ -187,7 +195,7 @@
     function openPDF(p) { document.getElementById('pdfFrame').src = p; document.getElementById('pdfOverlay').style.display = 'block'; }
     function closePDF() { document.getElementById('pdfOverlay').style.display = 'none'; document.getElementById('pdfFrame').src = ''; }
     
-    // Gallery Restoration
+    // Gallery Logic
     function handleCategory(cat) {
       const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
       const subs = galleryMap[cat];
