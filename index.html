@@ -17,47 +17,44 @@
     body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
     .hidden { display: none !important; }
 
-    /* --- HEADER (Big Logo + Settings) --- */
+    /* --- HEADER (AUTO-SCALING) --- */
     header { 
       background: var(--brand-blue); padding-top: var(--safe-top);
-      height: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; z-index: 100;
+      height: 110px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; position: relative; z-index: 100;
     }
     .header-logo { position: absolute; left: 0; height: 100%; width: auto; object-fit: contain; padding: 5px; }
-    #page-title { font-size: clamp(14px, 4vw, 55px); font-weight: 900; color: white; text-transform: uppercase; margin: 0; letter-spacing: -1px; }
-    .settings-btn { position: absolute; right: 15px; color: white; opacity: 0.3; cursor: pointer; padding: 10px; }
+    #page-title { font-size: clamp(20px, 6vw, 60px); font-weight: 900; color: white; text-transform: uppercase; margin: 0; letter-spacing: -2px; }
+    .settings-trigger { position: absolute; right: 15px; color: white; opacity: 0.3; cursor: pointer; padding: 10px; }
 
     /* --- NAVIGATION --- */
-    nav { background: var(--brand-yellow); display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-shrink: 0; z-index: 101; border-bottom: 2px solid rgba(0,0,0,0.1); }
+    nav { background: var(--brand-yellow); display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-shrink: 0; z-index: 101; }
     nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 15px 12px; white-space: nowrap; flex-shrink: 0; }
     nav button.active { text-decoration: underline; text-underline-offset: 5px; }
 
-    /* --- MAIN AREA --- */
+    /* --- MAIN CONTENT --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; z-index: 1; }
-    .screen { padding: 25px; min-height: 100%; }
+    .screen { padding: 25px; min-height: 100%; width: 100%; }
 
-    /* --- GRIDS --- */
-    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center; }
+    /* --- GRID SYSTEM --- */
+    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
     .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
     @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); } }
 
-    /* --- MEDIA CARDS (CEO & VISION) --- */
-    .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px; }
-    .media-card { background: rgba(0,47,84,0.05); border: 2px solid var(--brand-yellow); border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; color: var(--brand-blue); }
-    .media-thumb-placeholder { width: 100%; aspect-ratio: 16/9; background: #ddd; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
-
-    /* --- CONTENT CARDS --- */
+    /* --- CARD STYLING --- */
     .content-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
     .thumb-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
-    .thumb-item img, .placeholder { width: 100%; border-radius: 10px; margin-bottom: 8px; border: 1px solid #eee; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
-    .thumb-item span { font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 10px; }
+    .thumb-item img { width: 100%; border-radius: 10px; border: 1px solid #eee; margin-bottom: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .thumb-item span { font-weight: 800; font-size: 10px; text-transform: uppercase; color: var(--brand-blue); }
+
+    /* --- OVERLAYS --- */
+    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; flex-direction: column; }
+    .overlay-controls { background: var(--brand-blue); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+    .close-btn { font-size: 35px; cursor: pointer; line-height: 1; }
 
     /* --- FOOTER --- */
     footer { background: white; padding: 10px; border-top: 1px solid #eee; flex-shrink: 0; }
-    .footer-row { display: flex; justify-content: space-around; align-items: center; margin-bottom: 5px; }
-    .footer-row img { height: 30px; max-width: 55px; object-fit: contain; }
-
-    /* --- OVERLAYS --- */
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; }
+    .footer-row { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 5px; }
+    .footer-row img { height: 35px; max-width: 65px; object-fit: contain; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -66,13 +63,13 @@
   <header>
     <img src="Logo/co-logo.png" class="header-logo">
     <h1 id="page-title">Why Choose Us</h1>
-    <div class="settings-btn" onclick="toggleProfiles()"><i data-lucide="user-cog"></i></div>
+    <div class="settings-trigger" onclick="toggleSettings()"><i data-lucide="user-cog"></i></div>
   </header>
 
   <nav>
     <button onclick="navTo('home')" id="btn-home">Home</button>
+    <button onclick="navTo('aboutme')" id="btn-aboutme">About Me</button>
     <button onclick="navTo('gallery')" id="btn-gallery">Gallery</button>
-    <button onclick="navTo('about')" id="btn-about">About Your Designer</button>
     <button onclick="navTo('funding')" id="btn-funding">Funding</button>
     <button onclick="navTo('standards')" id="btn-standards">Standards</button>
     <button onclick="navTo('brochures')" id="btn-brochures">Brochures</button>
@@ -80,26 +77,51 @@
   </nav>
 
   <main id="scrollTarget">
-    <div id="home" class="screen">
-      <p style="color:var(--brand-blue); margin-bottom:25px; line-height:1.6; text-align:center;">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
-      
-      <div class="media-grid">
-        <div class="media-card" onclick="playVideo()">
-          <div class="media-thumb-placeholder"><i data-lucide="play-circle" style="color:var(--brand-yellow);"></i></div>
-          <span style="font-weight:900; font-size:10px; text-transform:uppercase;">Video from our CEO</span>
-        </div>
-        <div class="media-card" onclick="openPDF('brochures/pitchperfect.pdf')">
-          <div class="media-thumb-placeholder"><i data-lucide="file-text" style="color:var(--brand-yellow);"></i></div>
-          <span style="font-weight:900; font-size:10px; text-transform:uppercase;">Company Vision</span>
-        </div>
-      </div>
-
+    
+    <div id="home" class="screen" style="background-color: var(--brand-blue); color: white; text-align: center;">
+      <p style="font-size:15px; line-height:1.6; margin-bottom:30px;">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
       <div class="grid-2x2">
-        <div class="thumb-item"><h3 style="color:var(--brand-blue); font-size:12px; text-transform:uppercase; margin-bottom:5px;">Premium Standards</h3><p style="font-size:10px; color:#666;">Independently vetted Retailer.</p></div>
-        <div class="thumb-item"><h3 style="color:var(--brand-blue); font-size:12px; text-transform:uppercase; margin-bottom:5px;">Knowledge</h3><p style="font-size:10px; color:#666;">Strong local roots.</p></div>
-        <div class="thumb-item"><h3 style="color:var(--brand-blue); font-size:12px; text-transform:uppercase; margin-bottom:5px;">Guarantee</h3><p style="font-size:10px; color:#666;">Built with technology.</p></div>
-        <div class="thumb-item"><h3 style="color:var(--brand-blue); font-size:12px; text-transform:uppercase; margin-bottom:5px;">Price Promise</h3><p style="font-size:10px; color:#666;">Match like-for-like quotes.</p></div>
+        <div style="text-align:center;">
+          <h3 style="color:var(--brand-yellow); font-size:15px; text-transform:uppercase;">Premium Standards</h3>
+          <p style="font-size:11px; line-height:1.4; opacity:0.9;">As a Conservatory Outlet Premium Retailer, Yorkshire Windows is independently vetted to maintain the very highest standards. From your first enquiry and showroom visit through to sales, surveying, installation, and aftercare, we deliver excellence at every stage.</p>
+        </div>
+        <div style="text-align:center;">
+          <h3 style="color:var(--brand-yellow); font-size:15px; text-transform:uppercase;">Premium Knowledge</h3>
+          <p style="font-size:11px; line-height:1.4; opacity:0.9;">With strong local roots, we understand homes across South Yorkshire better than anyone. Backed by years of experience, trusted references, and a welcoming showroom nearby, we’re here to inspire and guide your home improvement journey.</p>
+        </div>
+        <div style="text-align:center;">
+          <h3 style="color:var(--brand-yellow); font-size:15px; text-transform:uppercase;">Premium Guarantee</h3>
+          <p style="font-size:11px; line-height:1.4; opacity:0.9;">Manufactured with the latest technology and expert craftsmanship, our products are built to last. That’s why every installation comes with an exceptional guarantee for your complete peace of mind.</p>
+        </div>
+        <div style="text-align:center;">
+          <h3 style="color:var(--brand-yellow); font-size:15px; text-transform:uppercase;">Premium Price Promise</h3>
+          <p style="font-size:11px; line-height:1.4; opacity:0.9;">We’re committed to honest, transparent pricing. If you find a genuine like-for-like quote elsewhere, we’ll match it – giving you the confidence that you’re always getting the best value.</p>
+        </div>
       </div>
+    </div>
+
+    <div id="aboutme" class="screen hidden">
+      <div class="content-card" style="padding:25px; border-left-width:12px;">
+        <div style="display:flex; align-items:center; gap:20px; margin-bottom:20px;">
+          <div id="user-initial" style="width:70px; height:70px; background:var(--brand-blue); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:30px; font-weight:900;">W</div>
+          <div>
+            <h2 id="user-name" style="margin:0; text-transform:uppercase; color:var(--brand-blue);">Yorkshire Windows</h2>
+            <p style="margin:0; font-weight:bold; color:var(--brand-yellow); font-size:14px;">Design Consultant</p>
+          </div>
+        </div>
+        <p id="user-bio" style="line-height:1.6; font-size:15px; color:#444;">Please select a designer from the settings menu.</p>
+      </div>
+    </div>
+
+    <div id="funding" class="screen hidden" style="text-align:center; color:var(--brand-blue);">
+      <p style="margin-bottom:25px; line-height:1.6;">Everything can be sorted out with you in the comfort of your home or at our showroom and you should get an answer within 24 hours.</p>
+      <div class="grid-2x2">
+        <div class="content-card"><h3>Buy Now Pay Monthly</h3><p style="color:#d00; font-weight:900;">11.9% APR</p><p style="font-size:10px;">Spread over 60 months.</p></div>
+        <div class="content-card"><h3>Buy Now Pay 3 Months</h3><p style="color:#d00; font-weight:900;">10.9% APR</p><p style="font-size:10px;">Nothing for 3 months*.</p></div>
+        <div class="content-card"><h3>Buy Now Pay 6 Months</h3><p style="color:#d00; font-weight:900;">19.9% APR</p><p style="font-size:10px;">Defer for 6 months*.</p></div>
+        <div class="content-card"><h3>Self Funding</h3><p style="font-weight:900;">Stage Payments</p><p style="font-size:10px;">20% Deposit.</p></div>
+      </div>
+      <p style="font-size:10px; margin-top:30px; font-style:italic; border-top:1px solid #eee; padding-top:10px;">*Terms: £29 fee applies if paid early. Starts from 'Wind and Water Tight'.</p>
     </div>
 
     <div id="gallery" class="screen hidden">
@@ -111,113 +133,97 @@
         <div class="thumb-item" onclick="handleCategory('Victorian')"><img src="Gallery/Thumbnails/Victorian.PNG"><span>Victorian</span></div>
       </div>
       <div id="subFolderList" class="hidden"></div>
-      <div id="albumImages" class="hidden"><button onclick="resetGallery()" style="margin-bottom:15px; padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px;">← BACK</button><div id="imagesGrid" class="grid-3x2"></div></div>
+      <div id="albumImages" class="hidden"><button onclick="resetGallery()" style="margin-bottom:20px; padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px;">← BACK</button><div id="imagesGrid" class="grid-3x2"></div></div>
     </div>
 
-    <div id="funding" class="screen hidden" style="text-align:center;">
-        <p style="font-size:14px; line-height:1.6; color:var(--brand-blue); margin-bottom:20px;">We arrange convenient easy payment options with quick decisions typically within 24 hours.</p>
-        <div class="grid-2x2">
-          <div class="content-card"><h3>Monthly</h3><span style="color:#d00; font-weight:900;">11.9% APR</span><p>Spread over 60 months.</p></div>
-          <div class="content-card"><h3>Pay in 3</h3><span style="color:#d00; font-weight:900;">10.9% APR</span><p>Nothing for 3 months*.</p></div>
-          <div class="content-card"><h3>Pay in 6</h3><span style="color:#d00; font-weight:900;">19.9% APR</span><p>Defer for 6 months*.</p></div>
-          <div class="content-card"><h3>Self Fund</h3><p>Stage payments.</p></div>
-        </div>
-        <p style="font-size:10px; font-style:italic; border-top:1px solid #eee; padding-top:15px;">*Terms: £29 fee if paid early. Deferral begins at the 'Wind and Water Tight' stage.</p>
-    </div>
-
-    <div id="about" class="screen hidden">
-      <div style="text-align:center; margin-bottom:20px;">
-        <div style="width:150px; height:150px; border-radius:50%; border:5px solid var(--brand-yellow); margin:0 auto 15px; overflow:hidden; background:#eee;">
-          <img id="designer-img" src="" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <h2 id="designer-name" style="color:var(--brand-blue); font-weight:900; margin:0; text-transform:uppercase;"></h2>
+    <div id="brochures" class="screen hidden"><div id="brochure-grid" class="grid-3x2"></div></div>
+    <div id="casestudies" class="screen hidden">
+      <div class="grid-3x2">
+        <div class="thumb-item" onclick="openPDF('brochures/largecs.pdf')"><div style="width:100%; aspect-ratio:1/1; background:#eee; border-radius:10px; display:flex; align-items:center; justify-content:center; border:1px dashed #ccc;">PDF</div><span>Large Project</span></div>
       </div>
-      <div class="content-card"><p id="designer-bio" style="line-height:1.7; font-size:15px; color:#333; margin:0; text-align:center;"></p></div>
     </div>
 
-    <div id="brochures" class="screen hidden"><div class="grid-3x2" id="brochure-grid"></div></div>
-
-    <div id="casestudies" class="screen hidden"><div class="thumb-item" onclick="openPDF('brochures/largecs.pdf')"><div style="width:100%; aspect-ratio:1/1; background:#eee; border-radius:10px; border:1px dashed #ccc; display:flex; align-items:center; justify-content:center;">PDF</div><span>Large Project</span></div></div>
+    <div id="standards" class="screen hidden">
+      <div style="width:200px; height:200px; background:var(--brand-blue); border-radius:50%; border:6px solid var(--brand-yellow); margin:20px auto; display:flex; align-items:center; justify-content:center; text-align:center; color:white; font-weight:900;">Badges of Honor</div>
+      <div class="content-card" style="margin-bottom:15px;"><h3>FENSA</h3><p>Strict building and energy regulations.</p></div>
+      <div class="content-card"><h3>CHAS</h3><p>Vetted health and safety standards.</p></div>
+    </div>
   </main>
 
-  <div id="profileOverlay" class="modal-overlay">
-    <div style="background:white; padding:30px; border-radius:20px; width:85%; max-width:400px; text-align:center;">
-      <h2 style="color:var(--brand-blue); margin-bottom:20px;">Switch Designer</h2>
-      <div style="padding:15px; margin:10px 0; border:2px solid var(--brand-blue); border-radius:12px; font-weight:900; cursor:pointer;" onclick="setDesigner('Tom')">TOM</div>
-      <div style="padding:15px; margin:10px 0; border:2px solid var(--brand-blue); border-radius:12px; font-weight:900; cursor:pointer;" onclick="setDesigner('Soban')">SOBAN</div>
-      <div style="padding:15px; margin:10px 0; border:2px solid var(--brand-blue); border-radius:12px; font-weight:900; cursor:pointer;" onclick="setDesigner('WYW')">WYW (GENERAL)</div>
+  <div id="settingsModal" class="overlay">
+    <div style="background:white; margin:auto; width:85%; border-radius:20px; padding:25px; text-align:center;">
+      <h2 style="color:var(--brand-blue); border-bottom:2px solid var(--brand-yellow); padding-bottom:10px;">Select Designer</h2>
+      <div style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
+        <button onclick="setUser('WYW')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px; font-weight:bold;">WYW (Default)</button>
+        <button onclick="setUser('Tom')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px; font-weight:bold;">Tom</button>
+        <button onclick="setUser('Soban')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px; font-weight:bold;">Soban</button>
+      </div>
+      <button onclick="toggleSettings()" style="color:#666; background:none; border:none; font-weight:bold;">Cancel</button>
     </div>
   </div>
-  <div id="pdfOverlay" class="modal-overlay" style="display:none;"><div style="width:100%; height:100%; display:flex; flex-direction:column;"><div style="background:var(--brand-blue); padding:15px; display:flex; justify-content:space-between; color:white;"><span>Viewer</span><span onclick="closePDF()" style="cursor:pointer; font-size:25px;">&times;</span></div><iframe id="pdfFrame" style="flex:1; width:100%; border:none; background:white;"></iframe></div></div>
-  <div id="videoOverlay" class="modal-overlay" style="display:none; align-items:center; justify-content:center;"><span style="position:absolute; top:20px; right:20px; color:white; font-size:40px; cursor:pointer; z-index:5001;" onclick="closeVideo()">&times;</span><video id="player" controls style="max-width:95%; max-height:85%;"><source src="intro.mp4"></video></div>
+
+  <div id="pdfOverlay" class="overlay">
+    <div class="overlay-controls"><span>Brochure Viewer</span><span class="close-btn" onclick="closePDF()">&times;</span></div>
+    <iframe id="pdfFrame" style="flex:1; width:100%; border:none; background:white;"></iframe>
+  </div>
 
   <footer>
     <div class="footer-row">
       <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png"><img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
     </div>
-    <div class="footer-row" style="opacity:0.5; padding-top:5px; border-top:1px solid #eee;">
+    <div class="footer-row" style="opacity:0.6; border-top:1px solid #eee; padding-top:5px;">
       <img src="Logo/fensa.png"><img src="Logo/chas.png"><img src="Logo/ggf.png"><img src="Logo/constructionline.png">
     </div>
   </footer>
 
   <script>
-    const designerData = {
-      'Tom': { 
-        name: 'Thomas', 
-        headshot: 'Logo/tom.png', 
-        bio: 'Passionate about bringing clients’ dreams to life, Thomas finds inspiration in creating spaces that not only transform homes but also enhance everyday living...', 
-        brochures: [{ title: 'Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' }, { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }] 
-      },
-      'Soban': { name: 'Soban', headshot: 'Logo/soban.png', bio: 'Soban leads our technical design team...', brochures: [{ title: 'Living Spaces', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' }] },
-      'WYW': { name: 'Yorkshire Windows', headshot: 'Logo/yorkshire.png', bio: 'At Yorkshire Windows...', brochures: [{ title: 'Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' }, { title: 'Living', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' }] }
+    const userProfiles = {
+      'WYW': { name: "Yorkshire Windows", initial: "W", bio: "Our team of experts is dedicated to bringing your vision to life with care, quality, and precision.", brochures: [{t:'Windows', f:'windows.pdf', i:'windows.png'}, {t:'Living Spaces', f:'nl.pdf', i:'nls.png'}] },
+      'Tom': { name: "Tom", initial: "T", bio: "Hi, I'm Tom. I specialize in energy-efficient solutions and bespoke conservatory designs.", brochures: [{t:'Feature Doors', f:'featuredoors.pdf', i:'featuredoors.png'}] },
+      'Soban': { name: "Soban", initial: "S", bio: "Hello, I'm Soban. I focus on modern architectural glazing and luxury home transformations.", brochures: [{t:'Windows', f:'windows.pdf', i:'windows.png'}, {t:'Feature Doors', f:'featuredoors.pdf', i:'featuredoors.png'}] }
     };
 
-    function setDesigner(key) {
-      const data = designerData[key];
-      localStorage.setItem('selectedDesigner', key);
-      document.getElementById('designer-name').innerText = data.name;
-      document.getElementById('designer-bio').innerText = data.bio;
-      document.getElementById('designer-img').src = data.headshot;
-      const grid = document.getElementById('brochure-grid'); grid.innerHTML = '';
-      data.brochures.forEach(b => {
-        const item = document.createElement('div'); item.className = 'thumb-item'; item.onclick = () => openPDF(b.file);
-        item.innerHTML = `<img src="${b.thumb}"><span>${b.title}</span>`; grid.appendChild(item);
+    function setUser(id) {
+      const u = userProfiles[id];
+      document.getElementById('user-name').innerText = u.name;
+      document.getElementById('user-initial').innerText = u.initial;
+      document.getElementById('user-bio').innerText = u.bio;
+      const grid = document.getElementById('brochure-grid');
+      grid.innerHTML = '';
+      u.brochures.forEach(b => {
+        grid.innerHTML += `<div class="thumb-item" onclick="openPDF('brochures/${b.f}')"><img src="Gallery/Thumbnails/${b.i}"><span>${b.t}</span></div>`;
       });
-      document.getElementById('profileOverlay').style.display = 'none';
+      toggleSettings();
       navTo('home');
     }
 
-    function toggleProfiles() { const el = document.getElementById('profileOverlay'); el.style.display = (el.style.display === 'flex') ? 'none' : 'flex'; }
+    function toggleSettings() { const m = document.getElementById('settingsModal'); m.style.display = (m.style.display==='flex')?'none':'flex'; }
     function navTo(id) {
-      const screens = ['home', 'gallery', 'about', 'funding', 'standards', 'brochures', 'casestudies'];
-      screens.forEach(s => { document.getElementById(s).classList.add('hidden'); document.getElementById('btn-' + s)?.classList.remove('active'); });
+      document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.remove('hidden');
-      document.getElementById('btn-' + id)?.classList.add('active');
-      document.getElementById('page-title').innerText = id === 'about' ? 'About Your Designer' : (id === 'home' ? 'Why Choose Us' : id.toUpperCase());
+      document.getElementById('btn-'+id).classList.add('active');
+      document.getElementById('page-title').innerText = id.toUpperCase();
     }
-
-    function openPDF(p) { document.getElementById('pdfFrame').src = p; document.getElementById('pdfOverlay').style.display = 'block'; }
+    function openPDF(p) { document.getElementById('pdfFrame').src = p; document.getElementById('pdfOverlay').style.display = 'flex'; }
     function closePDF() { document.getElementById('pdfOverlay').style.display = 'none'; document.getElementById('pdfFrame').src = ''; }
-    function playVideo() { document.getElementById('videoOverlay').style.display='flex'; document.getElementById('player').play(); }
-    function closeVideo() { document.getElementById('player').pause(); document.getElementById('videoOverlay').style.display='none'; }
+    function initApp() { lucide.createIcons(); setUser('WYW'); }
     
-    function handleCategory(cat) {
-      const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
-      const subs = galleryMap[cat];
-      if (subs.length === 0) { loadImages(`Gallery/${cat}`); } else { showSubFolders(cat, subs); }
-    }
-
-    function showSubFolders(parent, subs) {
+    // Gallery Logic
+    const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
+    function handleCategory(cat) { const subs = galleryMap[cat]; if (subs.length === 0) { loadImages(`Gallery/${cat}`); } else { showSubFolders(cat, subs); } }
+    function showSubFolders(p, subs) {
       document.getElementById("albumList").classList.add("hidden");
       const list = document.getElementById("subFolderList"); list.classList.remove("hidden");
-      list.innerHTML = `<button onclick="resetGallery()" style="margin-bottom:20px; padding:12px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px; font-weight:bold;">← BACK</button>`;
+      list.innerHTML = `<button onclick="resetGallery()" style="margin-bottom:20px; padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px;">← BACK</button>`;
       subs.forEach(s => {
-        const d = document.createElement("div"); d.className = "content-card"; d.style.marginBottom = "15px";
-        d.innerHTML = `<h3 style="margin:0; text-align:center;">${s}</h3>`; d.onclick = () => loadImages(`Gallery/${parent}/${s}`); list.appendChild(d);
+        const d = document.createElement("div"); d.className = "content-card"; d.style.marginBottom = "10px";
+        d.innerHTML = `<h3>${s}</h3>`;
+        d.onclick = () => loadImages(`Gallery/${encodeURIComponent(p)}/${encodeURIComponent(s)}`);
+        list.appendChild(d);
       });
     }
-
-    function loadImages(p) {
+    function loadImages(path) {
       document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumList").classList.add("hidden");
       document.getElementById("albumImages").classList.remove("hidden");
       const grid = document.getElementById("imagesGrid"); grid.innerHTML = 'Loading...';
@@ -226,7 +232,7 @@
         let eIdx = 0;
         function check() {
           if (eIdx >= exts.length) return;
-          const src = `${p}/${idx.toString().padStart(2, '0')}${exts[eIdx]}`;
+          const src = `${path}/${idx.toString().padStart(2, '0')}${exts[eIdx]}`;
           const img = new Image();
           img.onload = () => { if(idx === 1) grid.innerHTML = ''; const t = document.createElement("img"); t.src = src; t.style.width = "100%"; t.style.borderRadius = "8px"; grid.appendChild(t); tryLoad(idx + 1); };
           img.onerror = () => { eIdx++; check(); }; img.src = src;
@@ -235,9 +241,7 @@
       }
       tryLoad(1);
     }
-
     function resetGallery() { document.getElementById("albumList").classList.remove("hidden"); document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumImages").classList.add("hidden"); }
-    function initApp() { lucide.createIcons(); setDesigner(localStorage.getItem('selectedDesigner') || 'WYW'); }
   </script>
 </body>
 </html>
