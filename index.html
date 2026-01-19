@@ -40,12 +40,12 @@
     .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
     @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); } }
 
-    /* --- HOME SCREEN --- */
+    /* --- HOME SCREEN (VERBATIM TEXT) --- */
     .wcu-screen { background-color: var(--brand-blue); color: white; text-align: center; }
-    .wcu-screen h2 { color: var(--brand-yellow); font-weight: 800; margin-bottom: 20px; }
+    .wcu-intro-text { font-size: 16px; line-height: 1.6; margin-bottom: 30px; }
     .video-card { background: rgba(255,255,255,0.1); border: 2px solid var(--brand-yellow); border-radius: 15px; padding: 20px; margin-bottom: 30px; cursor: pointer; display: inline-block; width: 90%; }
-    .wcu-item h3 { color: var(--brand-yellow); font-size: 16px; text-transform: uppercase; margin-bottom: 5px; }
-    .wcu-item p { font-size: 12px; opacity: 0.9; margin: 0; }
+    .wcu-item h3 { color: var(--brand-yellow); font-size: 16px; text-transform: uppercase; margin-bottom: 8px; font-weight: 800; }
+    .wcu-item p { font-size: 12px; line-height: 1.5; opacity: 0.95; margin: 0; text-align: center; }
 
     /* --- FUNDING --- */
     .funding-container { text-align: center; color: var(--brand-blue); }
@@ -69,7 +69,6 @@
 
     /* --- OVERLAYS --- */
     #pdfOverlay, #videoOverlay, #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 2000; display: none; }
-    .pdf-container { display: flex; flex-direction: column; height: 100%; }
     .overlay-controls { background: var(--brand-blue); padding: 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
     .close-btn { font-size: 35px; cursor: pointer; padding: 0 10px; }
   </style>
@@ -93,30 +92,45 @@
 
   <main id="scrollTarget">
     <div id="home" class="screen wcu-screen">
-      <h2>Why Choose Yorkshire Windows?</h2>
-      <p>We combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free.</p>
+      <div class="wcu-intro-text">
+        At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.
+      </div>
+      
       <div class="video-card" onclick="playVideo()">
         <i data-lucide="play-circle" style="width: 50px; height: 50px; color: var(--brand-yellow); margin: 0 auto 10px; display: block;"></i>
         <div style="font-weight: 800; text-transform: uppercase;">A message from our CEO</div>
       </div>
+
       <div class="grid-2x2">
-        <div class="wcu-item"><h3>Standards</h3><p>Vetted Retailer.</p></div>
-        <div class="wcu-item"><h3>Knowledge</h3><p>Local Roots.</p></div>
-        <div class="wcu-item"><h3>Guarantee</h3><p>Built to Last.</p></div>
-        <div class="wcu-item"><h3>Price</h3><p>We match quotes.</p></div>
+        <div class="wcu-item">
+          <h3>Premium Standards</h3>
+          <p>As a Conservatory Outlet Premium Retailer, Yorkshire Windows is independently vetted to maintain the very highest standards. From your first enquiry and showroom visit through to sales, surveying, installation, and aftercare, we deliver excellence at every stage.</p>
+        </div>
+        <div class="wcu-item">
+          <h3>Premium Knowledge</h3>
+          <p>With strong local roots, we understand homes across South Yorkshire better than anyone. Backed by years of experience, trusted references, and a welcoming showroom nearby, we’re here to inspire and guide your home improvement journey.</p>
+        </div>
+        <div class="wcu-item">
+          <h3>Premium Guarantee</h3>
+          <p>Manufactured with the latest technology and expert craftsmanship, our products are built to last. That’s why every installation comes with an exceptional guarantee for your complete peace of mind.</p>
+        </div>
+        <div class="wcu-item">
+          <h3>Premium Price Promise</h3>
+          <p>We’re committed to honest, transparent pricing. If you find a genuine like-for-like quote elsewhere, we’ll match it – giving you the confidence that you’re always getting the best value.</p>
+        </div>
       </div>
     </div>
 
     <div id="funding" class="screen hidden funding-container">
       <p style="font-size:14px; line-height:1.6; margin-bottom:20px;">
-        To make life easy, we arrange convenient easy payment options. Decision typically within 24 hours.<br><br>
+        To make life easy, we arrange convenient easy payment options. Decisions are typically delivered within 24 hours.<br><br>
         We will always complete an <span class="ecof-link" onclick="window.open('https://ecof.online', '_blank')">ECOF (Electronic Choice of Funding)</span> with you.
       </p>
       <div class="grid-2x2">
-        <div class="content-card"><h3>Monthly</h3><span class="apr-badge">11.9% APR</span><p>Spread over 60 months.</p></div>
-        <div class="content-card"><h3>3 Months</h3><span class="apr-badge">10.9% APR</span><p>Nothing for 3 months*.</p></div>
-        <div class="content-card"><h3>6 Months</h3><span class="apr-badge">19.9% APR</span><p>Defer for 6 months*.</p></div>
-        <div class="content-card"><h3>Self Fund</h3><p>20% Deposit, 4 stages.</p></div>
+        <div class="content-card"><h3>Buy Now Pay Monthly</h3><span class="apr-badge">11.9% APR</span><p>Spread over 60 months with a 20% deposit.</p></div>
+        <div class="content-card"><h3>Buy Now Pay 3 Months</h3><span class="apr-badge">10.9% APR</span><p>Nothing to pay for 3 months with a 20% deposit.</p></div>
+        <div class="content-card"><h3>Buy Now Pay 6 Months</h3><span class="apr-badge">19.9% APR</span><p>Defer payments for up to 6 months.</p></div>
+        <div class="content-card"><h3>Self Funding</h3><p>20% Deposit, the remainder is split over 4 stage payments.</p></div>
       </div>
       <div style="font-size:11px; margin-top:25px; border-top:1px solid #eee; padding-top:15px; font-style:italic; line-height:1.4;">
         *Terms and Conditions: A nominal £29 administration fee is applicable should the balance be settled in full prior to the end of the term. The commencement of the deferral period starts from when the build is "Wind and Water Tight".
@@ -143,9 +157,9 @@
       <div style="height:6px; background:var(--brand-yellow); margin-bottom:20px;"></div>
       <p style="text-align:center; font-size:13px; line-height:1.5;">We promise to treat your home exactly as if it were our own.</p>
       <div class="central-circle">Badges<br>of Honor</div>
-      <div class="content-card" style="margin-bottom:10px;"><h3>FENSA</h3><p>Meets strict building and energy regulations.</p></div>
-      <div class="content-card" style="margin-bottom:10px;"><h3>CHAS</h3><p>Vetted health and safety standards.</p></div>
-      <div class="content-card"><h3>GGF</h3><p>Protected by industry code of conduct.</p></div>
+      <div class="content-card" style="margin-bottom:10px;"><h3>FENSA</h3><p>Guaranteed to meet strict building and energy regulations.</p></div>
+      <div class="content-card" style="margin-bottom:10px;"><h3>CHAS</h3><p>Safety standards vetted to be second to none.</p></div>
+      <div class="content-card"><h3>GGF</h3><p>Protection through industry-standard code of conduct.</p></div>
     </div>
 
     <div id="brochures" class="screen hidden">
@@ -163,8 +177,16 @@
     </div>
   </main>
 
-  <div id="pdfOverlay" class="overlay"><div class="pdf-container"><div class="overlay-controls"><span>Document</span><span class="close-btn" onclick="closePDF()">&times;</span></div><iframe id="pdfFrame" style="flex:1; width:100%; border:none; background:white;"></iframe></div></div>
-  <div id="videoOverlay" style="display:none; align-items:center; justify-content:center;"><span class="close-btn" style="position:absolute; top:20px; right:20px; z-index:2001;" onclick="closeVideo()">&times;</span><video id="player" controls style="max-width:95%; max-height:85%;"><source src="intro.mp4"></video></div>
+  <div id="pdfOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:2000; display:none;">
+    <div style="display:flex; flex-direction:column; height:100%;">
+      <div class="overlay-controls"><span>Brochure Viewer</span><span class="close-btn" onclick="closePDF()">&times;</span></div>
+      <iframe id="pdfFrame" style="flex:1; width:100%; border:none; background:white;"></iframe>
+    </div>
+  </div>
+  <div id="videoOverlay" style="display:none; align-items:center; justify-content:center; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:2001;">
+    <span class="close-btn" style="position:absolute; top:20px; right:20px; z-index:2002;" onclick="closeVideo()">&times;</span>
+    <video id="player" controls style="max-width:95%; max-height:85%;"><source src="intro.mp4"></video>
+  </div>
   <div id="imageModal" style="display:none; align-items:center; justify-content:center; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:3000;" onclick="this.style.display='none'"><img id="fullscreenImg" style="max-width:98%; max-height:95%;"></div>
 
   <footer>
@@ -178,8 +200,7 @@
 
   <script>
     const screens = ['home', 'gallery', 'funding', 'standards', 'brochures', 'casestudies'];
-    const titles = { 'home': 'Why Choose Us', 'gallery': 'GALLERY', 'funding': 'CHOICE OF FUNDING', 'standards': 'STANDARDS', 'brochures': 'BROCHURES', 'casestudies': 'CASE STUDIES' };
-    const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
+    const titles = { 'home': 'Why Choose Us', 'gallery': 'Collections', 'funding': 'CHOICE OF FUNDING', 'standards': 'STANDARDS', 'brochures': 'BROCHURES', 'casestudies': 'CASE STUDIES' };
 
     function navTo(id) {
       screens.forEach(s => { document.getElementById(s).classList.add('hidden'); document.getElementById('btn-' + s)?.classList.remove('active'); });
@@ -193,6 +214,7 @@
     function closeVideo() { document.getElementById('player').pause(); document.getElementById('videoOverlay').style.display='none'; }
     
     function handleCategory(cat) {
+      const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
       const subs = galleryMap[cat];
       if (subs.length === 0) { loadImages(`Gallery/${cat}`); } 
       else { showSubFolders(cat, subs); }
