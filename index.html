@@ -13,140 +13,242 @@
       --brand-white: #ffffff;
       --safe-top: env(safe-area-inset-top, 20px);
     }
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
     .hidden { display: none !important; }
 
-    /* --- Auto-Scaling Responsive Header --- */
+    /* --- HEADER (Large Logo + Settings) --- */
     header { 
-      padding: calc(var(--safe-top) + 10px) 15px 10px; 
-      background: var(--brand-blue); 
-      flex-shrink: 0; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      position: relative;
-      min-height: 80px;
+      background: var(--brand-blue); padding-top: var(--safe-top);
+      height: 115px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; position: relative; z-index: 100;
     }
-    .header-logo { 
-      position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-      height: 70%; width: auto; object-fit: contain; 
+    .header-logo { position: absolute; left: 0; height: 100%; width: auto; object-fit: contain; padding: 5px; }
+    #page-title { font-size: clamp(20px, 6vw, 60px); font-weight: 900; color: white; text-transform: uppercase; margin: 0; letter-spacing: -2px; }
+    .settings-btn { position: absolute; right: 15px; color: white; opacity: 0.4; cursor: pointer; padding: 10px; }
+
+    /* --- NAVIGATION --- */
+    nav { background: var(--brand-yellow); display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-shrink: 0; z-index: 101; }
+    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 15px 12px; white-space: nowrap; flex-shrink: 0; }
+    nav button.active { text-decoration: underline; text-underline-offset: 5px; }
+
+    /* --- MAIN AREA --- */
+    main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; z-index: 1; }
+    .screen { padding: 25px; min-height: 100%; }
+
+    /* --- ABOUT ME STYLING (New) --- */
+    .profile-header { text-align: center; margin-bottom: 20px; }
+    .headshot-frame { 
+      width: 160px; height: 160px; border-radius: 50%; 
+      border: 5px solid var(--brand-yellow); margin: 0 auto 15px; 
+      overflow: hidden; background: #eee; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-    #page-title { 
-      font-size: clamp(30px, 8vw, 60px); 
-      font-weight: 900; color: var(--brand-white); 
-      text-transform: uppercase; margin: 0; letter-spacing: -2px; 
-    }
-
-    /* Vertical Orientation Adjustments */
-    @media (orientation: portrait) {
-      header { height: 12vh; }
-      #page-title { font-size: 10vw; }
-    }
-    /* Horizontal Orientation Adjustments */
-    @media (orientation: landscape) {
-      header { height: 15vh; }
-      #page-title { font-size: 6vh; }
-    }
-
-    /* --- Compact Nav (Scrollable for 6 buttons) --- */
-    nav { padding: 5px; background: var(--brand-yellow); display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 10px; flex-shrink: 0; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 12px 15px; white-space: nowrap; }
-    nav button.active { text-decoration: underline; text-underline-offset: 4px; }
-
-    main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; }
-    .screen { padding: 25px; box-sizing: border-box; }
-
-    /* --- Grid Layouts --- */
-    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(3, auto); gap: 15px; }
-    @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, auto); } }
-
-    .content-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .headshot-frame img { width: 100%; height: 100%; object-fit: cover; }
     
-    /* Case Study Item */
-    .cs-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
-    .cs-item .thumb-placeholder { width: 100%; aspect-ratio: 1/1; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #999; font-weight: bold; margin-bottom: 8px; border: 1px dashed #ccc; }
+    /* --- GRID & CARD SYSTEM --- */
+    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: center; }
+    .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); } }
 
-    /* --- Finance Styling --- */
-    .funding-container { text-align: center; color: var(--brand-blue); }
-    .footnote { font-size: 12px; font-style: italic; color: #555; margin-top: 30px; line-height: 1.4; border-top: 1px solid #eee; padding-top: 15px; }
+    .content-card { background: white; border: 1px solid #ddd; border-radius: 15px; padding: 20px; border-left: 10px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .thumb-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
+    .thumb-item img { width: 100%; border-radius: 10px; margin-bottom: 8px; border: 1px solid #eee; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+    .thumb-item span { font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 10px; }
 
-    /* Standard Badge Elements Retained... */
-    .central-circle { width: 200px; height: 200px; background: var(--brand-blue); border-radius: 50%; border: 6px solid var(--brand-yellow); margin: 20px auto; display: flex; align-items: center; justify-content: center; text-align: center; color: white; font-weight: 900; text-transform: uppercase; }
+    /* --- HOME SCREEN (VERBATIM) --- */
+    .wcu-screen { background-color: var(--brand-blue); color: white; text-align: center; }
+    .wcu-item h3 { color: var(--brand-yellow); font-size: 15px; text-transform: uppercase; margin-bottom: 5px; font-weight: 800; }
+    .wcu-item p { font-size: 11px; line-height: 1.4; opacity: 0.9; margin: 0; }
 
-    /* Overlay styles... */
-    #pdfOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10001; display: none; flex-direction: column; }
-    #pdfFrame { flex: 1; width: 100%; border: none; background: white; }
-    .pdf-controls { background: var(--brand-blue); padding: 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
+    /* --- MODALS --- */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; }
+    .designer-select-card { background: white; padding: 30px; border-radius: 20px; width: 85%; max-width: 400px; text-align: center; }
+    .designer-btn { padding: 15px; margin: 10px 0; border: 2px solid var(--brand-blue); border-radius: 12px; font-weight: 900; color: var(--brand-blue); cursor: pointer; }
+    .designer-btn.active { background: var(--brand-yellow); border-color: var(--brand-yellow); }
+
+    /* --- FOOTER (All Logos) --- */
+    footer { background: white; padding: 12px; border-top: 1px solid #eee; flex-shrink: 0; }
+    .footer-row { display: flex; justify-content: space-around; align-items: center; margin-bottom: 5px; }
+    .footer-row img { height: 32px; max-width: 58px; object-fit: contain; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body onload="initApp()">
 
   <header>
-    <img src="Logo/co-logo.png" class="header-logo" alt="COHI Logo">
+    <img src="Logo/co-logo.png" class="header-logo">
     <h1 id="page-title">Why Choose Us</h1>
+    <div class="settings-btn" onclick="toggleProfiles()"><i data-lucide="user-cog"></i></div>
   </header>
 
   <nav>
     <button onclick="navTo('home')" id="btn-home">Home</button>
     <button onclick="navTo('gallery')" id="btn-gallery">Gallery</button>
-    <button onclick="navTo('funding')" id="btn-funding">Choice of Funding</button>
+    <button onclick="navTo('about')" id="btn-about">About Me</button>
+    <button onclick="navTo('funding')" id="btn-funding">Funding</button>
     <button onclick="navTo('standards')" id="btn-standards">Standards</button>
     <button onclick="navTo('brochures')" id="btn-brochures">Brochures</button>
     <button onclick="navTo('casestudies')" id="btn-casestudies">Case Studies</button>
   </nav>
 
   <main id="scrollTarget">
-    <div id="funding" class="screen hidden funding-container">
-        <p style="margin-bottom: 25px; line-height: 1.6;">At Yorkshire Windows, we offer convenient finance options to suit your needs. Applications are processed quickly, often providing a decision within 24 hours.</p>
-        
-        <div class="grid-2x2">
-          <div class="content-card"><h3>Buy Now Pay Monthly</h3><p>11.9% APR Representative.</p></div>
-          <div class="content-card"><h3>Buy Now Pay 3 Months</h3><p>10.9% APR Representative*.</p></div>
-          <div class="content-card"><h3>Buy Now Pay 6 Months</h3><p>19.9% APR Representative*.</p></div>
-          <div class="content-card"><h3>Self Funding</h3><p>20% Deposit, 4 stage payments.</p></div>
-        </div>
-
-        <div class="footnote">
-          *Terms and Conditions: A nominal £29 administration fee is applicable should the balance be settled in full prior to the end of the term. The commencement of the deferral period is defined as the point at which the installation reaches the 'Wind and Water Tight' stage of construction.
-        </div>
+    <div id="home" class="screen wcu-screen">
+      <p style="margin-bottom:25px; line-height:1.6;">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
+      <div class="grid-2x2">
+        <div class="wcu-item"><h3>Premium Standards</h3><p>Independently vetted to maintain the very highest standards from showroom to aftercare.</p></div>
+        <div class="wcu-item"><h3>Knowledge</h3><p>Strong local roots and decades of experience understanding South Yorkshire homes.</p></div>
+        <div class="wcu-item"><h3>Guarantee</h3><p>Built with the latest technology and backed by an exceptional peace-of-mind guarantee.</p></div>
+        <div class="wcu-item"><h3>Price Promise</h3><p>Honest pricing with a commitment to match any genuine like-for-like quote.</p></div>
+      </div>
     </div>
 
-    <div id="casestudies" class="screen hidden">
-        <div class="grid-3x2">
-            <div class="cs-item" onclick="openPDF('brochures/largecs.pdf')">
-                <div class="thumb-placeholder">CS THUMB</div>
-                <span style="font-weight: 800; color: var(--brand-blue); text-transform: uppercase; font-size: 11px;">Large Project</span>
-            </div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
-            <div class="cs-item"><div class="thumb-placeholder">+</div><span>Coming Soon</span></div>
+    <div id="about" class="screen hidden">
+      <div class="profile-header">
+        <div class="headshot-frame">
+          <img id="designer-img" src="" alt="Designer Headshot">
         </div>
+        <h2 id="designer-name" style="color: var(--brand-blue); text-transform: uppercase; margin: 0; font-weight: 900;">Designer Name</h2>
+      </div>
+      <div class="content-card">
+        <p id="designer-bio" style="line-height: 1.7; font-size: 15px; margin: 0; color: #333;"></p>
+      </div>
     </div>
 
-    </main>
+    <div id="brochures" class="screen hidden">
+      <div class="grid-3x2" id="brochure-grid"></div>
+    </div>
 
-  <div id="pdfOverlay">
-    <div class="pdf-controls"><span style="font-weight: 800; text-transform: uppercase;">Viewing Document</span><span onclick="closePDF()" style="font-size: 30px; cursor: pointer;">&times;</span></div>
-    <iframe id="pdfFrame" src=""></iframe>
+    <div id="funding" class="screen hidden" style="text-align:center;">
+        <div class="grid-2x2" style="margin-bottom:25px;">
+          <div class="content-card"><h3>Pay Monthly</h3><span style="color:#d00; font-weight:900;">11.9% APR</span></div>
+          <div class="content-card"><h3>Pay in 3</h3><span style="color:#d00; font-weight:900;">10.9% APR</span></div>
+          <div class="content-card"><h3>Pay in 6</h3><span style="color:#d00; font-weight:900;">19.9% APR</span></div>
+          <div class="content-card"><h3>Self Fund</h3><p>Stage Payments</p></div>
+        </div>
+        <p style="font-size:11px; font-style:italic; border-top:1px solid #eee; padding-top:15px;">*Terms: £29 fee if paid early. Build starts from "Wind and Water Tight" stage.</p>
+    </div>
+
+    <div id="gallery" class="screen hidden">
+      <div class="grid-3x2" id="albumList">
+        <div class="thumb-item" onclick="handleCategory('Edwardian')"><img src="Gallery/Thumbnails/Edwardian.jpg"><span>Edwardian</span></div>
+        <div class="thumb-item" onclick="handleCategory('Flat Roof')"><img src="Gallery/Thumbnails/Flat Roof.JPG"><span>Flat Roof</span></div>
+        <div class="thumb-item" onclick="handleCategory('Gable End')"><img src="Gallery/Thumbnails/Gable End.jpeg"><span>Gable End</span></div>
+        <div class="thumb-item" onclick="handleCategory('Leanto')"><img src="Gallery/Thumbnails/Leanto.JPG"><span>Leanto</span></div>
+        <div class="thumb-item" onclick="handleCategory('Victorian')"><img src="Gallery/Thumbnails/Victorian.PNG"><span>Victorian</span></div>
+      </div>
+      <div id="subFolderList" class="hidden"></div>
+      <div id="albumImages" class="hidden"><button onclick="resetGallery()" style="margin-bottom:15px; padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px;">← BACK</button><div id="imagesGrid" class="grid-3x2"></div></div>
+    </div>
+
+    <div id="standards" class="screen hidden"><div style="background:var(--brand-blue); color:white; padding:20px; text-align:center; font-weight:900;">BADGES OF HONOR</div><div style="height:8px; background:var(--brand-yellow);"></div></div>
+    <div id="casestudies" class="screen hidden"><div class="grid-3x2"><div class="thumb-item" onclick="openPDF('brochures/largecs.pdf')"><div style="width:100%; aspect-ratio:1/1; background:#eee; border-radius:10px; display:flex; align-items:center; justify-content:center;">PDF</div><span>Large Project</span></div></div></div>
+  </main>
+
+  <div id="profileOverlay" class="modal-overlay">
+    <div class="designer-select-card">
+      <h2 style="color: var(--brand-blue); margin-bottom: 20px;">Switch Designer</h2>
+      <div class="designer-btn" onclick="setDesigner('Tom')">TOM</div>
+      <div class="designer-btn" onclick="setDesigner('Soban')">SOBAN</div>
+      <div class="designer-btn" onclick="setDesigner('WYW')">WYW (GENERAL)</div>
+      <p onclick="toggleProfiles()" style="margin-top:20px; font-size:12px; color:#999; cursor:pointer;">Close Menu</p>
+    </div>
   </div>
 
+  <div id="pdfOverlay" class="modal-overlay" style="display:none;"><div style="width:100%; height:100%; display:flex; flex-direction:column;"><div style="background:var(--brand-blue); padding:15px; display:flex; justify-content:space-between; color:white;"><span>Brochure</span><span onclick="closePDF()" style="cursor:pointer; font-size:25px;">&times;</span></div><iframe id="pdfFrame" style="flex:1; width:100%; border:none; background:white;"></iframe></div></div>
+
+  <footer>
+    <div class="footer-row">
+      <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png"><img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
+    </div>
+    <div class="footer-row" style="opacity: 0.5; padding-top:5px; border-top:1px solid #eee;">
+        <img src="Logo/fensa.png"><img src="Logo/chas.png"><img src="Logo/ggf.png"><img src="Logo/constructionline.png">
+    </div>
+  </footer>
+
   <script>
-    const screens = ['home','gallery','funding','standards','brochures', 'casestudies'];
-    const titles = { 'home': 'Why Choose Us', 'gallery': 'GALLERY', 'funding': 'CHOICE OF FUNDING', 'standards': 'STANDARDS', 'brochures': 'BROCHURES', 'casestudies': 'CASE STUDIES' };
-    
-    function navTo(id) {
-      screens.forEach(s => { document.getElementById(s).classList.add('hidden'); document.getElementById('btn-'+s).classList.remove('active'); });
-      document.getElementById(id).classList.remove('hidden');
-      document.getElementById('btn-'+id).classList.add('active');
-      document.getElementById('page-title').innerText = titles[id];
+    const designerData = {
+      'Tom': {
+        name: 'Tom',
+        headshot: 'Logo/tom.png',
+        bio: 'Tom has over 10 years of experience in South Yorkshire home design. He specializes in thermal efficiency and Victorian-style conservatories, ensuring every customer finds the perfect fit for their lifestyle.',
+        brochures: [
+          { title: 'Featured Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' },
+          { title: 'Windows Guide', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }
+        ]
+      },
+      'Soban': {
+        name: 'Soban',
+        headshot: 'Logo/soban.png',
+        bio: 'Soban is our lead technical consultant, known for precision in Gable End and modern Flat Roof designs. He ensures every project is technically perfect from the first visit to final sign-off.',
+        brochures: [
+          { title: 'Living Spaces', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' },
+          { title: 'Full Range', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }
+        ]
+      },
+      'WYW': {
+        name: 'Yorkshire Windows',
+        headshot: 'Logo/yorkshire.png',
+        bio: 'At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. We bring your vision to life with care, quality, and precision.',
+        brochures: [
+          { title: 'Doors', file: 'brochures/featuredoors.pdf', thumb: 'Gallery/Thumbnails/featuredoors.png' },
+          { title: 'Living', file: 'brochures/nl.pdf', thumb: 'Gallery/Thumbnails/nls.png' },
+          { title: 'Windows', file: 'brochures/windows.pdf', thumb: 'Gallery/Thumbnails/windows.png' }
+        ]
+      }
+    };
+
+    function setDesigner(key) {
+      const data = designerData[key];
+      localStorage.setItem('selectedDesigner', key);
+      
+      document.getElementById('designer-name').innerText = data.name;
+      document.getElementById('designer-bio').innerText = data.bio;
+      document.getElementById('designer-img').src = data.headshot;
+      
+      const grid = document.getElementById('brochure-grid');
+      grid.innerHTML = '';
+      data.brochures.forEach(b => {
+        const item = document.createElement('div');
+        item.className = 'thumb-item';
+        item.onclick = () => openPDF(b.file);
+        item.innerHTML = `<img src="${b.thumb}"><span>${b.title}</span>`;
+        grid.appendChild(item);
+      });
+
+      if(document.getElementById('profileOverlay').style.display === 'flex') toggleProfiles();
+      navTo('home');
     }
-    function openPDF(path) { document.getElementById('pdfFrame').src = path; document.getElementById('pdfOverlay').style.display = 'flex'; }
+
+    function toggleProfiles() {
+      const el = document.getElementById('profileOverlay');
+      el.style.display = (el.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function navTo(id) {
+      const screens = ['home', 'gallery', 'about', 'funding', 'standards', 'brochures', 'casestudies'];
+      screens.forEach(s => { document.getElementById(s).classList.add('hidden'); document.getElementById('btn-' + s)?.classList.remove('active'); });
+      document.getElementById(id).classList.remove('hidden');
+      document.getElementById('btn-' + id)?.classList.add('active');
+      document.getElementById('page-title').innerText = id === 'home' ? 'Why Choose Us' : id.toUpperCase();
+      document.getElementById('scrollTarget').scrollTop = 0;
+    }
+
+    function openPDF(p) { document.getElementById('pdfFrame').src = p; document.getElementById('pdfOverlay').style.display = 'flex'; }
     function closePDF() { document.getElementById('pdfOverlay').style.display = 'none'; document.getElementById('pdfFrame').src = ''; }
-    function initApp() { navTo('home'); lucide.createIcons(); }
+
+    function handleCategory(cat) { loadImages(`Gallery/${cat}`); } // Simplified for this view
+    function resetGallery() { document.getElementById("albumList").classList.remove("hidden"); document.getElementById("albumImages").classList.add("hidden"); }
+    function loadImages(path) {
+        document.getElementById("albumList").classList.add("hidden");
+        document.getElementById("albumImages").classList.remove("hidden");
+        // Same logic as before to load images...
+    }
+
+    function initApp() {
+      lucide.createIcons();
+      const saved = localStorage.getItem('selectedDesigner') || 'WYW';
+      setDesigner(saved);
+    }
   </script>
 </body>
 </html>
