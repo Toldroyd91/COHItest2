@@ -1,35 +1,69 @@
-<div style="padding: 30px 20px; color: #002f54;">
-    <p style="text-align: center; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
-        Everything can be sorted out with you in the comfort of your home or at our showroom and you should get an answer within 24 hours.
-    </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yorkshire Windows Showcase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <style>
+    :root { --brand-blue: #002f54; --brand-yellow: #fab51f; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+    header { background: var(--brand-blue); height: 110px; flex-shrink: 0; display: flex; border-bottom: 4px solid var(--brand-yellow); }
+    .header-center { background: white; flex: 2; display: flex; align-items: center; justify-content: center; }
+    nav { background: var(--brand-yellow); display: flex; overflow-x: auto; flex-shrink: 0; }
+    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; padding: 15px 20px; text-transform: uppercase; white-space: nowrap; }
+    nav button.active { text-decoration: underline; text-underline-offset: 5px; }
+    main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    footer { background: white; border-top: 1px solid #eee; padding: 15px; display: flex; justify-content: space-around; }
+    footer img { height: 35px; max-width: 65px; object-fit: contain; }
+  </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div id="lock-screen">
+    <input type="password" id="pw" style="padding:15px; border-radius:10px; text-align:center;" placeholder="Enter 1234">
+    <button onclick="unlock()" style="margin-top:10px; padding:10px 20px; background:var(--brand-yellow); border:none; border-radius:10px; font-weight:bold;">UNLOCK</button>
+  </div>
 
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-        <div style="background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid #fab51f; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <h3 style="margin:0; font-size:14px; text-transform:uppercase;">Monthly</h3>
-            <p style="color:#d00; font-weight:900; font-size:18px; margin: 5px 0;">11.9% APR</p>
-            <p style="font-size:10px; margin:0; opacity:0.8;">Representative spread over 60, 120, or 180 months.</p>
-        </div>
+  <div id="app" style="display:none; flex-direction:column; height:100vh;">
+    <header>
+      <div style="flex:1"></div>
+      <div class="header-center"><img src="Logo/co-logo.png" style="height:90%"></div>
+      <div style="flex:1; display:flex; justify-content:center; align-items:center; color:white;"><i data-lucide="user-cog" onclick="alert('Settings menu coming!')"></i></div>
+    </header>
+    <nav id="nav-bar">
+      <button onclick="loadSection('home')" id="btn-home">Home</button>
+      <button onclick="loadSection('aboutme')" id="btn-aboutme">About Me</button>
+      <button onclick="loadSection('gallery')" id="btn-gallery">Gallery</button>
+      <button onclick="loadSection('funding')" id="btn-funding">Funding</button>
+      <button onclick="loadSection('standards')" id="btn-standards">Standards</button>
+      <button onclick="loadSection('brochures')" id="btn-brochures">Brochures</button>
+    </nav>
+    <main id="view-port"><div style="padding:50px; text-align:center;">Loading...</div></main>
+    <footer>
+      <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png">
+      <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
+    </footer>
+  </div>
 
-        <div style="background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid #fab51f; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <h3 style="margin:0; font-size:14px; text-transform:uppercase;">3 Months</h3>
-            <p style="color:#d00; font-weight:900; font-size:18px; margin: 5px 0;">10.9% APR</p>
-            <p style="font-size:10px; margin:0; opacity:0.8;">Buy Now Pay Later. Pay nothing for 3 months*.</p>
-        </div>
-
-        <div style="background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid #fab51f; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <h3 style="margin:0; font-size:14px; text-transform:uppercase;">6 Months</h3>
-            <p style="color:#d00; font-weight:900; font-size:18px; margin: 5px 0;">19.9% APR</p>
-            <p style="font-size:10px; margin:0; opacity:0.8;">Buy Now Pay Later. Defer payments for 6 months*.</p>
-        </div>
-
-        <div style="background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid #fab51f; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-            <h3 style="margin:0; font-size:14px; text-transform:uppercase;">Self Fund</h3>
-            <p style="font-weight:900; font-size:18px; margin: 5px 0;">Stage Pay</p>
-            <p style="font-size:10px; margin:0; opacity:0.8;">20% Deposit. Balance on 'Wind and Water Tight'.</p>
-        </div>
-    </div>
-
-    <p style="font-size: 11px; margin-top: 40px; font-style: italic; border-top: 1px solid #eee; padding-top: 15px; text-align: center; opacity: 0.7;">
-        *Terms and conditions apply. A £29 administration fee applies if the balance is paid in full within the deferral period.
-    </p>
-</div>
+  <script>
+    function unlock() {
+      if(document.getElementById('pw').value === "1234") {
+        document.getElementById('lock-screen').style.display = 'none';
+        document.getElementById('app').style.display = 'flex';
+        loadSection('home');
+      }
+    }
+    async function loadSection(name) {
+      const container = document.getElementById('view-port');
+      try {
+        const resp = await fetch(name + '.html');
+        container.innerHTML = await resp.text();
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + name).classList.add('active');
+        lucide.createIcons();
+      } catch (e) { container.innerHTML = "Error loading " + name; }
+    }
+  </script>
+</body>
+</html>
