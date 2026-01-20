@@ -1,47 +1,29 @@
 <div style="padding: 20px;">
-    <div id="album-list" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-        <div onclick="openSub('Edwardian')" style="text-align:center;"><img src="Gallery/Thumbnails/Edwardian.jpg" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;"><br><b>Edwardian</b></div>
-        <div onclick="openSub('Flat Roof')" style="text-align:center;"><img src="Gallery/Thumbnails/Flat Roof.JPG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;"><br><b>Flat Roof</b></div>
-        <div onclick="openSub('Gable End')" style="text-align:center;"><img src="Gallery/Thumbnails/Gable End.jpeg" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;"><br><b>Gable End</b></div>
-        <div onclick="openSub('Leanto')" style="text-align:center;"><img src="Gallery/Thumbnails/Leanto.JPG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;"><br><b>Leanto</b></div>
-        <div onclick="openSub('Victorian')" style="text-align:center;"><img src="Gallery/Thumbnails/Victorian.PNG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;"><br><b>Victorian</b></div>
+    <div id="album-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div onclick="openSub('Edwardian')" style="text-align:center; cursor:pointer;">
+            <img src="Gallery/Thumbnails/Edwardian.jpg" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
+            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Edwardian</b>
+        </div>
+        <div onclick="openSub('Flat Roof')" style="text-align:center; cursor:pointer;">
+            <img src="Gallery/Thumbnails/Flat Roof.JPG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
+            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Flat Roof</b>
+        </div>
+        <div onclick="openSub('Gable End')" style="text-align:center; cursor:pointer;">
+            <img src="Gallery/Thumbnails/Gable End.jpeg" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
+            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Gable End</b>
+        </div>
+        <div onclick="openSub('Leanto')" style="text-align:center; cursor:pointer;">
+            <img src="Gallery/Thumbnails/Leanto.JPG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
+            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Leanto</b>
+        </div>
+        <div onclick="openSub('Victorian')" style="text-align:center; cursor:pointer;">
+            <img src="Gallery/Thumbnails/Victorian.PNG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
+            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Victorian</b>
+        </div>
     </div>
 
-    <div id="photo-view" style="display:none;">
-        <button onclick="closeSub()" style="margin-bottom:20px; padding:10px 20px; background:#002f54; color:white; border:none; border-radius:20px;">← BACK</button>
-        <div id="photo-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;"></div>
+    <div id="photo-view" class="hidden">
+        <button onclick="closeSub()" style="margin-bottom:20px; padding:12px 25px; background:#002f54; color:white; border:none; border-radius:30px; font-weight:bold;">← BACK</button>
+        <div id="photo-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
     </div>
 </div>
-
-<script>
-    // Note: When loading modularly, we use a global approach for functions
-    window.openSub = function(cat) {
-        document.getElementById('album-list').style.display = 'none';
-        document.getElementById('photo-view').style.display = 'block';
-        const grid = document.getElementById('photo-grid');
-        grid.innerHTML = 'Searching for photos...';
-        
-        let found = 0;
-        const extensions = ['.jpg', '.JPG', '.jpeg', '.png'];
-        
-        for(let i=1; i<=10; i++) {
-            let num = i.toString().padStart(2, '0');
-            extensions.forEach(ext => {
-                let imgPath = `Gallery/${cat}/${num}${ext}`;
-                let testImg = new Image();
-                testImg.onload = function() {
-                    if(found === 0) grid.innerHTML = '';
-                    grid.innerHTML += `<img src="${imgPath}" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px;">`;
-                    found++;
-                };
-                testImg.src = imgPath;
-            });
-        }
-    };
-
-    window.closeSub = function() {
-        document.getElementById('album-list').style.display = 'grid';
-        document.getElementById('photo-view').style.display = 'none';
-    };
-</script>
-.
