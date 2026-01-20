@@ -6,32 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <style>
     :root { --brand-blue: #002f54; --brand-yellow: #fab51f; }
-    body { margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; background: white; }
+    
+    /* PASSWORD OVERLAY */
     #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
-    header { background: var(--brand-blue); height: 110px; flex-shrink: 0; display: flex; border-bottom: 4px solid var(--brand-yellow); }
-    .header-center { background: white; flex: 2; display: flex; align-items: center; justify-content: center; }
+    
+    /* HEADER: TRIMMED SPACING */
+    header { background: var(--brand-blue); height: 90px; flex-shrink: 0; display: flex; border-bottom: 4px solid var(--brand-yellow); }
+    .header-center { background: white; flex: 2; display: flex; align-items: center; justify-content: center; padding: 5px 0; }
+    .header-logo { height: 75px; width: auto; object-fit: contain; }
+    
+    /* NAVIGATION */
     nav { background: var(--brand-yellow); display: flex; overflow-x: auto; flex-shrink: 0; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; padding: 15px 20px; text-transform: uppercase; white-space: nowrap; }
+    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; padding: 15px 18px; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
     nav button.active { text-decoration: underline; text-underline-offset: 5px; }
+
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    footer { background: white; border-top: 1px solid #eee; padding: 15px; display: flex; justify-content: space-around; }
-    footer img { height: 35px; max-width: 65px; object-fit: contain; }
+
+    /* FOOTER: RESTORED BRAND LOGOS */
+    footer { background: white; border-top: 1px solid #eee; padding: 10px; flex-shrink: 0; display: flex; justify-content: space-around; align-items: center; gap: 5px; }
+    footer img { height: 32px; max-width: 60px; object-fit: contain; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div id="lock-screen">
+    <h2 style="margin-bottom:20px;">Secure Access</h2>
     <input type="password" id="pw" style="padding:15px; border-radius:10px; text-align:center;" placeholder="Enter 1234">
-    <button onclick="unlock()" style="margin-top:10px; padding:10px 20px; background:var(--brand-yellow); border:none; border-radius:10px; font-weight:bold;">UNLOCK</button>
+    <button onclick="unlock()" style="margin-top:10px; padding:12px 25px; background:var(--brand-yellow); border:none; border-radius:10px; font-weight:bold; color:var(--brand-blue);">UNLOCK</button>
   </div>
 
   <div id="app" style="display:none; flex-direction:column; height:100vh;">
     <header>
       <div style="flex:1"></div>
-      <div class="header-center"><img src="Logo/co-logo.png" style="height:90%"></div>
-      <div style="flex:1; display:flex; justify-content:center; align-items:center; color:white;"><i data-lucide="user-cog" onclick="alert('Settings menu coming!')"></i></div>
+      <div class="header-center"><img src="Logo/co-logo.png" class="header-logo"></div>
+      <div style="flex:1; display:flex; justify-content:center; align-items:center; color:white;">
+        <i data-lucide="user-cog" onclick="alert('Settings coming soon')"></i>
+      </div>
     </header>
-    <nav id="nav-bar">
+
+    <nav>
       <button onclick="loadSection('home')" id="btn-home">Home</button>
       <button onclick="loadSection('aboutme')" id="btn-aboutme">About Me</button>
       <button onclick="loadSection('gallery')" id="btn-gallery">Gallery</button>
@@ -39,7 +53,9 @@
       <button onclick="loadSection('standards')" id="btn-standards">Standards</button>
       <button onclick="loadSection('brochures')" id="btn-brochures">Brochures</button>
     </nav>
+
     <main id="view-port"><div style="padding:50px; text-align:center;">Loading...</div></main>
+
     <footer>
       <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png">
       <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
@@ -54,15 +70,21 @@
         loadSection('home');
       }
     }
+
     async function loadSection(name) {
       const container = document.getElementById('view-port');
       try {
         const resp = await fetch(name + '.html');
+        if(!resp.ok) throw new Error();
         container.innerHTML = await resp.text();
+        
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
         document.getElementById('btn-' + name).classList.add('active');
+        
+        // Re-initialize icons for the newly loaded page
         lucide.createIcons();
-      } catch (e) { container.innerHTML = "Error loading " + name; }
+        container.scrollTop = 0;
+      } catch (e) { container.innerHTML = "<div style='padding:50px; text-align:center;'>Error loading " + name + ".html</div>"; }
     }
   </script>
 </body>
