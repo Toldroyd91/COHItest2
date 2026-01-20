@@ -10,13 +10,12 @@
     html, body { margin: 0; padding: 0; height: 100dvh; width: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
     
     #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+    #app { display: none; flex-direction: column; height: 100dvh; width: 100%; position: relative; }
     
-    /* Layout Framework */
-    #app { display: none; flex-direction: column; height: 100dvh; width: 100%; }
     header { background: var(--brand-blue); height: 100px; flex-shrink: 0; display: flex; border-bottom: 4px solid var(--brand-yellow); }
     .h-side { flex: 1; display: flex; align-items: center; justify-content: center; }
     .h-center { background: white; flex: 3; display: flex; align-items: center; justify-content: center; }
-    .h-logo { height: 90px; width: auto; object-fit: contain; }
+    .h-logo { height: 85px; width: auto; object-fit: contain; }
     
     nav { background: var(--brand-yellow); height: 50px; display: flex; overflow-x: auto; flex-shrink: 0; }
     nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; padding: 0 15px; text-transform: uppercase; white-space: nowrap; font-size: 11px; }
@@ -24,7 +23,6 @@
 
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 80px; }
 
-    /* FOOTER LOCK: ABSOLUTE BOTTOM */
     footer { 
       position: absolute; bottom: 0; left: 0; width: 100%;
       background: white; border-top: 1px solid #eee; height: 70px;
@@ -32,10 +30,9 @@
     }
     footer img { height: 35px; max-width: 55px; object-fit: contain; }
 
-    /* SHARED OVERLAYS */
     .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; }
     #fs-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .close-btn { position: absolute; top: 30px; right: 20px; color: white; font-size: 40px; cursor: pointer; }
+    .close-btn { position: absolute; top: 30px; right: 20px; color: white; font-size: 40px; cursor: pointer; z-index: 8001; }
     .hidden { display: none !important; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -74,9 +71,9 @@
   <div id="fs-viewer" class="overlay">
     <span class="close-btn" onclick="closeFS()">&times;</span>
     <img id="fs-img" src="">
-    <div style="position:absolute; width:100%; display:flex; justify-content:space-between; padding:0 20px;">
-        <button onclick="navFS(-1)" style="background:rgba(255,255,255,0.2); border:none; color:white; padding:15px; border-radius:50%;"><i data-lucide="chevron-left"></i></button>
-        <button onclick="navFS(1)" style="background:rgba(255,255,255,0.2); border:none; color:white; padding:15px; border-radius:50%;"><i data-lucide="chevron-right"></i></button>
+    <div style="position:absolute; width:100%; display:flex; justify-content:space-between; padding:0 30px;">
+        <button onclick="navFS(-1)" style="background:rgba(255,255,255,0.1); border:none; color:white; padding:20px; border-radius:50%;"><i data-lucide="chevron-left" size="32"></i></button>
+        <button onclick="navFS(1)" style="background:rgba(255,255,255,0.1); border:none; color:white; padding:20px; border-radius:50%;"><i data-lucide="chevron-right" size="32"></i></button>
     </div>
   </div>
 
@@ -103,28 +100,42 @@
       } catch (e) { container.innerHTML = "<div style='padding:50px; text-align:center;'>Loading " + name + "...</div>"; }
     }
 
-    // GLOBAL GALLERY LOGIC (LOCKED IN INDEX)
+    // UPDATED UNIVERSAL GALLERY CRAWLER
     window.openSub = function(cat) {
         document.getElementById('album-list').classList.add('hidden');
         document.getElementById('photo-view').classList.remove('hidden');
         const grid = document.getElementById('photo-grid');
-        grid.innerHTML = 'Searching for photos...';
+        grid.innerHTML = '<div style="grid-column: span 2; padding:20px; text-align:center;">Checking for photos...</div>';
         currentPhotos = [];
-        const exts = ['.jpg', '.JPG', '.jpeg', '.png'];
-        for(let i=1; i<=15; i++) {
-            let num = i.toString().padStart(2, '0');
-            exts.forEach(ext => {
-                let path = `Gallery/${cat}/${num}${ext}`;
-                let img = new Image();
-                img.onload = () => {
-                    if(currentPhotos.length === 0) grid.innerHTML = '';
-                    currentPhotos.push(path);
-                    let idx = currentPhotos.length - 1;
-                    grid.innerHTML += `<img src="${path}" onclick="openFS(${idx})" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">`;
-                };
-                img.src = path;
-            });
-        }
+        
+        const exts = ['.jpg', '.JPG', '.jpeg', '.png', '.PNG'];
+        const subDirs = ['', '/Edwardian Glass Roof', '/Edwardian Solid Roof', '/Gable Glass Roof', '/Gable Solid Roof', '/Leanto Glass Roof', '/Leanto Solid Roof', '/Victorian Glass Roof', '/Victorian Solid Roof'];
+        
+        let checked = 0;
+        let found = 0;
+
+        subDirs.forEach(sub => {
+            for(let i=1; i<=15; i++) {
+                let num = i.toString().padStart(2, '0');
+                exts.forEach(ext => {
+                    let path = `Gallery/${cat}${sub}/${num}${ext}`;
+                    let img = new Image();
+                    img.onload = () => {
+                        if(found === 0) grid.innerHTML = '';
+                        currentPhotos.push(path);
+                        let idx = currentPhotos.length - 1;
+                        grid.innerHTML += `<img src="${path}" onclick="openFS(${idx})" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; border:1px solid #eee;">`;
+                        found++;
+                    };
+                    img.src = path;
+                });
+            }
+        });
+
+        // Timeout check if nothing found after 3 seconds
+        setTimeout(() => {
+            if(found === 0) grid.innerHTML = `<div style="grid-column: span 2; padding:20px; text-align:center; color:#999;">No photos found in Gallery/${cat} folders.</div>`;
+        }, 3000);
     };
 
     window.closeSub = () => { document.getElementById('album-list').classList.remove('hidden'); document.getElementById('photo-view').classList.add('hidden'); };
@@ -132,8 +143,7 @@
     window.closeFS = () => document.getElementById('fs-viewer').style.display = 'none';
     window.navFS = (dir) => { photoIdx = (photoIdx + dir + currentPhotos.length) % currentPhotos.length; document.getElementById('fs-img').src = currentPhotos[photoIdx]; };
 
-    // Shared actions
-    window.triggerVideo = () => alert("Video loading...");
+    window.triggerVideo = () => alert("Video feature pending mp4 link...");
     window.triggerPDF = (p) => window.open(p, '_blank');
   </script>
 </body>
