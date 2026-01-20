@@ -1,71 +1,39 @@
-<div id="home-content">
-  <div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Gallery/Thumbnails/homescreen.jpg'); 
-              background-size: cover; background-position: center; padding: 60px 25px; text-align: center; color: white;">
-    
-    <h1 style="font-size: clamp(32px, 8vw, 48px); font-weight: 800; margin: 0; line-height: 1.1;">
-        Welcome to Yorkshire Windows
-    </h1>
-    
-    <div style="width: 80px; height: 6px; background: #fab51f; margin: 20px auto;"></div>
-    
-    <p style="font-size: 16px; line-height: 1.6; margin-bottom: 35px; max-width: 800px; margin-left: auto; margin-right: auto;">
+<div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Gallery/Thumbnails/background.jpg'); background-size: cover; background-position: center; padding: 50px 25px; text-align: center; color: white;">
+    <h1 style="font-size: 32px; margin: 0; font-weight: 800;">Welcome to Yorkshire Windows</h1>
+    <div style="width: 80px; height: 6px; background: #fab51f; margin: 15px auto;"></div>
+    <p style="font-size: 15px; line-height: 1.6; margin-bottom: 25px;">
         At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.
     </p>
     
-    <div style="display: flex; gap: 15px; justify-content: center;">
-      <div style="background: rgba(255,255,255,0.15); border: 2px solid #fab51f; border-radius: 12px; padding: 15px; flex: 1; max-width: 160px; cursor: pointer; display: flex; flex-direction: column; align-items: center;" 
-           onclick="playVideo()">
-        <i data-lucide="play-circle"></i>
-        <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 8px;">Watch Video</span>
-      </div>
-      
-      <div style="background: rgba(255,255,255,0.15); border: 2px solid #fab51f; border-radius: 12px; padding: 15px; flex: 1; max-width: 160px; cursor: pointer; display: flex; flex-direction: column; align-items: center;" 
-           onclick="openPDF('brochures/pitchperfect.pdf')">
-        <i data-lucide="file-text"></i>
-        <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 8px;">Our Vision</span>
-      </div>
+    <div style="display: flex; gap: 12px; justify-content: center;">
+        <div onclick="triggerVideo()" style="background: rgba(255,255,255,0.15); border: 2px solid #fab51f; border-radius: 12px; padding: 12px; flex: 1; max-width: 150px; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
+            <i data-lucide="play-circle"></i>
+            <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 5px;">Watch Video</span>
+        </div>
+        <div onclick="triggerPDF('brochures/pitchperfect.pdf')" style="background: rgba(255,255,255,0.15); border: 2px solid #fab51f; border-radius: 12px; padding: 12px; flex: 1; max-width: 150px; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
+            <i data-lucide="file-text"></i>
+            <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 5px;">Our Vision</span>
+        </div>
     </div>
-  </div>
+</div>
 
-  <div style="background: #002f54; color: white; padding: 45px 20px;">
-    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; text-align: center;">
-      
-      <div class="wcu-item">
-        <h3 style="color: #fab51f; font-size: 15px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800;">
-            Premium Standards
-        </h3>
-        <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">
-            As a Conservatory Outlet Premium Retailer, Yorkshire Windows is independently vetted to maintain the very highest standards. From your first enquiry and showroom visit through to sales, surveying, installation, and aftercare, we deliver excellence at every stage.
-        </p>
-      </div>
-
-      <div class="wcu-item">
-        <h3 style="color: #fab51f; font-size: 15px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800;">
-            Premium Knowledge
-        </h3>
-        <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">
-            With strong local roots, we understand homes across South Yorkshire better than anyone. Backed by years of experience, trusted references, and a welcoming showroom nearby, we’re here to inspire and guide your home improvement journey.
-        </p>
-      </div>
-
-      <div class="wcu-item">
-        <h3 style="color: #fab51f; font-size: 15px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800;">
-            Premium Guarantee
-        </h3>
-        <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">
-            Manufactured with the latest technology and expert craftsmanship, our products are built to last. That’s why every installation comes with an exceptional guarantee for your complete peace of mind.
-        </p>
-      </div>
-
-      <div class="wcu-item">
-        <h3 style="color: #fab51f; font-size: 15px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800;">
-            Premium Price Promise
-        </h3>
-        <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">
-            We’re committed to honest, transparent pricing. If you find a genuine like-for-like quote elsewhere, we’ll match it – giving you the confidence that you’re always getting the best value.
-        </p>
-      </div>
-
+<div style="background: var(--brand-blue); color: white; padding: 40px 20px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center;">
+        <div class="grid-item">
+            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Premium Standards</h3>
+            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">Independently vetted to maintain the very highest standards from first enquiry to aftercare.</p>
+        </div>
+        <div class="grid-item">
+            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Premium Knowledge</h3>
+            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">Strong local roots understanding South Yorkshire homes better than anyone.</p>
+        </div>
+        <div class="grid-item">
+            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Premium Guarantee</h3>
+            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">Manufactured with the latest technology, every installation comes with an exceptional guarantee.</p>
+        </div>
+        <div class="grid-item">
+            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Price Promise</h3>
+            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">We match genuine like-for-like quotes to ensure you always get the best value.</p>
+        </div>
     </div>
-  </div>
 </div>
