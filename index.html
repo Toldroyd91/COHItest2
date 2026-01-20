@@ -3,185 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Yorkshire Windows Showcase</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
-    :root {
-      --brand-blue: #002f54; 
-      --brand-yellow: #fab51f; 
-      --brand-white: #ffffff;
-      --safe-top: env(safe-area-inset-top, 20px);
-      --safe-bottom: env(safe-area-inset-bottom, 20px);
-    }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-    .hidden { display: none !important; }
-
-    /* --- HEADER (LOCKED) --- */
-    header { 
-      background: var(--brand-blue); height: 110px; flex-shrink: 0;
-      display: flex; align-items: stretch; position: relative; z-index: 100;
-      border-bottom: 4px solid var(--brand-yellow);
-    }
-    .header-side { flex: 1; display: flex; align-items: center; justify-content: center; color: white; padding-top: var(--safe-top); }
-    .header-center { background: white; flex: 2; display: flex; align-items: center; justify-content: center; padding-top: var(--safe-top); }
-    .header-logo { height: 90%; width: auto; object-fit: contain; }
-    .settings-trigger { opacity: 0.6; cursor: pointer; padding: 10px; }
-
-    /* --- NAVIGATION --- */
-    nav { background: var(--brand-yellow); display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; flex-shrink: 0; z-index: 101; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 15px 12px; white-space: nowrap; flex-shrink: 0; }
-    nav button.active { text-decoration: underline; text-underline-offset: 5px; }
-
-    /* --- MAIN CONTENT --- */
-    main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; z-index: 1; }
-    .screen { min-height: 100%; width: 100%; }
-
-    /* --- GRID SYSTEM --- */
-    .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; }
-    @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); } }
-
-    /* --- CARD & THUMB STYLING --- */
-    .thumb-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
-    .thumb-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; border: 1px solid #eee; margin-bottom: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
-    .thumb-item span { font-weight: 800; font-size: 10px; text-transform: uppercase; color: var(--brand-blue); }
-
-    /* --- MODALS --- */
-    #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 3000; display: none; align-items: center; justify-content: center; }
-    #fullscreenImg { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .modal-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; transform: translateY(-50%); pointer-events: none; }
-    .modal-nav button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 15px; border-radius: 50%; pointer-events: auto; }
-
-    /* --- FOOTER [LOCKED BRANDING] --- */
-    footer { 
-      background: white; border-top: 1px solid #eee; flex-shrink: 0;
-      padding: 15px 10px calc(var(--safe-bottom) + 15px); z-index: 102;
-    }
-    .footer-brands { display: flex; justify-content: space-around; align-items: center; gap: 8px; }
+    /* Fixed Branding Styles */
+    header { background: #002f54; height: 110px; border-bottom: 4px solid #fab51f; display: flex; align-items: stretch; }
+    .header-center { background: white; flex: 2; display: flex; align-items: center; justify-content: center; }
+    .header-logo { height: 90%; }
+    
+    /* Footer Brand Bar */
+    footer { background: white; border-top: 1px solid #eee; padding: 15px; }
+    .footer-brands { display: flex; justify-content: space-around; align-items: center; }
     .footer-brands img { height: 40px; max-width: 75px; object-fit: contain; }
   </style>
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body onload="initApp()">
-
+<body>
   <header>
     <div class="header-side"></div>
     <div class="header-center"><img src="Logo/co-logo.png" class="header-logo"></div>
-    <div class="header-side"><div class="settings-trigger" onclick="toggleSettings()"><i data-lucide="user-cog"></i></div></div>
+    <div class="header-side"></div>
   </header>
-
-  <nav>
-    <button onclick="navTo('home')" id="btn-home">Home</button>
-    <button onclick="navTo('aboutme')" id="btn-aboutme">About Me</button>
-    <button onclick="navTo('gallery')" id="btn-gallery">Gallery</button>
-    <button onclick="navTo('funding')" id="btn-funding">Funding</button>
-    <button onclick="navTo('standards')" id="btn-standards">Standards</button>
-    <button onclick="navTo('brochures')" id="btn-brochures">Brochures</button>
-    <button onclick="navTo('casestudies')" id="btn-casestudies">Case Studies</button>
-  </nav>
-
-  <main id="scrollTarget">
-    <div id="home" class="screen">
-      <div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Gallery/Thumbnails/background.jpg'); background-size: cover; background-position: center; padding: 50px 25px; text-align: center; color: white;">
-        <h1>Welcome to Yorkshire Windows</h1>
-        <div style="width: 80px; height: 6px; background: var(--brand-yellow); margin: 15px auto;"></div>
-        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 25px;">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
-        <div style="display: flex; gap: 12px; justify-content: center;">
-          <div style="background: rgba(255,255,255,0.15); border: 2px solid var(--brand-yellow); border-radius: 12px; padding: 12px; flex: 1; max-width: 160px; cursor: pointer;" onclick="playVideo()"><i data-lucide="play-circle"></i><br><span>Watch Video</span></div>
-          <div style="background: rgba(255,255,255,0.15); border: 2px solid var(--brand-yellow); border-radius: 12px; padding: 12px; flex: 1; max-width: 160px; cursor: pointer;" onclick="openPDF('brochures/pitchperfect.pdf')"><i data-lucide="file-text"></i><br><span>Our Vision</span></div>
-        </div>
-      </div>
-      <div style="background: var(--brand-blue); color: white; padding: 40px 20px;">
-        <div class="grid-2x2">
-          <div style="text-align: center;"><h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase;">Premium Standards</h3><p style="font-size: 11px; opacity: 0.9;">Conservatory Outlet Premium Retailer.</p></div>
-          <div style="text-align: center;"><h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase;">Premium Knowledge</h3><p style="font-size: 11px; opacity: 0.9;">South Yorkshire roots.</p></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="gallery" class="screen hidden">
-      <div id="albumList" class="grid-3x2">
-        <div class="thumb-item" onclick="handleCategory('Edwardian')"><img src="Gallery/Thumbnails/Edwardian.jpg" class="thumb-img"><span>Edwardian</span></div>
-        <div class="thumb-item" onclick="handleCategory('Flat Roof')"><img src="Gallery/Thumbnails/Flat Roof.JPG" class="thumb-img"><span>Flat Roof</span></div>
-        <div class="thumb-item" onclick="handleCategory('Gable End')"><img src="Gallery/Thumbnails/Gable End.jpeg" class="thumb-img"><span>Gable End</span></div>
-        <div class="thumb-item" onclick="handleCategory('Leanto')"><img src="Gallery/Thumbnails/Leanto.JPG" class="thumb-img"><span>Leanto</span></div>
-        <div class="thumb-item" onclick="handleCategory('Victorian')"><img src="Gallery/Thumbnails/Victorian.PNG" class="thumb-img"><span>Victorian</span></div>
-      </div>
-      <div id="subFolderList" class="hidden"></div>
-      <div id="albumImages" class="hidden">
-        <div style="padding: 15px;"><button onclick="resetGallery()" style="padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:30px; font-weight:bold;">← BACK</button></div>
-        <div id="imagesGrid" class="grid-3x2"></div>
-      </div>
-    </div>
-  </main>
+  
+  <nav id="navbar"></nav>
+  <main id="content-loader"></main>
 
   <footer>
     <div class="footer-brands">
-      <img src="Logo/clearview.png" alt="Clearview">
-      <img src="Logo/planet.png" alt="Planet">
-      <img src="Logo/orion.png" alt="Orion">
-      <img src="Logo/trentvalley.png" alt="Trent Valley">
-      <img src="Logo/yorkshire.png" alt="Yorkshire Windows">
-      <img src="Logo/westyorkshire.png" alt="West Yorkshire">
+      <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png">
+      <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
     </div>
   </footer>
-
-  <script>
-    let currentImageIndex = 0;
-    let categoryImages = [];
-
-    function navTo(id) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-      document.getElementById(id).classList.remove('hidden');
-      document.getElementById('btn-'+id)?.classList.add('active');
-      document.getElementById('scrollTarget').scrollTop = 0;
-    }
-
-    // GALLERY LOGIC
-    const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
-    function handleCategory(cat) { const subs = galleryMap[cat]; if (subs.length === 0) { loadImages(`Gallery/${cat}`); } else { showSubFolders(cat, subs); } }
-    function showSubFolders(p, subs) {
-      document.getElementById("albumList").classList.add("hidden");
-      const list = document.getElementById("subFolderList"); list.classList.remove("hidden");
-      list.innerHTML = `<div style="padding:15px;"><button onclick="resetGallery()" style="padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px;">← BACK</button></div>`;
-      subs.forEach(s => {
-        const d = document.createElement("div"); d.style = "background:white; border-radius:12px; padding:15px; border-left:8px solid var(--brand-yellow); margin:0 15px 10px; cursor:pointer;"; 
-        d.innerHTML = `<h3 style="margin:0; font-size:14px;">${s}</h3>`;
-        d.onclick = () => loadImages(`Gallery/${encodeURIComponent(p)}/${encodeURIComponent(s)}`);
-        list.appendChild(d);
-      });
-    }
-    function loadImages(path) {
-      document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumList").classList.add("hidden");
-      document.getElementById("albumImages").classList.remove("hidden");
-      const grid = document.getElementById("imagesGrid"); grid.innerHTML = 'Loading...';
-      categoryImages = [];
-      const exts = ['.jpg', '.JPG', '.jpeg', '.png', '.PNG'];
-      function tryLoad(idx) {
-        let eIdx = 0;
-        function check() {
-          if (eIdx >= exts.length) return;
-          const src = `${path}/${idx.toString().padStart(2, '0')}${exts[eIdx]}`;
-          const img = new Image();
-          img.onload = () => {
-            if(idx === 1) grid.innerHTML = '';
-            categoryImages.push(src);
-            const t = document.createElement("img"); t.src = src; t.className = "thumb-img"; t.style = "cursor:pointer;";
-            t.onclick = () => openModal(categoryImages.indexOf(src));
-            grid.appendChild(t); tryLoad(idx + 1);
-          };
-          img.onerror = () => { eIdx++; check(); }; img.src = src;
-        }
-        check();
-      }
-      tryLoad(1);
-    }
-    function resetGallery() { document.getElementById("albumList").classList.remove("hidden"); document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumImages").classList.add("hidden"); }
-
-    function initApp() { lucide.createIcons(); navTo('home'); }
-  </script>
 </body>
 </html>
