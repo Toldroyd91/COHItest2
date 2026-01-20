@@ -31,6 +31,9 @@
     footer img { height: 35px; max-width: 55px; object-fit: contain; }
 
     .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; }
+    .modal { background: white; width: 85%; border-radius: 20px; padding: 25px; text-align: center; }
+    .modal button { width: 100%; padding: 15px; margin: 5px 0; border: none; border-radius: 10px; background: var(--brand-blue); color: white; font-weight: bold; font-size: 16px; }
+    
     #fs-img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .close-btn { position: absolute; top: 30px; right: 20px; color: white; font-size: 40px; cursor: pointer; z-index: 8001; }
     .hidden { display: none !important; }
@@ -48,7 +51,7 @@
     <header>
       <div class="h-side"></div>
       <div class="h-center"><img src="Logo/co-logo.png" class="h-logo"></div>
-      <div class="h-side" onclick="toggleSettings()"><i data-lucide="user-cog" style="color:white; opacity:0.6;"></i></div>
+      <div class="h-side" onclick="toggleSettings()"><i data-lucide="user-cog" style="color:white; cursor:pointer;"></i></div>
     </header>
 
     <nav>
@@ -68,6 +71,16 @@
     </footer>
   </div>
 
+  <div id="settings-overlay" class="overlay">
+    <div class="modal">
+      <h2 style="color:var(--brand-blue); margin-bottom:20px; border-bottom:2px solid var(--brand-yellow); padding-bottom:10px;">Select Designer</h2>
+      <button onclick="setDesigner('WYW')">Yorkshire Windows (Default)</button>
+      <button onclick="setDesigner('Tom')">Tom</button>
+      <button onclick="setDesigner('Soban')">Soban</button>
+      <p onclick="toggleSettings()" style="margin-top:15px; color:#666; cursor:pointer;">Cancel</p>
+    </div>
+  </div>
+
   <div id="fs-viewer" class="overlay">
     <span class="close-btn" onclick="closeFS()">&times;</span>
     <img id="fs-img" src="">
@@ -78,6 +91,8 @@
   </div>
 
   <script>
+    // App State
+    let activeDesigner = 'WYW';
     let currentPhotos = [];
     let photoIdx = 0;
 
@@ -94,56 +109,56 @@
       try {
         const resp = await fetch(name + '.html');
         container.innerHTML = await resp.text();
+        
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
         document.getElementById('btn-' + name).classList.add('active');
+        
         lucide.createIcons();
+
+        // SPECIAL CASE: If loading About Me, tell the script which designer is active
+        if(name === 'aboutme' && typeof initProfile === 'function') {
+            initProfile(activeDesigner);
+        }
       } catch (e) { container.innerHTML = "<div style='padding:50px; text-align:center;'>Loading " + name + "...</div>"; }
     }
 
-    // UPDATED UNIVERSAL GALLERY CRAWLER
+    // SETTINGS LOGIC
+    function toggleSettings() {
+        const ov = document.getElementById('settings-overlay');
+        ov.style.display = (ov.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function setDesigner(name) {
+        activeDesigner = name;
+        toggleSettings();
+        loadSection('home'); // Redirect home after change
+    }
+
+    // GALLERY LOGIC (LOCKED)
     window.openSub = function(cat) {
         document.getElementById('album-list').classList.add('hidden');
         document.getElementById('photo-view').classList.remove('hidden');
         const grid = document.getElementById('photo-grid');
         grid.innerHTML = '<div style="grid-column: span 2; padding:20px; text-align:center;">Checking for photos...</div>';
         currentPhotos = [];
-        
-        const exts = ['.jpg', '.JPG', '.jpeg', '.png', '.PNG'];
+        const exts = ['.jpg', '.JPG', '.jpeg', '.png'];
         const subDirs = ['', '/Edwardian Glass Roof', '/Edwardian Solid Roof', '/Gable Glass Roof', '/Gable Solid Roof', '/Leanto Glass Roof', '/Leanto Solid Roof', '/Victorian Glass Roof', '/Victorian Solid Roof'];
-        
-        let checked = 0;
-        let found = 0;
-
         subDirs.forEach(sub => {
             for(let i=1; i<=15; i++) {
                 let num = i.toString().padStart(2, '0');
                 exts.forEach(ext => {
                     let path = `Gallery/${cat}${sub}/${num}${ext}`;
                     let img = new Image();
-                    img.onload = () => {
-                        if(found === 0) grid.innerHTML = '';
-                        currentPhotos.push(path);
-                        let idx = currentPhotos.length - 1;
-                        grid.innerHTML += `<img src="${path}" onclick="openFS(${idx})" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; border:1px solid #eee;">`;
-                        found++;
-                    };
+                    img.onload = () => { if(currentPhotos.length === 0) grid.innerHTML = ''; currentPhotos.push(path); grid.innerHTML += `<img src="${path}" onclick="openFS(${currentPhotos.length - 1})" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; border:1px solid #eee;">`; };
                     img.src = path;
                 });
             }
         });
-
-        // Timeout check if nothing found after 3 seconds
-        setTimeout(() => {
-            if(found === 0) grid.innerHTML = `<div style="grid-column: span 2; padding:20px; text-align:center; color:#999;">No photos found in Gallery/${cat} folders.</div>`;
-        }, 3000);
     };
-
     window.closeSub = () => { document.getElementById('album-list').classList.remove('hidden'); document.getElementById('photo-view').classList.add('hidden'); };
     window.openFS = (idx) => { photoIdx = idx; document.getElementById('fs-img').src = currentPhotos[photoIdx]; document.getElementById('fs-viewer').style.display = 'flex'; lucide.createIcons(); };
     window.closeFS = () => document.getElementById('fs-viewer').style.display = 'none';
     window.navFS = (dir) => { photoIdx = (photoIdx + dir + currentPhotos.length) % currentPhotos.length; document.getElementById('fs-img').src = currentPhotos[photoIdx]; };
-
-    window.triggerVideo = () => alert("Video feature pending mp4 link...");
     window.triggerPDF = (p) => window.open(p, '_blank');
   </script>
 </body>
