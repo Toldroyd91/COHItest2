@@ -17,17 +17,15 @@
     body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--brand-white); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
     .hidden { display: none !important; }
 
-    /* --- HEADER (COHI LOGO TOP) --- */
+    /* --- HEADER (COHI TOP) --- */
     header { 
-      background: var(--brand-blue); 
-      height: 110px; flex-shrink: 0;
+      background: var(--brand-blue); height: 110px; flex-shrink: 0;
       display: flex; align-items: stretch; position: relative; z-index: 100;
       border-bottom: 4px solid var(--brand-yellow);
     }
     .header-side { flex: 1; display: flex; align-items: center; justify-content: center; color: white; padding-top: var(--safe-top); }
     .header-center { background: white; flex: 2; display: flex; align-items: center; justify-content: center; padding-top: var(--safe-top); }
     .header-logo { height: 90%; width: auto; object-fit: contain; }
-    
     .settings-trigger { opacity: 0.6; cursor: pointer; padding: 10px; }
 
     /* --- NAVIGATION --- */
@@ -35,45 +33,45 @@
     nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; font-size: 11px; text-transform: uppercase; padding: 15px 12px; white-space: nowrap; flex-shrink: 0; }
     nav button.active { text-decoration: underline; text-underline-offset: 5px; }
 
-    /* --- MAIN CONTENT --- */
+    /* --- CONTENT --- */
     main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; position: relative; z-index: 1; }
     .screen { min-height: 100%; width: 100%; }
 
-    /* --- HOME: HERO SECTION --- */
+    /* --- HOME [LOCKED] --- */
     .hero-section {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Gallery/Thumbnails/homepage.jpg');
-      background-size: cover; background-position: center;
-      padding: 50px 25px; text-align: center; color: white;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Gallery/Thumbnails/background.jpg');
+      background-size: cover; background-position: center; padding: 50px 25px; text-align: center; color: white;
     }
-    .hero-section h1 { font-size: clamp(28px, 8vw, 42px); font-weight: 800; margin: 0; line-height: 1.1; }
+    .hero-section h1 { font-size: clamp(28px, 8vw, 42px); font-weight: 800; margin: 0; }
     .yellow-dash { width: 80px; height: 6px; background: var(--brand-yellow); margin: 15px auto; }
-    .hero-intro-text { font-size: 15px; line-height: 1.6; margin-bottom: 25px; }
-    
-    .hero-actions { display: flex; gap: 12px; justify-content: center; }
-    .hero-btn { 
-      background: rgba(255,255,255,0.15); border: 2px solid var(--brand-yellow); 
-      border-radius: 12px; padding: 12px; color: white; flex: 1; max-width: 160px;
-      display: flex; flex-direction: column; align-items: center; cursor: pointer;
-    }
-    .hero-btn span { font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 5px; }
-
-    /* --- HOME: STATEMENTS SECTION --- */
+    .hero-actions { display: flex; gap: 12px; justify-content: center; margin-top: 25px; }
+    .hero-btn { background: rgba(255,255,255,0.15); border: 2px solid var(--brand-yellow); border-radius: 12px; padding: 12px; color: white; flex: 1; max-width: 160px; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
     .statements-section { background: var(--brand-blue); color: white; padding: 40px 20px; }
     .grid-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; text-align: center; }
-    .wcu-item h3 { color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; margin-bottom: 8px; font-weight: 800; }
-    .wcu-item p { font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0; }
 
-    /* --- OVERLAYS --- */
-    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; flex-direction: column; }
-    .overlay-controls { background: var(--brand-blue); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
-    .close-btn { font-size: 35px; cursor: pointer; line-height: 1; }
+    /* --- GALLERY UNIFORM GRID --- */
+    .grid-3x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px; }
+    @media (min-width: 600px) { .grid-3x2 { grid-template-columns: repeat(3, 1fr); } }
+    .thumb-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; text-align: center; }
+    .thumb-item img, .thumb-img { 
+      width: 100%; aspect-ratio: 4/3; object-fit: cover; 
+      border-radius: 10px; border: 1px solid #eee; margin-bottom: 8px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); 
+    }
+    .thumb-item span { font-weight: 800; font-size: 10px; text-transform: uppercase; color: var(--brand-blue); }
 
-    /* --- FOOTER (6 BRANDS) --- */
+    /* --- FULLSCREEN VIEWER --- */
+    #imageModal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 3000; display: none; align-items: center; justify-content: center; }
+    #fullscreenImg { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .modal-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; transform: translateY(-50%); pointer-events: none; }
+    .modal-nav button { background: rgba(255,255,255,0.2); border: none; color: white; padding: 15px; border-radius: 50%; pointer-events: auto; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .close-modal { position: absolute; top: 40px; right: 20px; color: white; cursor: pointer; z-index: 3001; }
+
+    /* --- FOOTER --- */
     footer { background: white; padding: 15px 10px; border-top: 1px solid #eee; flex-shrink: 0; }
-    .footer-brands { display: flex; justify-content: space-around; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .footer-brands img { height: 40px; max-width: 70px; object-fit: contain; }
-    .footer-badges { display: flex; justify-content: center; align-items: center; gap: 15px; opacity: 0.5; border-top: 1px solid #f0f0f0; padding-top: 8px; }
-    .footer-badges img { height: 25px; max-width: 50px; object-fit: contain; }
+    .footer-brands { display: flex; justify-content: space-around; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .footer-brands img { height: 35px; max-width: 65px; object-fit: contain; }
+
+    .content-card { background: white; border: 1px solid #ddd; border-radius: 12px; padding: 15px; border-left: 8px solid var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -82,9 +80,7 @@
   <header>
     <div class="header-side"></div>
     <div class="header-center"><img src="Logo/co-logo.png" class="header-logo"></div>
-    <div class="header-side">
-      <div class="settings-trigger" onclick="toggleSettings()"><i data-lucide="user-cog"></i></div>
-    </div>
+    <div class="header-side"><div class="settings-trigger" onclick="toggleSettings()"><i data-lucide="user-cog"></i></div></div>
   </header>
 
   <nav>
@@ -98,115 +94,173 @@
   </nav>
 
   <main id="scrollTarget">
-    
     <div id="home" class="screen">
       <div class="hero-section">
         <h1>Welcome to Yorkshire Windows</h1>
         <div class="yellow-dash"></div>
         <p class="hero-intro-text">At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.</p>
-        
         <div class="hero-actions">
-          <div class="hero-btn" onclick="playVideo()">
-            <i data-lucide="play-circle"></i>
-            <span>Watch Video</span>
-          </div>
-          <div class="hero-btn" onclick="openPDF('brochures/pitchperfect.pdf')">
-            <i data-lucide="file-text"></i>
-            <span>Our Vision</span>
-          </div>
+          <div class="hero-btn" onclick="playVideo()"><i data-lucide="play-circle"></i><span>Watch Video</span></div>
+          <div class="hero-btn" onclick="openPDF('brochures/pitchperfect.pdf')"><i data-lucide="file-text"></i><span>Our Vision</span></div>
         </div>
       </div>
-
       <div class="statements-section">
         <div class="grid-2x2">
-          <div class="wcu-item">
-            <h3>Premium Standards</h3>
-            <p>As a Conservatory Outlet Premium Retailer, Yorkshire Windows is independently vetted to maintain the very highest standards. From your first enquiry and showroom visit through to sales, surveying, installation, and aftercare, we deliver excellence at every stage.</p>
-          </div>
-          <div class="wcu-item">
-            <h3>Premium Knowledge</h3>
-            <p>With strong local roots, we understand homes across South Yorkshire better than anyone. Backed by years of experience, trusted references, and a welcoming showroom nearby, we’re here to inspire and guide your home improvement journey.</p>
-          </div>
-          <div class="wcu-item">
-            <h3>Premium Guarantee</h3>
-            <p>Manufactured with the latest technology and expert craftsmanship, our products are built to last. That’s why every installation comes with an exceptional guarantee for your complete peace of mind.</p>
-          </div>
-          <div class="wcu-item">
-            <h3>Premium Price Promise</h3>
-            <p>We’re committed to honest, transparent pricing. If you find a genuine like-for-like quote elsewhere, we’ll match it – giving you the confidence that you’re always getting the best value.</p>
-          </div>
+          <div class="wcu-item"><h3>Premium Standards</h3><p>Independently vetted to maintain the very highest standards from first enquiry to aftercare.</p></div>
+          <div class="wcu-item"><h3>Premium Knowledge</h3><p>Strong local roots understanding South Yorkshire homes better than anyone.</p></div>
+          <div class="wcu-item"><h3>Premium Guarantee</h3><p>Every installation comes with an exceptional guarantee for complete peace of mind.</p></div>
+          <div class="wcu-item"><h3>Premium Price Promise</h3><p>If you find a genuine like-for-like quote elsewhere, we’ll match it.</p></div>
         </div>
+      </div>
+    </div>
+
+    <div id="gallery" class="screen hidden">
+      <div id="albumList" class="grid-3x2">
+        <div class="thumb-item" onclick="handleCategory('Edwardian')"><img src="Gallery/Thumbnails/Edwardian.jpg"><span>Edwardian</span></div>
+        <div class="thumb-item" onclick="handleCategory('Flat Roof')"><img src="Gallery/Thumbnails/Flat Roof.JPG"><span>Flat Roof</span></div>
+        <div class="thumb-item" onclick="handleCategory('Gable End')"><img src="Gallery/Thumbnails/Gable End.jpeg"><span>Gable End</span></div>
+        <div class="thumb-item" onclick="handleCategory('Leanto')"><img src="Gallery/Thumbnails/Leanto.JPG"><span>Leanto</span></div>
+        <div class="thumb-item" onclick="handleCategory('Victorian')"><img src="Gallery/Thumbnails/Victorian.PNG"><span>Victorian</span></div>
+      </div>
+      <div id="subFolderList" class="hidden"></div>
+      <div id="albumImages" class="hidden">
+        <div style="padding: 15px;"><button onclick="resetGallery()" style="padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:30px; font-weight:bold;">← BACK</button></div>
+        <div id="imagesGrid" class="grid-3x2"></div>
       </div>
     </div>
 
     <div id="funding" class="screen hidden" style="padding:25px; text-align:center; color:var(--brand-blue);">
-        <p style="margin-bottom:20px; line-height:1.6;">To make life easy for you, at Yorkshire Windows we can arrange a variety of convenient easy payment finance options (subject to application & affordability).</p>
+        <p style="margin-bottom:20px; line-height:1.6;">Decisions typically within 24 hours.</p>
         <div class="grid-2x2">
-            <div style="background:white; border:1px solid #ddd; border-radius:12px; padding:15px; border-left:8px solid var(--brand-yellow);">
-                <h3>Monthly</h3><p style="color:#d00; font-weight:900;">11.9% APR</p>
-            </div>
-            <div style="background:white; border:1px solid #ddd; border-radius:12px; padding:15px; border-left:8px solid var(--brand-yellow);">
-                <h3>3 Months</h3><p style="color:#d00; font-weight:900;">10.9% APR</p>
-            </div>
-            <div style="background:white; border:1px solid #ddd; border-radius:12px; padding:15px; border-left:8px solid var(--brand-yellow);">
-                <h3>6 Months</h3><p style="color:#d00; font-weight:900;">19.9% APR</p>
-            </div>
-            <div style="background:white; border:1px solid #ddd; border-radius:12px; padding:15px; border-left:8px solid var(--brand-yellow);">
-                <h3>Stage Pay</h3><p>20% Deposit</p>
-            </div>
+            <div class="content-card"><h3>Monthly</h3><p style="color:#d00; font-weight:900;">11.9% APR</p></div>
+            <div class="content-card"><h3>3 Months</h3><p style="color:#d00; font-weight:900;">10.9% APR</p></div>
+            <div class="content-card"><h3>6 Months</h3><p style="color:#d00; font-weight:900;">19.9% APR</p></div>
+            <div class="content-card"><h3>Self Fund</h3><p>20% Deposit</p></div>
+        </div>
+        <p style="font-size:11px; margin-top:25px; font-style:italic; opacity:0.8;">*Terms: £29 admin fee. Starts from 'Wind and Water Tight'.</p>
+    </div>
+
+    <div id="standards" class="screen hidden">
+        <div style="width:200px; height:200px; background:var(--brand-blue); border-radius:50%; border:6px solid var(--brand-yellow); margin:20px auto; display:flex; align-items:center; justify-content:center; text-align:center; color:white; font-weight:900;">Badges of Honor</div>
+        <div style="padding: 20px;">
+          <div class="content-card" style="margin-bottom:15px;"><h3>FENSA</h3><p>Energy regulation guarantee.</p></div>
+          <div class="content-card"><h3>GGF</h3><p>Industry code of conduct protection.</p></div>
         </div>
     </div>
   </main>
 
-  <div id="settingsModal" class="overlay">
-    <div style="background:white; margin:auto; width:85%; border-radius:20px; padding:25px; text-align:center;">
+  <div id="imageModal">
+    <div class="close-modal" onclick="closeModal()"><i data-lucide="x-circle" size="40"></i></div>
+    <img id="fullscreenImg" src="">
+    <div class="modal-nav">
+      <button onclick="changeImage(-1)"><i data-lucide="chevron-left"></i></button>
+      <button onclick="changeImage(1)"><i data-lucide="chevron-right"></i></button>
+    </div>
+  </div>
+
+  <div id="settingsModal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; display:none; align-items:center; justify-content:center;">
+    <div style="background:white; width:85%; border-radius:20px; padding:25px; text-align:center;">
       <h2 style="color:var(--brand-blue); border-bottom:2px solid var(--brand-yellow); padding-bottom:10px;">Select Designer</h2>
       <div style="display:flex; flex-direction:column; gap:12px; margin:20px 0;">
-        <button onclick="setUser('WYW')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px; font-weight:bold;">WYW</button>
-        <button onclick="setUser('Tom')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px; font-weight:bold;">Tom</button>
-        <button onclick="setUser('Soban')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px; font-weight:bold;">Soban</button>
+        <button onclick="setUser('WYW')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px;">WYW</button>
+        <button onclick="setUser('Tom')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px;">Tom</button>
+        <button onclick="setUser('Soban')" style="padding:15px; background:var(--brand-blue); color:white; border:none; border-radius:10px;">Soban</button>
       </div>
       <button onclick="toggleSettings()" style="color:#666; background:none; border:none; font-weight:bold;">Cancel</button>
     </div>
   </div>
 
-  <div id="pdfOverlay" class="overlay">
-    <div class="overlay-controls"><span>Brochure Viewer</span><span class="close-btn" onclick="closePDF()">&times;</span></div>
+  <div id="pdfOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:2000; display:none; flex-direction:column;">
+    <div style="background:var(--brand-blue); color:white; padding:15px; display:flex; justify-content:space-between;"><span>Brochure</span><span onclick="closePDF()" style="cursor:pointer; font-size:24px;">&times;</span></div>
     <iframe id="pdfFrame" style="flex:1; width:100%; border:none; background:white;"></iframe>
-  </div>
-
-  <div id="videoOverlay" class="overlay" style="align-items:center; justify-content:center;">
-    <span class="close-btn" style="position:absolute; top:20px; right:20px;" onclick="closeVideo()">&times;</span>
-    <video id="player" controls style="max-width:95%; max-height:85%;"><source src="intro.mp4"></video>
   </div>
 
   <footer>
     <div class="footer-brands">
-      <img src="Logo/clearview.png" alt="Clearview">
-      <img src="Logo/planet.png" alt="Planet">
-      <img src="Logo/orion.png" alt="Orion">
-      <img src="Logo/trentvalley.png" alt="Trent Valley">
-      <img src="Logo/yorkshire.png" alt="Yorkshire Windows">
-      <img src="Logo/westyorkshire.png" alt="West Yorkshire">
-    </div>
-    <div class="footer-badges">
-      <img src="Logo/fensa.png"><img src="Logo/chas.png"><img src="Logo/ggf.png"><img src="Logo/constructionline.png">
+      <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png">
+      <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
     </div>
   </footer>
 
   <script>
+    let currentImageIndex = 0;
+    let categoryImages = [];
+
     function navTo(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
       document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.remove('hidden');
-      document.getElementById('btn-'+id).classList.add('active');
+      document.getElementById('btn-'+id)?.classList.add('active');
       document.getElementById('scrollTarget').scrollTop = 0;
     }
+
+    // GALLERY LOGIC
+    const galleryMap = { "Edwardian": ["Edwardian Glass Roof", "Edwardian Solid Roof"], "Flat Roof": [], "Gable End": ["Gable Glass Roof", "Gable Solid Roof"], "Leanto": ["Leanto Glass Roof", "Leanto Solid Roof"], "Victorian": ["Victorian Glass Roof", "Victorian Solid Roof"] };
+    function handleCategory(cat) { const subs = galleryMap[cat]; if (subs.length === 0) { loadImages(`Gallery/${cat}`); } else { showSubFolders(cat, subs); } }
+    function showSubFolders(p, subs) {
+      document.getElementById("albumList").classList.add("hidden");
+      const list = document.getElementById("subFolderList"); list.classList.remove("hidden");
+      list.innerHTML = `<div style="padding:15px;"><button onclick="resetGallery()" style="padding:10px 20px; background:var(--brand-blue); color:white; border:none; border-radius:20px;">← BACK</button></div>`;
+      subs.forEach(s => {
+        const d = document.createElement("div"); d.className = "content-card"; d.style.margin = "0 15px 10px"; d.innerHTML = `<h3>${s}</h3>`;
+        d.onclick = () => loadImages(`Gallery/${encodeURIComponent(p)}/${encodeURIComponent(s)}`);
+        list.appendChild(d);
+      });
+    }
+    function loadImages(path) {
+      document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumList").classList.add("hidden");
+      document.getElementById("albumImages").classList.remove("hidden");
+      const grid = document.getElementById("imagesGrid"); grid.innerHTML = 'Loading...';
+      categoryImages = [];
+      const exts = ['.jpg', '.JPG', '.jpeg', '.png', '.PNG'];
+      function tryLoad(idx) {
+        let eIdx = 0;
+        function check() {
+          if (eIdx >= exts.length) return;
+          const src = `${path}/${idx.toString().padStart(2, '0')}${exts[eIdx]}`;
+          const img = new Image();
+          img.onload = () => {
+            if(idx === 1) grid.innerHTML = '';
+            categoryImages.push(src);
+            const t = document.createElement("img"); t.src = src; t.className = "thumb-img";
+            t.onclick = () => openModal(categoryImages.indexOf(src));
+            grid.appendChild(t); tryLoad(idx + 1);
+          };
+          img.onerror = () => { eIdx++; check(); }; img.src = src;
+        }
+        check();
+      }
+      tryLoad(1);
+    }
+    function resetGallery() { document.getElementById("albumList").classList.remove("hidden"); document.getElementById("subFolderList").classList.add("hidden"); document.getElementById("albumImages").classList.add("hidden"); }
+
+    // MODAL LOGIC
+    function openModal(index) {
+      currentImageIndex = index;
+      document.getElementById('fullscreenImg').src = categoryImages[currentImageIndex];
+      document.getElementById('imageModal').style.display = 'flex';
+    }
+    function changeImage(dir) {
+      currentImageIndex += dir;
+      if (currentImageIndex < 0) currentImageIndex = categoryImages.length - 1;
+      if (currentImageIndex >= categoryImages.length) currentImageIndex = 0;
+      document.getElementById('fullscreenImg').src = categoryImages[currentImageIndex];
+    }
+    function closeModal() { document.getElementById('imageModal').style.display = 'none'; }
+
+    // Swipe logic
+    let touchstartX = 0;
+    document.getElementById('imageModal').addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; });
+    document.getElementById('imageModal').addEventListener('touchend', e => {
+      let touchendX = e.changedTouches[0].screenX;
+      if (touchendX < touchstartX - 50) changeImage(1);
+      if (touchendX > touchstartX + 50) changeImage(-1);
+    });
+
     function toggleSettings() { const m = document.getElementById('settingsModal'); m.style.display = (m.style.display==='flex')?'none':'flex'; }
     function openPDF(p) { document.getElementById('pdfFrame').src = p; document.getElementById('pdfOverlay').style.display = 'flex'; }
     function closePDF() { document.getElementById('pdfOverlay').style.display = 'none'; document.getElementById('pdfFrame').src = ''; }
-    function playVideo() { document.getElementById('videoOverlay').style.display='flex'; document.getElementById('player').play(); }
-    function closeVideo() { document.getElementById('player').pause(); document.getElementById('videoOverlay').style.display='none'; }
+    function playVideo() { alert('CEO Video Loading...'); }
     function initApp() { lucide.createIcons(); navTo('home'); }
   </script>
 </body>
