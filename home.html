@@ -1,39 +1,47 @@
-<div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('Gallery/Thumbnails/background.jpg'); background-size: cover; background-position: center; padding: 50px 25px; text-align: center; color: white;">
-    <h1 style="font-size: 32px; margin: 0; font-weight: 800;">Welcome to Yorkshire Windows</h1>
-    <div style="width: 80px; height: 6px; background: #fab51f; margin: 15px auto;"></div>
-    <p style="font-size: 15px; line-height: 1.6; margin-bottom: 25px;">
-        At Yorkshire Windows, we combine premium products, expert craftsmanship, and reliable local service to make improving your home simple and stress-free. With decades of experience and a reputation built on trust, we’re dedicated to bringing your vision to life with care, quality, and precision.
-    </p>
-    
-    <div style="display: flex; gap: 12px; justify-content: center;">
-        <div onclick="triggerVideo()" style="background: rgba(255,255,255,0.15); border: 2px solid #fab51f; border-radius: 12px; padding: 12px; flex: 1; max-width: 150px; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-            <i data-lucide="play-circle"></i>
-            <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 5px;">Watch Video</span>
+<div style="position: relative; width: 100%; height: 250px; background: #000;">
+    <img src="Gallery/Thumbnails/Edwardian.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
+    <div onclick="triggerVideo()" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer; text-align: center;">
+        <div style="background: var(--brand-yellow); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+            <i data-lucide="play" fill="white" color="white"></i>
         </div>
-        <div onclick="triggerPDF('brochures/pitchperfect.pdf')" style="background: rgba(255,255,255,0.15); border: 2px solid #fab51f; border-radius: 12px; padding: 12px; flex: 1; max-width: 150px; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-            <i data-lucide="file-text"></i>
-            <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; margin-top: 5px;">Our Vision</span>
-        </div>
+        <p style="color: white; font-weight: bold; margin-top: 10px; text-transform: uppercase;">Watch Intro Video</p>
     </div>
 </div>
 
-<div style="background: var(--brand-blue); color: white; padding: 40px 20px;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center;">
-        <div class="grid-item">
-            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Premium Standards</h3>
-            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">Independently vetted to maintain the very highest standards from first enquiry to aftercare.</p>
+<div style="padding: 25px;">
+    <h2 style="color: var(--brand-blue); text-align: center; margin-bottom: 25px; font-weight: 800;">YOUR JOURNEY TO A BEAUTIFUL HOME</h2>
+
+    <div style="display: grid; gap: 20px;">
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="pen-tool" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
+            <div>
+                <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue);">Bespoke Design Consultation</h3>
+                <p style="margin: 5px 0; font-size: 14px; color: #666; line-height: 1.5;">Your journey begins with a detailed design consultation. We use the latest 3D software to help you visualize your dream home before a single brick is laid, ensuring the final result perfectly matches your vision.</p>
+            </div>
         </div>
-        <div class="grid-item">
-            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Premium Knowledge</h3>
-            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">Strong local roots understanding South Yorkshire homes better than anyone.</p>
+
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="award" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
+            <div>
+                <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue);">Quality Craftsmanship</h3>
+                <p style="margin: 5px 0; font-size: 14px; color: #666; line-height: 1.5;">All our products are manufactured to the highest standards, using premium materials that are built to last and withstand the elements, providing you with peace of mind for years to come.</p>
+            </div>
         </div>
-        <div class="grid-item">
-            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Premium Guarantee</h3>
-            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">Manufactured with the latest technology, every installation comes with an exceptional guarantee.</p>
+
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="check-circle" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
+            <div>
+                <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue);">Right First Time Approach</h3>
+                <p style="margin: 5px 0; font-size: 14px; color: #666; line-height: 1.5;">Our engineering and installation teams are focused on precision. We believe in the company's "Right First Time" ethos, dedicated to getting the job done correctly at every stage of the journey.</p>
+            </div>
         </div>
-        <div class="grid-item">
-            <h3 style="color: var(--brand-yellow); font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px;">Price Promise</h3>
-            <p style="font-size: 11px; line-height: 1.5; opacity: 0.9; margin: 0;">We match genuine like-for-like quotes to ensure you always get the best value.</p>
+
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="heart" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
+            <div>
+                <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue);">Customer-Centric Excellence</h3>
+                <p style="margin: 5px 0; font-size: 14px; color: #666; line-height: 1.5;">From start to finish, the customer is at the heart of every project. We pride ourselves on making the transformation process as smooth, enjoyable, and stress-free as possible.</p>
+            </div>
         </div>
     </div>
 </div>
