@@ -1,50 +1,51 @@
-<div style="position: relative; width: 100%; height: 240px; background: #000; overflow: hidden; border-bottom: 4px solid var(--brand-yellow);">
-    <img src="Gallery/Thumbnails/Edwardian.jpg" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
-    <div onclick="triggerVideo()" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); cursor: pointer; text-align: center; width: 100%;">
-        <div style="background: var(--brand-yellow); width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-            <i data-lucide="play" fill="white" color="white" size="30"></i>
+<div style="background: var(--brand-blue); padding: 30px 20px; text-align: center; border-bottom: 5px solid var(--brand-yellow);">
+    <h2 style="color: white; margin-top: 0; font-weight: 800; letter-spacing: 1px;">WELCOME</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+        <div onclick="triggerVideo()" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer;">
+            <i data-lucide="play-circle" color="#fab51f" size="32" style="margin-bottom: 10px;"></i>
+            <div style="color: white; font-weight: bold; font-size: 12px; text-transform: uppercase;">Intro Video</div>
         </div>
-        <p style="color: white; font-weight: 900; margin-top: 12px; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Watch Intro Video</p>
+        <div onclick="loadSection('gallery')" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer;">
+            <i data-lucide="presentation" color="#fab51f" size="32" style="margin-bottom: 10px;"></i>
+            <div style="color: white; font-weight: bold; font-size: 12px; text-transform: uppercase;">Presentation</div>
+        </div>
     </div>
 </div>
 
-<div style="padding: 20px; background: #fdfdfd;">
-    <h2 style="color: var(--brand-blue); text-align: center; margin-bottom: 25px; font-weight: 800; font-size: 20px; text-transform: uppercase; letter-spacing: 0.5px;">Your Journey To A Beautiful Home</h2>
+<div style="padding: 30px 25px;">
+    <h2 style="color: var(--brand-blue); text-align: center; margin-bottom: 30px; font-weight: 800; text-transform: uppercase;">Your Journey To A Beautiful Home</h2>
 
-    <div style="display: grid; gap: 15px;">
-        
-        <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 15px; border: 1px solid #f0f0f0;">
-            <div style="color: var(--brand-yellow); flex-shrink: 0;"><i data-lucide="pen-tool" size="24"></i></div>
+    <div style="display: grid; gap: 30px;">
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="pen-tool" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
             <div>
                 <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue); font-weight: 800;">Bespoke Design Consultation</h3>
-                <p style="margin: 8px 0 0; font-size: 14px; color: #555; line-height: 1.5;">Your journey begins with a detailed design consultation. We use the latest 3D software to help you visualize your dream home before a single brick is laid, ensuring the final result perfectly matches your vision.</p>
+                <p style="margin: 5px 0; font-size: 14px; color: #555; line-height: 1.6;">Your journey begins with a detailed design consultation. We use the latest 3D software to help you visualize your dream home before a single brick is laid, ensuring the final result perfectly matches your vision.</p>
             </div>
         </div>
 
-        <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 15px; border: 1px solid #f0f0f0;">
-            <div style="color: var(--brand-yellow); flex-shrink: 0;"><i data-lucide="award" size="24"></i></div>
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="award" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
             <div>
                 <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue); font-weight: 800;">Quality Craftsmanship</h3>
-                <p style="margin: 8px 0 0; font-size: 14px; color: #555; line-height: 1.5;">All our products are manufactured to the highest standards, using premium materials that are built to last and withstand the elements, providing you with peace of mind for years to come.</p>
+                <p style="margin: 5px 0; font-size: 14px; color: #555; line-height: 1.6;">All our products are manufactured to the highest standards, using premium materials that are built to last and withstand the elements, providing you with peace of mind for years to come.</p>
             </div>
         </div>
 
-        <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 15px; border: 1px solid #f0f0f0;">
-            <div style="color: var(--brand-yellow); flex-shrink: 0;"><i data-lucide="check-circle" size="24"></i></div>
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="check-circle" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
             <div>
                 <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue); font-weight: 800;">Right First Time Approach</h3>
-                <p style="margin: 8px 0 0; font-size: 14px; color: #555; line-height: 1.5;">Our engineering and installation teams are focused on precision. We believe in the company's "Right First Time" ethos, dedicated to getting the job done correctly at every stage of the journey.</p>
+                <p style="margin: 5px 0; font-size: 14px; color: #555; line-height: 1.6;">Our engineering and installation teams are focused on precision. We believe in the company's "Right First Time" ethos, dedicated to getting the job done correctly at every stage of the journey.</p>
             </div>
         </div>
 
-        <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 15px; border: 1px solid #f0f0f0;">
-            <div style="color: var(--brand-yellow); flex-shrink: 0;"><i data-lucide="heart" size="24"></i></div>
+        <div style="display: flex; gap: 15px;">
+            <i data-lucide="heart" style="color: var(--brand-yellow); flex-shrink: 0;"></i>
             <div>
                 <h3 style="margin: 0; font-size: 16px; color: var(--brand-blue); font-weight: 800;">Customer-Centric Excellence</h3>
-                <p style="margin: 8px 0 0; font-size: 14px; color: #555; line-height: 1.5;">From start to finish, the customer is at the heart of every project. We pride ourselves on making the transformation process as smooth, enjoyable, and stress-free as possible.</p>
+                <p style="margin: 5px 0; font-size: 14px; color: #555; line-height: 1.6;">From start to finish, the customer is at the heart of every project. We pride ourselves on making the transformation process as smooth, enjoyable, and stress-free as possible.</p>
             </div>
         </div>
-
     </div>
-    <div style="height: 30px;"></div>
 </div>
