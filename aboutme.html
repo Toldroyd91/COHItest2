@@ -1,0 +1,76 @@
+<div id="profile-container" style="padding: 20px; background: #fdfdfd; min-height: 100%;">
+    <div id="profile-inner">
+        </div>
+</div>
+
+<script>
+window.initProfile = function(designerKey) {
+    const target = document.getElementById('profile-inner');
+    
+    const profiles = {
+        'Sobaan': {
+            name: 'Sobaan',
+            title: 'Design Consultant',
+            image: 'Gallery/Thumbnails/sob.jpg',
+            tags: ['Architectural Design', '3D Rendering', 'Spatial Planning'],
+            bio: `<p>With an architectural background, Sobaan has always been fascinated by how our surroundings shape the way we live. He thrives on creating spaces that enhance wellbeing, productivity, and emotion—perfectly aligning with our vision of designing environments that improve everyday life.</p>
+                  <p>Known for his friendly, approachable nature and strong technical knowledge, he takes pride in offering thoughtful solutions that feel natural and personal. One of Sobaan's proudest moments was seeing a client's face light up after viewing their 3D design render—a reminder of the joy great design brings.</p>`
+        },
+        'Tom': {
+            name: 'Thomas',
+            title: 'Design Consultant',
+            image: 'Gallery/Thumbnails/tom.jpg',
+            tags: ['Home Transformations', 'Technical Specialist', 'Project Planning'],
+            bio: `<p>Passionate about bringing clients’ dreams to life, Thomas finds inspiration in creating spaces that not only transform homes but also enhance everyday living. Whether it’s designing a new playroom, a home office, or breathing new life into an old conservatory, he is motivated by making a real difference.</p>
+                  <p>Thomas values the "Right First Time" approach and the dedication of our specialist teams. With a strong belief that the customer should always be at the heart of every project, he is excited to help deliver seamless, stress-free transformations that turn visions into reality.</p>`
+        },
+        'WYW': {
+            name: 'Yorkshire Windows',
+            title: 'Our Design Team',
+            image: 'Logo/co-logo.png',
+            tags: ['Local Experts', 'Premium Quality', 'Trusted Service'],
+            bio: `<p>Our design team combines decades of experience with a passion for South Yorkshire architecture. Whether you are working with Tom or Sobaan, our goal is to provide a seamless, stress-free experience from the first render to the final installation.</p>`
+        }
+    };
+
+    const data = profiles[designerKey] || profiles['WYW'];
+
+    target.innerHTML = `
+        <div style="background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,47,84,0.08); padding: 30px 20px; text-align: center; margin-bottom: 25px;">
+            <div style="position: relative; width: 150px; height: 150px; margin: 0 auto 20px;">
+                <img src="${data.image}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="position: absolute; bottom: 5px; right: 5px; background: #fab51f; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid white;">
+                    <i data-lucide="check" style="color: #002f54; width: 18px;"></i>
+                </div>
+            </div>
+            
+            <h1 style="margin: 0; font-size: 26px; color: #002f54; font-weight: 800;">${data.name}</h1>
+            <p style="margin: 5px 0 15px; color: #fab51f; font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1.5px;">${data.title}</p>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 10px;">
+                ${data.tags.map(tag => `<span style="background: #f0f4f8; color: #002f54; font-size: 10px; font-weight: 700; padding: 6px 12px; border-radius: 15px;">${tag}</span>`).join('')}
+            </div>
+        </div>
+
+        <div style="background: white; border-radius: 20px; padding: 25px; line-height: 1.8; color: #444; font-size: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03);">
+            <div style="color: #002f54; margin-bottom: 15px;"><i data-lucide="quote"></i></div>
+            ${data.bio}
+        </div>
+
+        <div style="margin: 30px 0; display: grid; grid-template-columns: 1fr; gap: 12px;">
+            <button onclick="loadSection('gallery')" style="background: #002f54; color: white; border: none; padding: 18px; border-radius: 15px; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 12px rgba(0,47,84,0.2);">
+                <i data-lucide="layout"></i> VIEW MY RECENT WORK
+            </button>
+            <button onclick="loadSection('brochures')" style="background: white; color: #002f54; border: 2px solid #002f54; padding: 18px; border-radius: 15px; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <i data-lucide="download-cloud"></i> BROCHURES & GUIDES
+            </button>
+        </div>
+    `;
+
+    lucide.createIcons();
+};
+
+if(window.activeDesigner) {
+    initProfile(window.activeDesigner);
+}
+</script>
