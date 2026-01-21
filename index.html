@@ -134,6 +134,49 @@
     window.triggerVideo = () => { document.getElementById('video-overlay').style.display = 'flex'; document.getElementById('video-player').play(); };
     window.closeVideo = () => { document.getElementById('video-player').pause(); document.getElementById('video-overlay').style.display = 'none'; };
     window.triggerPDF = (p) => window.open(p, '_blank');
+// Add this inside the <script> tag of your index.html
+function openAlbum(cat) {
+    document.getElementById('album-list').classList.add('hidden');
+    document.getElementById('photo-view').classList.remove('hidden');
+    document.getElementById('album-title').innerText = cat;
+    
+    const grid = document.getElementById('photo-grid');
+    grid.innerHTML = ''; // Clear old photos
+    
+    // We define exactly which subfolders to check for this category
+    const variations = ['Glass Roof', 'Solid Roof'];
+    
+    variations.forEach(v => {
+        // We try to load 10 images per subfolder
+        for(let i=1; i<=10; i++) {
+            let num = i.toString().padStart(2, '0');
+            let path = `Gallery/${cat}/${cat} ${v}/${num}.jpg`;
+            
+            let img = new Image();
+            img.onload = function() {
+                // Only if the image actually exists, we add it to the grid
+                grid.innerHTML += `
+                    <div style="position:relative;">
+                        <img src="${path}" onclick="openFS('${path}')" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
+                        <span style="position:absolute; bottom:5px; right:5px; background:rgba(0,0,0,0.6); color:white; font-size:8px; padding:2px 5px; border-radius:4px;">${v}</span>
+                    </div>`;
+            };
+            img.src = path;
+        }
+    });
+}
+
+function closeAlbum() {
+    document.getElementById('album-list').classList.remove('hidden');
+    document.getElementById('photo-view').classList.add('hidden');
+}
+
+function openFS(src) {
+    // This uses the Fullscreen viewer already in your index.html
+    document.getElementById('fs-img').src = src;
+    document.getElementById('fs-viewer').style.display = 'flex';
+}
+
   </script>
 </body>
 </html>
