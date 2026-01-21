@@ -7,22 +7,27 @@
   <style>
     :root { --brand-blue: #002f54; --brand-yellow: #fab51f; }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { margin: 0; padding: 0; height: 100dvh; width: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+    html, body { margin: 0; padding: 0; height: 100dvh; width: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; }
+    
     #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
     #app { display: none; flex-direction: column; height: 100dvh; width: 100%; position: relative; }
-    header { background: var(--brand-blue); height: 100px; flex-shrink: 0; display: flex; border-bottom: 4px solid var(--brand-yellow); }
-    .h-side { flex: 1; display: flex; align-items: center; justify-content: center; }
-    .h-center { background: white; flex: 3; display: flex; align-items: center; justify-content: center; }
-    .h-logo { height: 85px; width: auto; object-fit: contain; }
+    
+    /* TIGHT HEADER LOGIC */
+    header { background: var(--brand-blue); height: 110px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid var(--brand-yellow); padding: 0 15px; }
+    .h-logo-box { background: white; height: 100%; display: flex; align-items: center; padding: 0 10px; }
+    .h-logo { height: 90px; width: auto; object-fit: contain; }
+    
     nav { background: var(--brand-yellow); height: 50px; display: flex; overflow-x: auto; flex-shrink: 0; }
     nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; padding: 0 15px; text-transform: uppercase; white-space: nowrap; font-size: 11px; }
     nav button.active { text-decoration: underline; text-underline-offset: 5px; }
-    main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 80px; }
-    footer { position: absolute; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #eee; height: 70px; display: flex; justify-content: space-around; align-items: center; padding: 0 10px; z-index: 1000; }
-    footer img { height: 35px; max-width: 55px; object-fit: contain; }
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; }
-    .modal { background: white; width: 85%; border-radius: 20px; padding: 25px; text-align: center; }
-    .modal button { width: 100%; padding: 15px; margin: 5px 0; border: none; border-radius: 10px; background: var(--brand-blue); color: white; font-weight: bold; font-size: 16px; }
+
+    main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 80px; background: white; }
+
+    footer { position: absolute; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #eee; height: 70px; display: flex; justify-content: space-around; align-items: center; padding: 0 5px; z-index: 1000; }
+    footer img { height: 30px; max-width: 50px; object-fit: contain; }
+
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; flex-direction: column; }
+    .close-btn { position: absolute; top: 30px; right: 20px; color: white; font-size: 40px; cursor: pointer; z-index: 8001; }
     .hidden { display: none !important; }
   </style>
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -36,9 +41,8 @@
 
   <div id="app">
     <header>
-      <div class="h-side"></div>
-      <div class="h-center"><img src="Logo/co-logo.png" class="h-logo"></div>
-      <div class="h-side" onclick="toggleSettings()"><i data-lucide="user-cog" style="color:white; cursor:pointer;"></i></div>
+      <div style="width:40px;"></div> <div class="h-logo-box"><img src="Logo/co-logo.png" class="h-logo"></div>
+      <div onclick="toggleSettings()" style="cursor:pointer; color:white;"><i data-lucide="user-cog"></i></div>
     </header>
 
     <nav>
@@ -59,42 +63,45 @@
   </div>
 
   <div id="settings-overlay" class="overlay">
-    <div class="modal">
-      <h2 style="color:var(--brand-blue); margin-bottom:20px;">Select Designer</h2>
-      <button onclick="setDesigner('Tom')">Thomas</button>
-      <button onclick="setDesigner('Sobaan')">Sobaan</button>
-      <button onclick="setDesigner('WYW')" style="background:#666;">Clear Selection</button>
-      <p onclick="toggleSettings()" style="margin-top:15px; color:#666; cursor:pointer;">Close</p>
+    <div style="background:white; padding:30px; border-radius:20px; width:80%; text-align:center;">
+      <h2 style="color:var(--brand-blue);">Select Designer</h2>
+      <button onclick="setDesigner('Tom')" style="width:100%; padding:15px; margin:5px; border:none; background:var(--brand-blue); color:white; border-radius:10px;">Thomas</button>
+      <button onclick="setDesigner('Sobaan')" style="width:100%; padding:15px; margin:5px; border:none; background:var(--brand-blue); color:white; border-radius:10px;">Sobaan</button>
+      <p onclick="toggleSettings()" style="margin-top:20px; color:#666;">Close</p>
     </div>
+  </div>
+
+  <div id="video-overlay" class="overlay">
+    <span class="close-btn" onclick="closeVideo()">&times;</span>
+    <video id="video-player" controls style="width:90%; border-radius:10px;">
+        <source src="intro.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div id="fs-viewer" class="overlay">
+    <span class="close-btn" onclick="closeFS()">&times;</span>
+    <img id="fs-img" src="" style="max-width:95%; max-height:80%; object-fit:contain;">
   </div>
 
   <script>
     let activeDesigner = 'WYW';
+    let currentPhotos = [];
 
     const designerData = {
         'Sobaan': {
-            name: 'Sobaan', title: 'Design Consultant', image: 'Gallery/Thumbnails/sob.jpg', tags: ['Architectural Design', '3D Rendering', 'Spatial Planning'],
-            bio: `<p>With an architectural background, Sobaan has always been fascinated by how our surroundings shape the way we live. He thrives on creating spaces that enhance wellbeing and emotion—aligning with our vision of improving everyday life.</p>
-                  <p>Known for his technical knowledge and approachable nature, he takes pride in offering thoughtful solutions that feel natural and personal.</p>`
+            name: 'Sobaan', title: 'Design Consultant', image: 'Gallery/Thumbnails/sob.jpg',
+            bio: `<p>With an architectural background, Sobaan has always been fascinated by how our surroundings shape the way we live. Drawn to the challenge of combining aesthetics with function, he thrives on creating spaces that enhance wellbeing, productivity, and emotion—perfectly aligning with the company's vision of designing environments that improve everyday life.</p>
+                  <p>For Sobaan, the most rewarding part of his work is the collaborative journey with clients: listening to their stories, understanding their needs, and translating them into spaces that truly reflect their identity. Known for his friendly, approachable nature and strong technical knowledge, he takes pride in offering thoughtful solutions that feel natural and personal, not sales-driven.</p>
+                  <p>One of Sobaan's proudest moments was seeing a client's face light up with excitement after viewing their 3D design render—a reminder of the joy and impact great design can bring. His goal is to create living spaces that clients feel proud of—spaces that reflect who they are and the life they want to live.</p>`
         },
         'Tom': {
-            name: 'Thomas', title: 'Design Consultant', image: 'Gallery/Thumbnails/tom.jpg', tags: ['Home Transformations', 'Technical Specialist', 'Project Planning'],
-            bio: `<p>Passionate about bringing dreams to life, Thomas finds inspiration in creating spaces that transform homes. Whether it’s a new playroom or home office, he is motivated by making a real difference.</p>
-                  <p>Thomas values our "Right First Time" approach and is excited to deliver seamless, stress-free transformations that turn visions into reality.</p>`
-        },
-        'WYW': {
-            name: 'Yorkshire Windows', title: 'Our Design Team', image: 'Logo/co-logo.png', tags: ['Local Experts', 'Premium Quality', 'Trusted Service'],
-            bio: `<p>Our design team combines decades of experience with a passion for South Yorkshire architecture to provide a seamless, stress-free experience.</p>`
+            name: 'Thomas', title: 'Design Consultant', image: 'Gallery/Thumbnails/tom.jpg',
+            bio: `<p>Passionate about bringing clients’ dreams to life, Thomas finds inspiration in creating spaces that not only transform homes but also enhance everyday living. Whether it’s designing a new playroom for children, a practical home office, or breathing new life into an old conservatory, he is motivated by the chance to make a real difference.</p>
+                  <p>Drawn to the company’s Right First Time approach and the dedication of specialist teams at every stage of the journey, Thomas values making the process as smooth and enjoyable as possible. With a strong belief that the customer should always be at the heart of every project, he is excited to help deliver seamless, stress-free transformations that turn visions into reality.</p>`
         }
     };
 
-    function unlock() {
-      if(document.getElementById('pw').value === "1234") {
-        document.getElementById('lock-screen').style.display = 'none';
-        document.getElementById('app').style.display = 'flex';
-        loadSection('home');
-      }
-    }
+    function unlock() { if(document.getElementById('pw').value === "1234") { document.getElementById('lock-screen').style.display = 'none'; document.getElementById('app').style.display = 'flex'; loadSection('home'); } }
 
     async function loadSection(name) {
       const container = document.getElementById('view-port');
@@ -103,45 +110,63 @@
         container.innerHTML = await resp.text();
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
         document.getElementById('btn-' + name).classList.add('active');
-        
-        // If we just loaded the About Me page, fill in the designer data immediately
         if(name === 'aboutme') renderProfile();
-        
         lucide.createIcons();
-      } catch (e) { container.innerHTML = "<div style='padding:50px;'>Error loading page.</div>"; }
+      } catch (e) { container.innerHTML = "<div style='padding:50px;'>Error</div>"; }
     }
 
     function renderProfile() {
-        const data = designerData[activeDesigner] || designerData['WYW'];
+        const data = designerData[activeDesigner] || designerData['Sobaan'];
         const target = document.getElementById('profile-target');
-        if(!target) return;
-
-        target.innerHTML = `
-            <div style="background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 30px 20px; text-align: center; margin-bottom: 20px;">
-                <img src="${data.image}" style="width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--brand-yellow); object-fit: cover; margin-bottom: 15px;">
-                <h1 style="margin:0; color:var(--brand-blue);">${data.name}</h1>
-                <p style="color:var(--brand-yellow); font-weight:bold; text-transform:uppercase; font-size:12px;">${data.title}</p>
-                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:5px; margin-top:10px;">
-                    ${data.tags.map(t => `<span style="background:#f0f4f8; font-size:10px; padding:5px 10px; border-radius:10px;">${t}</span>`).join('')}
+        if(target) {
+            target.innerHTML = `
+                <div style="text-align:center; margin-bottom:20px;">
+                    <img src="${data.image}" style="width:150px; height:150px; border-radius:50%; border:4px solid var(--brand-yellow); object-fit:cover;">
+                    <h1 style="color:var(--brand-blue); margin:10px 0 0;">${data.name}</h1>
+                    <p style="color:var(--brand-yellow); font-weight:bold; text-transform:uppercase; font-size:12px;">${data.title}</p>
                 </div>
-            </div>
-            <div style="background:white; border-radius:20px; padding:25px; line-height:1.7; color:#444;">${data.bio}</div>
-        `;
+                <div style="line-height:1.7; color:#444;">${data.bio}</div>
+            `;
+        }
     }
 
-    function toggleSettings() {
-        const ov = document.getElementById('settings-overlay');
-        ov.style.display = (ov.style.display === 'flex') ? 'none' : 'flex';
-    }
+    // FIXED GALLERY LOGIC
+    window.openSub = function(cat) {
+        document.getElementById('album-list').classList.add('hidden');
+        document.getElementById('photo-view').classList.remove('hidden');
+        const grid = document.getElementById('photo-grid');
+        grid.innerHTML = '';
+        currentPhotos = [];
+        
+        // Only crawl folders starting with the specific category
+        const subDirs = ['', '/Edwardian Glass Roof', '/Edwardian Solid Roof', '/Gable Glass Roof', '/Gable Solid Roof', '/Leanto Glass Roof', '/Leanto Solid Roof', '/Victorian Glass Roof', '/Victorian Solid Roof'];
+        
+        subDirs.forEach(sub => {
+            // Check if this subfolder belongs to the clicked category
+            if (sub === '' || sub.includes(cat)) {
+                for(let i=1; i<=12; i++) {
+                    let num = i.toString().padStart(2, '0');
+                    ['.jpg','.JPG','.jpeg','.png'].forEach(ext => {
+                        let path = `Gallery/${cat}${sub}/${num}${ext}`;
+                        let img = new Image();
+                        img.onload = () => {
+                            currentPhotos.push(path);
+                            grid.innerHTML += `<img src="${path}" onclick="openFS('${path}')" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:8px;">`;
+                        };
+                        img.src = path;
+                    });
+                }
+            }
+        });
+    };
 
-    function setDesigner(name) {
-        activeDesigner = name;
-        toggleSettings();
-        loadSection('aboutme'); // Jump straight to About Me to see the change
-    }
-
-    window.triggerVideo = () => alert("Video loading...");
-    window.triggerPDF = (p) => window.open(p, '_blank');
+    window.closeSub = () => { document.getElementById('album-list').classList.remove('hidden'); document.getElementById('photo-view').classList.add('hidden'); };
+    window.openFS = (src) => { document.getElementById('fs-img').src = src; document.getElementById('fs-viewer').style.display = 'flex'; };
+    window.closeFS = () => { document.getElementById('fs-viewer').style.display = 'none'; };
+    window.triggerVideo = () => { document.getElementById('video-overlay').style.display = 'flex'; document.getElementById('video-player').play(); };
+    window.closeVideo = () => { document.getElementById('video-player').pause(); document.getElementById('video-overlay').style.display = 'none'; };
+    function toggleSettings() { const ov = document.getElementById('settings-overlay'); ov.style.display = (ov.style.display === 'flex') ? 'none' : 'flex'; }
+    function setDesigner(name) { activeDesigner = name; toggleSettings(); loadSection('aboutme'); }
   </script>
 </body>
 </html>
