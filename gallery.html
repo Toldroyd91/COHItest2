@@ -1,29 +1,29 @@
-<div style="padding: 20px;">
+<div id="gallery-container" style="padding: 20px;">
     <div id="album-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-        <div onclick="openSub('Edwardian')" style="text-align:center; cursor:pointer;">
-            <img src="Gallery/Thumbnails/Edwardian.jpg" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
-            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Edwardian</b>
+        <div onclick="openAlbum('Edwardian')" style="cursor:pointer; text-align:center;">
+            <img src="Gallery/Thumbnails/Edwardian.jpg" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:15px; border:3px solid #eee;">
+            <p style="color:var(--brand-blue); font-weight:800; margin-top:8px; font-size:12px; text-transform:uppercase;">Edwardian</p>
         </div>
-        <div onclick="openSub('Flat Roof')" style="text-align:center; cursor:pointer;">
-            <img src="Gallery/Thumbnails/Flat Roof.JPG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
-            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Flat Roof</b>
+        <div onclick="openAlbum('Gable')" style="cursor:pointer; text-align:center;">
+            <img src="Gallery/Thumbnails/Gable.jpg" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:15px; border:3px solid #eee;">
+            <p style="color:var(--brand-blue); font-weight:800; margin-top:8px; font-size:12px; text-transform:uppercase;">Gable</p>
         </div>
-        <div onclick="openSub('Gable End')" style="text-align:center; cursor:pointer;">
-            <img src="Gallery/Thumbnails/Gable End.jpeg" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
-            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Gable End</b>
+        <div onclick="openAlbum('Victorian')" style="cursor:pointer; text-align:center;">
+            <img src="Gallery/Thumbnails/Victorian.jpg" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:15px; border:3px solid #eee;">
+            <p style="color:var(--brand-blue); font-weight:800; margin-top:8px; font-size:12px; text-transform:uppercase;">Victorian</p>
         </div>
-        <div onclick="openSub('Leanto')" style="text-align:center; cursor:pointer;">
-            <img src="Gallery/Thumbnails/Leanto.JPG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
-            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Leanto</b>
-        </div>
-        <div onclick="openSub('Victorian')" style="text-align:center; cursor:pointer;">
-            <img src="Gallery/Thumbnails/Victorian.PNG" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;">
-            <br><b style="color:#002f54; font-size:12px; text-transform:uppercase;">Victorian</b>
+        <div onclick="openAlbum('Leanto')" style="cursor:pointer; text-align:center;">
+            <img src="Gallery/Thumbnails/Leanto.jpg" style="width:100%; aspect-ratio:1; object-fit:cover; border-radius:15px; border:3px solid #eee;">
+            <p style="color:var(--brand-blue); font-weight:800; margin-top:8px; font-size:12px; text-transform:uppercase;">Lean-to</p>
         </div>
     </div>
 
     <div id="photo-view" class="hidden">
-        <button onclick="closeSub()" style="margin-bottom:20px; padding:12px 25px; background:#002f54; color:white; border:none; border-radius:30px; font-weight:bold;">← BACK</button>
-        <div id="photo-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <button onclick="closeAlbum()" style="background:var(--brand-blue); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:bold;">← BACK</button>
+            <h3 id="album-title" style="margin:0; color:var(--brand-blue); text-transform:uppercase;"></h3>
+        </div>
+        <div id="photo-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            </div>
     </div>
 </div>
