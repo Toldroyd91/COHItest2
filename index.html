@@ -1,182 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Yorkshire Windows Showcase</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <style>
-    :root { --brand-blue: #002f54; --brand-yellow: #fab51f; }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { margin: 0; padding: 0; height: 100dvh; width: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: white; }
-    
-    #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
-    #app { display: none; flex-direction: column; height: 100dvh; width: 100%; position: relative; }
-    
-    /* LOGO BOX FIX: Only as wide as the logo */
-    header { background: var(--brand-blue); height: 110px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid var(--brand-yellow); padding: 0 20px; }
-    .h-logo-box { background: white; height: 100%; display: flex; align-items: center; padding: 0 10px; width: fit-content; }
-    .h-logo { height: 85px; width: auto; }
-    
-    nav { background: var(--brand-yellow); height: 50px; display: flex; overflow-x: auto; flex-shrink: 0; }
-    nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; padding: 0 15px; text-transform: uppercase; white-space: nowrap; font-size: 11px; }
-    nav button.active { text-decoration: underline; text-underline-offset: 5px; }
-
-    main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 80px; }
-
-    footer { position: absolute; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #eee; height: 70px; display: flex; justify-content: space-around; align-items: center; padding: 0 10px; z-index: 1000; }
-    footer img { height: 30px; max-width: 55px; object-fit: contain; }
-
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; flex-direction: column; }
-    .close-btn { position: absolute; top: 30px; right: 20px; color: white; font-size: 40px; cursor: pointer; }
-    .hidden { display: none !important; }
-  </style>
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="UTF-8">
+    <title>Yorkshire Windows Showcase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <style>
+        :root { --brand-blue: #002f54; --brand-yellow: #fab51f; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { margin: 0; padding: 0; height: 100dvh; width: 100%; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: white; }
+        #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
+        header { background: var(--brand-blue); height: 110px; display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid var(--brand-yellow); padding-right: 20px; flex-shrink: 0; }
+        .h-logo-box { background: white; height: 100%; display: flex; align-items: center; padding: 0 15px; width: fit-content; }
+        .h-logo { height: 80px; width: auto; }
+        nav { background: var(--brand-yellow); height: 50px; display: flex; overflow-x: auto; flex-shrink: 0; }
+        nav button { background: none; border: none; color: var(--brand-blue); font-weight: 900; padding: 0 20px; text-transform: uppercase; white-space: nowrap; font-size: 12px; }
+        nav button.active { background: rgba(0,0,0,0.1); text-decoration: underline; }
+        #app { display: none; flex-direction: column; height: 100dvh; }
+        main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 90px; }
+        footer { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #eee; height: 80px; display: flex; justify-content: space-around; align-items: center; padding: 0 10px; z-index: 100; }
+        footer img { height: 35px; max-width: 55px; object-fit: contain; }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; }
+        .close-btn { position: absolute; top: 30px; right: 20px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+        .hidden { display: none !important; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
+        .gallery-item { cursor: pointer; text-align: center; }
+        .gallery-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 2px solid #eee; }
+        .gallery-item p { font-size: 10px; font-weight: bold; color: var(--brand-blue); margin-top: 5px; text-transform: uppercase; }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-
-  <div id="lock-screen">
-    <input type="password" id="pw" style="padding:15px; border-radius:10px; border:none; text-align:center;" placeholder="Enter 1234">
-    <button onclick="unlock()" style="margin-top:15px; padding:15px 30px; background:var(--brand-yellow); border:none; border-radius:10px; font-weight:bold; color:var(--brand-blue);">UNLOCK</button>
-  </div>
-
-  <div id="app">
-    <header>
-      <div class="h-logo-box"><img src="Logo/co-logo.png" class="h-logo"></div>
-      <div onclick="toggleSettings()" style="cursor:pointer; color:white;"><i data-lucide="user-cog"></i></div>
-    </header>
-
-    <nav>
-      <button onclick="loadSection('home')" id="btn-home">Home</button>
-      <button onclick="loadSection('aboutme')" id="btn-aboutme">About Me</button>
-      <button onclick="loadSection('gallery')" id="btn-gallery">Gallery</button>
-      <button onclick="loadSection('funding')" id="btn-funding">Funding</button>
-      <button onclick="loadSection('standards')" id="btn-standards">Standards</button>
-      <button onclick="loadSection('brochures')" id="btn-brochures">Brochures</button>
-    </nav>
-
-    <main id="view-port"></main>
-
-    <footer>
-      <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png">
-      <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
-    </footer>
-  </div>
-
-  <div id="video-overlay" class="overlay">
-    <span class="close-btn" onclick="closeVideo()">&times;</span>
-    <video id="video-player" controls style="width:90%; border-radius:10px;">
-        <source src="intro.mp4" type="video/mp4">
-    </video>
-  </div>
-
-  <div id="settings-overlay" class="overlay">
-    <div style="background:white; padding:30px; border-radius:20px; width:80%; text-align:center;">
-      <h2 style="color:var(--brand-blue);">Select Designer</h2>
-      <button onclick="setDesigner('Tom')" style="width:100%; padding:15px; margin:5px 0; border:none; background:var(--brand-blue); color:white; border-radius:10px; font-weight:bold;">Thomas</button>
-      <button onclick="setDesigner('Sobaan')" style="width:100%; padding:15px; margin:5px 0; border:none; background:var(--brand-blue); color:white; border-radius:10px; font-weight:bold;">Sobaan</button>
-      <p onclick="toggleSettings()" style="margin-top:20px; color:#666; cursor:pointer;">Close</p>
-    </div>
-  </div>
-
-  <script>
-    let activeDesigner = 'WYW';
-
-    // VERBATIM BIOS RESTORED
-    const designerData = {
-        'Sobaan': {
-            name: 'Sobaan', title: 'Design Consultant', image: 'Gallery/Thumbnails/sob.jpg',
-            bio: `<p>With an architectural background, Sobaan has always been fascinated by how our surroundings shape the way we live. Drawn to the challenge of combining aesthetics with function, he thrives on creating spaces that enhance wellbeing, productivity, and emotion—perfectly aligning with the company's vision of designing environments that improve everyday life.</p>
-                  <p>For Sobaan, the most rewarding part of his work is the collaborative journey with clients: listening to their stories, understanding their needs, and translating them into spaces that truly reflect their identity. Known for his friendly, approachable nature and strong technical knowledge, he takes pride in offering thoughtful solutions that feel natural and personal, not sales-driven.</p>
-                  <p>One of Sobaan's proudest moments was seeing a client's face light up with excitement after viewing their 3D design render—a reminder of the joy and impact great design can bring. His goal is to create living spaces that clients feel proud of—spaces that reflect who they are and the life they want to live.</p>`
-        },
-        'Tom': {
-            name: 'Thomas', title: 'Design Consultant', image: 'Gallery/Thumbnails/tom.jpg',
-            bio: `<p>Passionate about bringing clients’ dreams to life, Thomas finds inspiration in creating spaces that not only transform homes but also enhance everyday living. Whether it’s designing a new playroom for children, a practical home office, or breathing new life into an old conservatory, he is motivated by the chance to make a real difference.</p>
-                  <p>Drawn to the company’s Right First Time approach and the dedication of specialist teams at every stage of the journey, Thomas values making the process as smooth and enjoyable as possible. With a strong belief that the customer should always be at the heart of every project, he is excited to help deliver seamless, stress-free transformations that turn visions into reality.</p>`
-        },
-        'WYW': {
-            name: 'Yorkshire Windows', title: 'Design Team', image: 'Logo/co-logo.png',
-            bio: `<p>Our design team combines decades of experience with a passion for South Yorkshire architecture to provide a seamless, stress-free experience.</p>`
-        }
-    };
-
-    function unlock() { if(document.getElementById('pw').value === "1234") { document.getElementById('lock-screen').style.display = 'none'; document.getElementById('app').style.display = 'flex'; loadSection('home'); } }
-
-    async function loadSection(name) {
-      const container = document.getElementById('view-port');
-      try {
-        const resp = await fetch(name + '.html');
-        container.innerHTML = await resp.text();
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-        document.getElementById('btn-' + name).classList.add('active');
-        if(name === 'aboutme') renderProfile();
-        lucide.createIcons();
-      } catch (e) { container.innerHTML = "<div style='padding:50px;'>Error</div>"; }
-    }
-
-    function renderProfile() {
-        const data = designerData[activeDesigner] || designerData['WYW'];
-        const target = document.getElementById('profile-target');
-        if(target) {
-            target.innerHTML = `
-                <div style="text-align:center; margin-bottom:20px;">
-                    <img src="${data.image}" style="width:150px; height:150px; border-radius:50%; border:4px solid var(--brand-yellow); object-fit:cover;">
-                    <h1 style="color:var(--brand-blue); margin:10px 0 0;">${data.name}</h1>
-                    <p style="color:var(--brand-yellow); font-weight:bold; text-transform:uppercase; font-size:12px;">${data.title}</p>
-                </div>
-                <div style="line-height:1.7; color:#444;">${data.bio}</div>
-            `;
-        }
-    }
-
-    function toggleSettings() { const ov = document.getElementById('settings-overlay'); ov.style.display = (ov.style.display === 'flex') ? 'none' : 'flex'; }
-    function setDesigner(name) { activeDesigner = name; toggleSettings(); loadSection('aboutme'); }
-    window.triggerVideo = () => { document.getElementById('video-overlay').style.display = 'flex'; document.getElementById('video-player').play(); };
-    window.closeVideo = () => { document.getElementById('video-player').pause(); document.getElementById('video-overlay').style.display = 'none'; };
-    window.triggerPDF = (p) => window.open(p, '_blank');
-// Add this inside the <script> tag of your index.html
-function openAlbum(cat) {
-    document.getElementById('album-list').classList.add('hidden');
-    document.getElementById('photo-view').classList.remove('hidden');
-    document.getElementById('album-title').innerText = cat;
-    
-    const grid = document.getElementById('photo-grid');
-    grid.innerHTML = ''; // Clear old photos
-    
-    // We define exactly which subfolders to check for this category
-    const variations = ['Glass Roof', 'Solid Roof'];
-    
-    variations.forEach(v => {
-        // We try to load 10 images per subfolder
-        for(let i=1; i<=10; i++) {
-            let num = i.toString().padStart(2, '0');
-            let path = `Gallery/${cat}/${cat} ${v}/${num}.jpg`;
-            
-            let img = new Image();
-            img.onload = function() {
-                // Only if the image actually exists, we add it to the grid
-                grid.innerHTML += `
-                    <div style="position:relative;">
-                        <img src="${path}" onclick="openFS('${path}')" style="width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);">
-                        <span style="position:absolute; bottom:5px; right:5px; background:rgba(0,0,0,0.6); color:white; font-size:8px; padding:2px 5px; border-radius:4px;">${v}</span>
-                    </div>`;
-            };
-            img.src = path;
-        }
-    });
-}
-
-function closeAlbum() {
-    document.getElementById('album-list').classList.remove('hidden');
-    document.getElementById('photo-view').classList.add('hidden');
-}
-
-function openFS(src) {
-    // This uses the Fullscreen viewer already in your index.html
-    document.getElementById('fs-img').src = src;
-    document.getElementById('fs-viewer').style.display = 'flex';
-}
-
-  </script>
-</body>
-</html>
