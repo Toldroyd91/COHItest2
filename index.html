@@ -7,15 +7,14 @@
     <style>
         :root { --brand-blue: #002f54; --brand-yellow: #fab51f; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: sans-serif; }
-        html, body { margin: 0; padding: 0; height: 100vh; width: 100%; overflow: hidden; background: #fff; }
+        html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #fff; }
         
         /* LOCK SCREEN */
         #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
-        .lock-input { padding: 15px; border-radius: 10px; border: none; text-align: center; width: 220px; font-size: 18px; margin-bottom: 15px; color: #333; }
-        .lock-btn { padding: 15px 40px; background: var(--brand-yellow); border: none; border-radius: 10px; font-weight: bold; color: var(--brand-blue); cursor: pointer; font-size: 16px; }
+        .lock-input { padding: 15px; border-radius: 10px; border: 2px solid var(--brand-yellow); text-align: center; width: 220px; font-size: 24px; margin-bottom: 10px; color: #333; letter-spacing: 5px; }
 
         /* APP LAYOUT */
-        #app { display: none; flex-direction: column; height: 100vh; width: 100%; }
+        #app { display: none; flex-direction: column; height: 100dvh; width: 100%; }
         header { background: var(--brand-blue); height: 100px; display: flex; align-items: center; justify-content: space-between; border-bottom: 4px solid var(--brand-yellow); flex-shrink: 0; }
         .h-logo-box { background: white; height: 100%; display: flex; align-items: center; padding: 0 15px; }
         .h-logo { height: 70px; width: auto; }
@@ -29,7 +28,7 @@
         footer { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #eee; height: 75px; display: flex; justify-content: space-around; align-items: center; padding: 0 5px; z-index: 100; }
         footer img { height: 30px; max-width: 50px; object-fit: contain; }
 
-        /* CONTENT STYLES */
+        /* COMPONENTS */
         .hidden { display: none !important; }
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; }
         .close-btn { position: absolute; top: 20px; right: 20px; color: white; font-size: 40px; cursor: pointer; }
@@ -39,21 +38,22 @@
         .gallery-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid #ddd; }
         .gallery-item p { font-size: 9px; font-weight: bold; color: var(--brand-blue); margin-top: 4px; text-transform: uppercase; }
     </style>
-    </head>
+</head>
 <body>
 
     <div id="lock-screen">
         <div style="background:white; padding:10px; border-radius:10px; margin-bottom:20px;">
-            <img src="Logo/co-logo.png" style="height:60px;" onerror="this.style.display='none'">
+            <img src="Logo/co-logo.png" style="height:60px;" onerror="this.src='https://placehold.co/200x60?text=LOGO'">
         </div>
-        <input type="number" id="pw" class="lock-input" placeholder="Enter 1234">
-        <button onclick="checkPin()" class="lock-btn">UNLOCK APP</button>
+        <p style="margin-bottom:10px; font-weight:bold; letter-spacing:1px;">ENTER PIN TO UNLOCK</p>
+        <input type="tel" id="pw" class="lock-input" maxlength="4" placeholder="••••">
+        <p id="error-msg" style="color:var(--brand-yellow); font-size:12px; display:none;">Checking...</p>
     </div>
 
     <div id="app">
         <header>
             <div class="h-logo-box"><img src="Logo/co-logo.png" class="h-logo" onerror="this.style.display='none'"></div>
-            <div style="padding-right:20px; color:white; font-weight:bold;">SALES TOOL</div>
+            <div style="padding-right:20px; color:white; font-weight:bold; font-size:12px;">DESIGN TOOL</div>
         </header>
 
         <nav>
@@ -63,34 +63,97 @@
 
         <main id="main-content">
             <section id="sec-home">
-                <div style="background: var(--brand-blue); padding: 30px 20px; text-align: center; border-bottom: 5px solid var(--brand-yellow);">
+                <div style="background: var(--brand-blue); padding: 35px 20px; text-align: center; border-bottom: 5px solid var(--brand-yellow);">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div onclick="playVid()" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
-                            <div style="color:var(--brand-yellow); font-size:24px; margin-bottom:5px;">▶</div>
-                            <div style="color: white; font-weight: 800; font-size: 11px;">VIDEO</div>
+                        <div onclick="playVid()" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+                            <div style="color:var(--brand-yellow); font-size:30px;">▶</div>
+                            <div style="color: white; font-weight: 800; font-size: 11px; margin-top:5px;">VIDEO</div>
                         </div>
-                        <div onclick="openPDF()" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
-                            <div style="color:var(--brand-yellow); font-size:24px; margin-bottom:5px;">📄</div>
-                            <div style="color: white; font-weight: 800; font-size: 11px;">PRESENTATION</div>
+                        <div onclick="openPDF()" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);">
+                            <div style="color:var(--brand-yellow); font-size:30px;">📄</div>
+                            <div style="color: white; font-weight: 800; font-size: 11px; margin-top:5px;">PDF</div>
                         </div>
                     </div>
                 </div>
                 <div style="padding: 25px;">
-                    <h2 style="color: var(--brand-blue); text-align: center; margin-bottom: 20px; font-weight: 900;">WELCOME</h2>
-                    <div style="line-height:1.6; color:#444;">
-                        <p><strong>Bespoke Design:</strong> Your journey begins with a detailed design consultation. We use the latest 3D software to help you visualize your dream home before a single brick is laid.</p>
-                        <p><strong>Quality Craftsmanship:</strong> All our products are manufactured to the highest standards, using premium materials that are built to last.</p>
+                    <h2 style="color: var(--brand-blue); text-align: center; margin-bottom: 20px; font-weight: 900; text-transform:uppercase;">Your Journey</h2>
+                    <div style="line-height:1.6; color:#333; font-size:15px;">
+                        <p><strong>Bespoke Design Consultation:</strong> Your journey begins with a detailed design consultation. We use the latest 3D software to help you visualize your dream home before a single brick is laid, ensuring the final result perfectly matches your vision.</p>
+                        <p><strong>Quality Craftsmanship:</strong> All our products are manufactured to the highest standards, using premium materials that are built to last and withstand the elements, providing you with peace of mind for years to come.</p>
+                        <p><strong>Right First Time Approach:</strong> Our engineering and installation teams are focused on precision. We believe in the company's "Right First Time" ethos, dedicated to getting the job done correctly at every stage of the journey.</p>
+                        <p><strong>Customer-Centric Excellence:</strong> From start to finish, the customer is at the heart of every project. We pride ourselves on making the transformation process as smooth, enjoyable, and stress-free as possible.</p>
                     </div>
                 </div>
             </section>
 
             <section id="sec-gallery" class="hidden">
                 <div id="cat-grid" class="gallery-grid">
-                    <div class="gallery-item" onclick="showAlbum('Edwardian')"><img src="Gallery/Thumbnails/Edwardian.jpg" onerror="this.src='https://placehold.co/100x100?text=Edwardian'"><p>Edwardian</p></div>
-                    <div class="gallery-item" onclick="showAlbum('Gable')"><img src="Gallery/Thumbnails/Gable.jpg" onerror="this.src='https://placehold.co/100x100?text=Gable'"><p>Gable</p></div>
-                    <div class="gallery-item" onclick="showAlbum('Victorian')"><img src="Gallery/Thumbnails/Victorian.jpg" onerror="this.src='https://placehold.co/100x100?text=Victorian'"><p>Victorian</p></div>
-                    <div class="gallery-item" onclick="showAlbum('Leanto')"><img src="Gallery/Thumbnails/Leanto.jpg" onerror="this.src='https://placehold.co/100x100?text=Leanto'"><p>Lean-To</p></div>
+                    <div class="gallery-item" onclick="showAlbum('Edwardian')"><img src="Gallery/Thumbnails/Edwardian.jpg" onerror="this.src='https://placehold.co/100x100?text=Style'"><p>Edwardian</p></div>
+                    <div class="gallery-item" onclick="showAlbum('Gable')"><img src="Gallery/Thumbnails/Gable.jpg" onerror="this.src='https://placehold.co/100x100?text=Style'"><p>Gable</p></div>
+                    <div class="gallery-item" onclick="showAlbum('Victorian')"><img src="Gallery/Thumbnails/Victorian.jpg" onerror="this.src='https://placehold.co/100x100?text=Style'"><p>Victorian</p></div>
+                    <div class="gallery-item" onclick="showAlbum('Leanto')"><img src="Gallery/Thumbnails/Leanto.jpg" onerror="this.src='https://placehold.co/100x100?text=Style'"><p>Lean-To</p></div>
                 </div>
                 <div id="photo-view" class="hidden" style="padding:15px;">
-                    <button onclick="backToCats()" style="margin-bottom:15px; background:var(--brand-blue); color:white; border:none; padding:10px 15px; border-radius:5px;">← BACK</button>
+                    <button onclick="backToCats()" style="margin-bottom:15px; background:var(--brand-blue); color:white; border:none; padding:12px 20px; border-radius:5px; font-weight:bold;">← BACK</button>
                     <div id="photo-grid" class="gallery-grid"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <img src="Logo/clearview.png"><img src="Logo/planet.png"><img src="Logo/orion.png">
+            <img src="Logo/trentvalley.png"><img src="Logo/yorkshire.png"><img src="Logo/westyorkshire.png">
+        </footer>
+    </div>
+
+    <div id="vid-ov" class="overlay">
+        <span class="close-btn" onclick="stopVid()">&times;</span>
+        <video id="player" controls style="width:90%; border-radius:10px;"><source src="intro.mp4" type="video/mp4"></video>
+    </div>
+    <div id="img-ov" class="overlay" onclick="this.style.display='none'">
+        <img id="full-img" src="" style="max-width:95%; max-height:85%; object-fit:contain;">
+    </div>
+
+    <script>
+        // PASSIVE PIN CHECKER - No button click required
+        const pinField = document.getElementById('pw');
+        pinField.addEventListener('input', () => {
+            if (pinField.value === "1234") {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('app').style.display = 'flex';
+            }
+        });
+
+        function navTo(id) {
+            document.getElementById('sec-home').className = (id === 'home' ? '' : 'hidden');
+            document.getElementById('sec-gallery').className = (id === 'gallery' ? '' : 'hidden');
+            document.getElementById('nav-home').className = (id === 'home' ? 'active' : '');
+            document.getElementById('nav-gallery').className = (id === 'gallery' ? 'active' : '');
+        }
+
+        function showAlbum(cat) {
+            document.getElementById('cat-grid').classList.add('hidden');
+            document.getElementById('photo-view').classList.remove('hidden');
+            const grid = document.getElementById('photo-grid');
+            grid.innerHTML = '';
+            const variations = ['Glass Roof', 'Solid Roof'];
+            variations.forEach(v => {
+                for(let i=1; i<=6; i++) {
+                    const path = `Gallery/${cat}/${cat} ${v}/0${i}.jpg`;
+                    grid.innerHTML += `<div class="gallery-item" onclick="zoom('${path}')"><img src="${path}" onerror="this.parentElement.style.display='none'"><p>${v}</p></div>`;
+                }
+            });
+        }
+
+        function backToCats() {
+            document.getElementById('cat-grid').classList.remove('hidden');
+            document.getElementById('photo-view').classList.add('hidden');
+        }
+
+        function zoom(src) { document.getElementById('full-img').src = src; document.getElementById('img-ov').style.display = 'flex'; }
+        function playVid() { document.getElementById('vid-ov').style.display = 'flex'; document.getElementById('player').play(); }
+        function stopVid() { document.getElementById('vid-ov').style.display = 'none'; document.getElementById('player').pause(); }
+        function openPDF() { window.open('presentation.pdf', '_blank'); }
+    </script>
+</body>
+</html>
