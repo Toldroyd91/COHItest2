@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Yorkshire Windows | Our Vision</title>
+  <title>Yorkshire Windows | Kiosk</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header class="header">
-  <img src="Logo/co-logo.jpg" alt="COHI Logo" class="logo">
+  <img src="Logo/co-logo.jpg" class="logo">
+  <button class="present-btn" onclick="toggleFullscreen()">Present Mode</button>
 </header>
 
 <nav class="nav">
@@ -21,17 +22,17 @@
   <div class="overlay">
 
     <section class="vision">
-      <div class="video">
+      <div>
         <h2>Our Vision</h2>
         <video controls>
           <source src="intro.mp4" type="video/mp4">
         </video>
       </div>
 
-      <div class="pdf">
+      <div>
         <h2>Our Process</h2>
-        <a href="brochures/pitchperfect.pdf" target="_blank" class="pdf-link">
-          View Presentation (PDF)
+        <a class="pdf-link" href="brochures/pitchperfect.pdf" target="_blank">
+          View Presentation
         </a>
       </div>
     </section>
@@ -39,9 +40,8 @@
     <section class="why">
       <h2>Why Choose Yorkshire Windows</h2>
       <p>
-        We pride ourselves on delivering premium-quality conservatories,
-        windows and doors, combining craftsmanship, innovation and
-        outstanding customer service across Yorkshire.
+        We deliver premium conservatories, solid roofs and glazing systems
+        designed for performance, comfort and long-term value.
       </p>
     </section>
 
@@ -57,9 +57,8 @@
   </div>
 </main>
 
-<footer class="footer">
-  © Yorkshire Windows
-</footer>
+<footer class="footer">© Yorkshire Windows</footer>
 
+<script src="kiosk.js"></script>
 </body>
 </html>
