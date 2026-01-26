@@ -2,71 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Yorkshire Windows – Presentation</title>
+  <title>Yorkshire Windows</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body class="kiosk">
+<body class="kiosk fade-in">
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-left">
-      <img src="Logo/co-logo.jpg" alt="COHI Logo" />
-    </div>
+<header class="header">
+  <img src="Logo/co-logo.jpg" class="logo" />
+  <nav>
+    <a class="active">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="designer.html">Your Designer</a>
+  </nav>
+</header>
 
-    <nav class="nav">
-      <a class="active" href="index.html">Home</a>
-      <a href="gallery.html">Gallery</a>
-    </nav>
-  </header>
+<main class="home-layout">
 
-  <!-- MAIN -->
-  <main class="home">
+<section class="panel">
+  <h2>Our Vision</h2>
+  <video controls playsinline>
+    <source src="intro.mp4" type="video/mp4">
+  </video>
+</section>
 
-    <section class="hero">
-      <div class="video-wrap">
-        <h2>Our Vision</h2>
-        <video controls playsinline>
-          <source src="intro.mp4" type="video/mp4" />
-        </video>
-      </div>
+<section class="panel soft">
+  <h2>Our Process</h2>
+  <p>
+    We design, manufacture and install bespoke solutions tailored to your home.
+    Clear advice, quality materials, and a process that puts confidence first.
+  </p>
+</section>
 
-      <div class="process-wrap">
-        <h2>Our Process</h2>
-        <div class="process-card">
-          <p>
-            From initial design to final installation, Yorkshire Windows
-            delivers carefully considered solutions built around your home.
-          </p>
-          <p>
-            Quality materials, experienced designers, and a process that puts
-            clarity first.
-          </p>
-        </div>
-      </div>
-    </section>
+</main>
 
-    <section class="why">
-      <h2>Why Choose Yorkshire Windows</h2>
-      <p>
-        We believe exceptional results come from experience, transparency,
-        and pride in craftsmanship. Our installations are tailored, not
-        templated — and our service continues long after installation.
-      </p>
-    </section>
+<footer class="footer">
+  <img src="Logo/clearview.png" onerror="this.style.display='none'">
+  <img src="Logo/orion.png" onerror="this.style.display='none'">
+  <img src="Logo/planet.png" onerror="this.style.display='none'">
+  <img src="Logo/trentvalley.png" onerror="this.style.display='none'">
+  <img src="Logo/yorkshire.png" onerror="this.style.display='none'">
+</footer>
 
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <img src="Logo/clearview.png" onerror="this.style.display='none'" />
-    <img src="Logo/orion.png" onerror="this.style.display='none'" />
-    <img src="Logo/planet.png" onerror="this.style.display='none'" />
-    <img src="Logo/trentvalley.png" onerror="this.style.display='none'" />
-    <img src="Logo/yorkshire.png" onerror="this.style.display='none'" />
-    <img src="Logo/West Yorkshire.png" onerror="this.style.display='none'" />
-  </footer>
-
+<script src="app.js"></script>
 </body>
 </html>
