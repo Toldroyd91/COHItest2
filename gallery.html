@@ -1,78 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Gallery | Yorkshire Windows</title>
+  <title>Gallery</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+
+<body class="kiosk fade-in">
 
 <header class="header">
-  <img src="Logo/co-logo.jpg" class="logo">
-  <button class="present-btn" onclick="toggleFullscreen()">Present Mode</button>
+  <img src="Logo/co-logo.jpg" class="logo" />
+  <nav>
+    <a href="index.html">Home</a>
+    <a class="active">Gallery</a>
+    <a href="designer.html">Your Designer</a>
+  </nav>
 </header>
 
-<nav class="nav">
-  <a href="index.html">Home</a>
-  <a href="gallery.html">Gallery</a>
-</nav>
+<main class="gallery-grid" id="gallery"></main>
 
-<main class="gallery-page">
-  <h1>Gallery</h1>
-
-  <div class="category">
-    <h2 onclick="toggleFolder(this)">Edwardian</h2>
-    <div class="subfolders">
-      <button onclick="openGallery('Gallery/Edwardian/Edwardian Glass Roof')">Glass Roof</button>
-      <button onclick="openGallery('Gallery/Edwardian/Edwardian Solid Roof')">Solid Roof</button>
-    </div>
-  </div>
-
-  <div class="category">
-    <h2 onclick="toggleFolder(this)">Flat Roof</h2>
-    <div class="subfolders">
-      <button onclick="openGallery('Gallery/Flat Roof')">View</button>
-    </div>
-  </div>
-
-  <div class="category">
-    <h2 onclick="toggleFolder(this)">Gable End</h2>
-    <div class="subfolders">
-      <button onclick="openGallery('Gallery/Gable End/Gable End Glass Roof')">Glass Roof</button>
-      <button onclick="openGallery('Gallery/Gable End/Gable End Solid Roof')">Solid Roof</button>
-    </div>
-  </div>
-
-  <div class="category">
-    <h2 onclick="toggleFolder(this)">Leanto</h2>
-    <div class="subfolders">
-      <button onclick="openGallery('Gallery/Leanto/Leanto Glass Roof')">Glass Roof</button>
-      <button onclick="openGallery('Gallery/Leanto/Leanto Solid Roof')">Solid Roof</button>
-    </div>
-  </div>
-
-  <div class="category">
-    <h2 onclick="toggleFolder(this)">Victorian</h2>
-    <div class="subfolders">
-      <button onclick="openGallery('Gallery/Victorian/Victorian Glass Roof')">Glass Roof</button>
-      <button onclick="openGallery('Gallery/Victorian/Victorian Solid Roof')">Solid Roof</button>
-    </div>
-  </div>
-</main>
-
-<div id="modal" class="modal">
-  <span class="close" onclick="closeModal()">×</span>
-  <img id="modalImage">
-  <div class="controls">
-    <button onclick="prevImage()">‹</button>
-    <button onclick="nextImage()">›</button>
-  </div>
+<div class="modal" id="modal">
+  <span id="close">×</span>
+  <img id="modalImg">
 </div>
 
-<footer class="footer">© Yorkshire Windows</footer>
+<footer class="footer"></footer>
 
-<script src="gallery.js"></script>
-<script src="kiosk.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
