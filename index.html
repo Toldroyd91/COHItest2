@@ -2,122 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Yorkshire Windows | Premium Showcase</title>
+    <title>Yorkshire Windows | Premium Designer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <style>
-        :root { --brand-blue: #002f54; --brand-yellow: #fab51f; --glass: rgba(255, 255, 255, 0.1); }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
-        html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #f4f7f9; }
+        :root { --brand-blue: #002f54; --brand-yellow: #fab51f; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        html, body { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #fff; }
         
         /* LOCK SCREEN */
-        #lock-screen { position: fixed; inset: 0; background: linear-gradient(135deg, var(--brand-blue) 0%, #001a2f 100%); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; }
-        .lock-input { padding: 18px; border-radius: 12px; border: 2px solid var(--brand-yellow); text-align: center; width: 240px; font-size: 28px; background: rgba(255,255,255,0.05); color: white; letter-spacing: 8px; outline: none; }
+        #lock-screen { position: fixed; inset: 0; background: var(--brand-blue); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; transition: opacity 0.4s ease; }
+        .lock-input { padding: 18px; border-radius: 12px; border: 3px solid var(--brand-yellow); text-align: center; width: 240px; font-size: 28px; background: white; color: #333; letter-spacing: 5px; outline: none; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
-        /* HEADER & LOGO */
-        header { background: var(--brand-blue); height: 120px; display: flex; align-items: center; justify-content: center; border-bottom: 4px solid var(--brand-yellow); position: relative; flex-shrink: 0; }
-        .h-logo-box { background: white; height: 100%; display: flex; align-items: center; padding: 0 30px; border-radius: 0 0 20px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .h-logo { height: 80px; width: auto; }
+        /* HEADER & CENTRAL LOGO */
+        header { background: var(--brand-blue); height: 115px; display: flex; align-items: center; justify-content: center; border-bottom: 4px solid var(--brand-yellow); flex-shrink: 0; }
+        .h-logo-box { background: white; height: 100%; display: flex; align-items: center; padding: 0 30px; border-radius: 0 0 15px 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .h-logo { height: 75px; width: auto; }
         
         /* NAVIGATION */
-        nav { background: white; height: 60px; display: flex; justify-content: center; gap: 10px; padding: 10px; border-bottom: 1px solid #ddd; flex-shrink: 0; }
-        nav button { background: #f0f0f0; border: none; color: var(--brand-blue); font-weight: 700; padding: 0 25px; border-radius: 30px; text-transform: uppercase; font-size: 11px; transition: 0.3s; }
-        nav button.active { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 4px 10px rgba(250, 181, 31, 0.3); }
+        nav { background: #fdfdfd; height: 60px; display: flex; justify-content: center; gap: 15px; padding: 10px; border-bottom: 1px solid #eee; }
+        nav button { background: #f0f0f0; border: none; color: var(--brand-blue); font-weight: 800; padding: 0 25px; border-radius: 8px; text-transform: uppercase; font-size: 11px; }
+        nav button.active { background: var(--brand-yellow); color: var(--brand-blue); box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
 
-        /* MAIN AREA */
-        #app { display: none; flex-direction: column; height: 100dvh; width: 100%; }
+        /* MAIN CONTENT */
+        #app { display: none; flex-direction: column; height: 100dvh; }
         main { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 100px; }
 
-        /* MODERN HOME HERO */
-        .hero-card { background: var(--brand-blue); margin: 20px; border-radius: 20px; padding: 30px 20px; position: relative; overflow: hidden; color: white; box-shadow: 0 10px 30px rgba(0,47,84,0.3); }
-        .hero-card::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(250,181,31,0.1) 0%, transparent 70%); }
-        .hero-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; position: relative; z-index: 1; }
-        .hero-btn { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); padding: 25px 15px; border-radius: 15px; text-align: center; transition: 0.3s; }
-        .hero-btn:active { transform: scale(0.95); background: rgba(255,255,255,0.2); }
-        
-        /* JOURNEY TEXT */
-        .journey-section { padding: 10px 25px; }
-        .card { background: white; padding: 20px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-left: 5px solid var(--brand-yellow); }
-        .card h3 { margin: 0 0 8px 0; color: var(--brand-blue); font-size: 17px; }
-        .card p { margin: 0; font-size: 14px; color: #555; line-height: 1.6; }
+        /* MODERN HOMEPAGE HERO */
+        .hero { 
+            background: linear-gradient(rgba(0,47,84,0.7), rgba(0,47,84,0.7)), url('Gallery/background.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            padding: 50px 20px; 
+            text-align: center; 
+            color: white; 
+            border-bottom: 5px solid var(--brand-yellow);
+        }
+        .hero-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .h-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 25px 10px; border-radius: 15px; backdrop-filter: blur(10px); transition: 0.2s; }
+        .h-btn:active { background: rgba(255,255,255,0.3); transform: scale(0.96); }
 
-        /* FOOTER */
-        footer { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #eee; height: 85px; display: flex; justify-content: space-around; align-items: center; padding: 0 10px; z-index: 100; }
-        footer img { height: 35px; max-width: 55px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; }
+        /* JOURNEY CARDS */
+        .journey { padding: 25px; max-width: 600px; margin: 0 auto; }
+        .card { background: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 6px solid var(--brand-yellow); }
+        .card h3 { margin: 0 0 8px; color: var(--brand-blue); font-size: 18px; text-transform: uppercase; }
+        .card p { margin: 0; color: #555; line-height: 1.6; font-size: 14px; }
 
-        /* GALLERY GRID */
-        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px; }
-        .gallery-item { cursor: pointer; text-align: center; }
-        .gallery-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border: 3px solid white; }
-        .gallery-item p { font-size: 10px; font-weight: 800; color: var(--brand-blue); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        /* GALLERY SYSTEM */
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px; }
+        .item { cursor: pointer; text-align: center; }
+        .item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .item p { font-size: 9px; font-weight: 900; margin-top: 6px; color: var(--brand-blue); text-transform: uppercase; letter-spacing: 0.5px; }
 
+        /* FOOTER (FULL COLOR) */
+        footer { position: fixed; bottom: 0; width: 100%; background: white; border-top: 1px solid #eee; height: 90px; display: flex; justify-content: space-around; align-items: center; padding: 0 10px; z-index: 100; }
+        footer img { height: 38px; max-width: 58px; object-fit: contain; }
+
+        /* OVERLAYS */
         .hidden { display: none !important; }
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 8000; display: none; align-items: center; justify-content: center; }
+        .close-x { position: absolute; top: 40px; right: 30px; color: white; font-size: 45px; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div id="lock-screen">
-        <div style="background:white; padding:15px; border-radius:20px; margin-bottom:30px;">
-            <img src="Logo/co-logo.png" style="height:70px;">
+        <div style="background:white; padding:15px; border-radius:15px; margin-bottom:25px;">
+            <img src="Logo/co-logo.png" style="height:65px;">
         </div>
-        <input type="tel" id="pw" class="lock-input" maxlength="4" placeholder="••••" autocomplete="off">
-        <p style="margin-top:20px; font-size:12px; opacity:0.6; text-transform:uppercase; letter-spacing:2px;">Secure Designer Portal</p>
+        <input type="tel" id="pw" class="lock-input" maxlength="4" placeholder="••••">
+        <p style="color:white; margin-top:15px; font-size:12px; letter-spacing:2px; opacity:0.7;">ENTER AUTHORIZED PIN</p>
     </div>
 
     <div id="app">
         <header>
-            <div class="h-logo-box">
-                <img src="Logo/co-logo.png" class="h-logo">
-            </div>
+            <div class="h-logo-box"><img src="Logo/co-logo.png" class="h-logo"></div>
         </header>
 
         <nav>
-            <button onclick="navTo('home')" id="nav-home" class="active">Overview</button>
+            <button onclick="navTo('home')" id="nav-home" class="active">Showcase</button>
             <button onclick="navTo('gallery')" id="nav-gallery">Gallery</button>
         </nav>
 
         <main id="main-content">
             <section id="sec-home">
-                <div class="hero-card">
-                    <h1 style="margin:0 0 20px 0; font-size:22px; text-align:center; letter-spacing:1px;">Welcome to Yorkshire Windows</h1>
-                    <div class="hero-btn-grid">
-                        <div class="hero-btn" onclick="playVid()">
-                            <span style="font-size:30px;">▶</span>
-                            <div style="font-weight:900; font-size:11px; margin-top:10px;">WATCH VIDEO</div>
+                <div class="hero">
+                    <h2 style="margin:0; font-size:24px; letter-spacing:1px;">PREMIUM DESIGNS</h2>
+                    <div class="hero-btns">
+                        <div class="h-btn" onclick="playVid()">
+                            <span style="font-size:28px;">▶</span><br><span style="font-size:10px; font-weight:900;">VIDEO</span>
                         </div>
-                        <div class="hero-btn" onclick="openPDF()">
-                            <span style="font-size:30px;">📄</span>
-                            <div style="font-weight:900; font-size:11px; margin-top:10px;">VIEW PDF</div>
+                        <div class="h-btn" onclick="openPDF()">
+                            <span style="font-size:28px;">📄</span><br><span style="font-size:10px; font-weight:900;">BROCHURE</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="journey-section">
-                    <div class="card">
-                        <h3>Bespoke Design Consultation</h3>
-                        <p>Your journey begins with a detailed design consultation. We use the latest 3D software to help you visualize your dream home before a single brick is laid.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Quality Craftsmanship</h3>
-                        <p>All our products are manufactured to the highest standards, using premium materials that are built to last and withstand the elements.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Right First Time Approach</h3>
-                        <p>Our engineering and installation teams are focused on precision, dedicated to getting the job done correctly at every stage.</p>
-                    </div>
+                <div class="journey">
+                    <div class="card"><h3>Bespoke Design</h3><p>Your journey begins with a detailed design consultation using the latest 3D software to visualize your dream home.</p></div>
+                    <div class="card"><h3>Quality Craftsmanship</h3><p>Our products are manufactured to the highest standards, using premium materials built for longevity.</p></div>
+                    <div class="card"><h3>Right First Time</h3><p>Our engineering and installation teams are focused on precision at every stage of the journey.</p></div>
                 </div>
             </section>
 
             <section id="sec-gallery" class="hidden">
-                <div id="cat-grid" class="gallery-grid">
-                    <div class="gallery-item" onclick="showAlbum('Edwardian')"><img src="Gallery/Thumbnails/Edwardian.jpg" onerror="this.src='https://placehold.co/400x400/002f54/FFFFFF?text=Edwardian'"><p>Edwardian</p></div>
-                    <div class="gallery-item" onclick="showAlbum('Gable')"><img src="Gallery/Thumbnails/Gable.jpg" onerror="this.src='https://placehold.co/400x400/002f54/FFFFFF?text=Gable'"><p>Gable</p></div>
-                    <div class="gallery-item" onclick="showAlbum('Victorian')"><img src="Gallery/Thumbnails/Victorian.jpg" onerror="this.src='https://placehold.co/400x400/002f54/FFFFFF?text=Victorian'"><p>Victorian</p></div>
-                    <div class="gallery-item" onclick="showAlbum('Leanto')"><img src="Gallery/Thumbnails/Leanto.jpg" onerror="this.src='https://placehold.co/400x400/002f54/FFFFFF?text=Lean-To'"><p>Lean-To</p></div>
+                <div id="cat-grid" class="grid">
+                    <div class="item" onclick="showAlbum('Edwardian', ['Edwardian Glass Roof','Edwardian Solid Roof'])">
+                        <img src="Gallery/Thumbnails/Edwardian.jpg" onerror="this.src='https://placehold.co/300?text=Edwardian'"><p>Edwardian</p>
+                    </div>
+                    <div class="item" onclick="showAlbum('Flat Roof', [])">
+                        <img src="Gallery/Thumbnails/Flat Roof.jpg" onerror="this.src='https://placehold.co/300?text=Flat+Roof'"><p>Flat Roof</p>
+                    </div>
+                    <div class="item" onclick="showAlbum('Gable End', ['Gable End Glass Roof','Gable End Solid Roof'])">
+                        <img src="Gallery/Thumbnails/Gable End.jpg" onerror="this.src='https://placehold.co/300?text=Gable+End'"><p>Gable End</p>
+                    </div>
+                    <div class="item" onclick="showAlbum('Leanto', ['Leanto Glass Roof','Leanto Solid Roof'])">
+                        <img src="Gallery/Thumbnails/Leanto.jpg" onerror="this.src='https://placehold.co/300?text=Lean-To'"><p>Lean-to</p>
+                    </div>
+                    <div class="item" onclick="showAlbum('Victorian', ['Victorian Glass Roof','Victorian Solid Roof'])">
+                        <img src="Gallery/Thumbnails/Victorian.jpg" onerror="this.src='https://placehold.co/300?text=Victorian'"><p>Victorian</p>
+                    </div>
                 </div>
                 <div id="photo-view" class="hidden" style="padding:15px;">
-                    <button onclick="backToCats()" style="margin-bottom:20px; background:var(--brand-blue); color:white; border:none; padding:15px 25px; border-radius:10px; font-weight:bold; width:100%;">← BACK TO STYLES</button>
-                    <div id="photo-grid" class="gallery-grid"></div>
+                    <button onclick="backToCats()" style="margin-bottom:20px; background:var(--brand-blue); color:white; border:none; padding:18px; border-radius:12px; width:100%; font-weight:bold; font-size:14px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">← RETURN TO STYLES</button>
+                    <div id="photo-grid" class="grid"></div>
                 </div>
             </section>
         </main>
@@ -129,14 +135,13 @@
     </div>
 
     <div id="vid-ov" class="overlay">
-        <span style="position:absolute; top:40px; right:30px; color:white; font-size:50px;" onclick="stopVid()">&times;</span>
-        <video id="player" controls style="width:90%; border-radius:15px;"><source src="intro.mp4" type="video/mp4"></video>
+        <span class="close-x" onclick="stopVid()">&times;</span>
+        <video id="player" controls style="width:90%; border-radius:15px; background:black;"><source src="intro.mp4" type="video/mp4"></video>
     </div>
-    <div id="img-ov" class="overlay" onclick="this.style.display='none'">
-        <img id="full-img" src="" style="max-width:95%; max-height:85%; border-radius:10px;">
-    </div>
+    <div id="img-ov" class="overlay" onclick="this.style.display='none'"><img id="full-img" src="" style="max-width:95%; max-height:85%; border-radius:10px; border:2px solid #fff;"></div>
 
     <script>
+        // AUTHENTICATION
         const pinField = document.getElementById('pw');
         pinField.addEventListener('input', () => {
             if (pinField.value === "1234") {
@@ -144,45 +149,58 @@
                 setTimeout(() => {
                     document.getElementById('lock-screen').style.display = 'none';
                     document.getElementById('app').style.display = 'flex';
-                }, 300);
+                }, 400);
             }
         });
 
+        // NAVIGATION
         function navTo(id) {
             document.getElementById('sec-home').className = (id === 'home' ? '' : 'hidden');
             document.getElementById('sec-gallery').className = (id === 'gallery' ? '' : 'hidden');
             document.getElementById('nav-home').className = (id === 'home' ? 'active' : '');
             document.getElementById('nav-gallery').className = (id === 'gallery' ? 'active' : '');
+            window.scrollTo(0,0);
         }
 
-        function showAlbum(cat) {
+        // GALLERY ENGINE
+        function showAlbum(mainFolder, subs) {
             document.getElementById('cat-grid').classList.add('hidden');
             document.getElementById('photo-view').classList.remove('hidden');
             const grid = document.getElementById('photo-grid');
             grid.innerHTML = '';
-            const variations = ['Glass Roof', 'Solid Roof'];
-            variations.forEach(v => {
-                for(let i=1; i<=6; i++) {
-                    const path = `Gallery/${cat}/${cat} ${v}/0${i}.jpg`;
-                    grid.innerHTML += `<div class="gallery-item" onclick="zoom('${path}')"><img src="${path}" onerror="this.parentElement.style.display='none'"><p>${v}</p></div>`;
+            
+            // If subs list is empty, it's a Flat Roof (single folder)
+            const foldersToSearch = subs.length > 0 ? subs : [mainFolder];
+
+            foldersToSearch.forEach(folderName => {
+                for(let i=1; i<=12; i++) {
+                    const imgNum = i < 10 ? '0' + i : i;
+                    // Path logic: if no sub, it looks in Gallery/Flat Roof/01.jpg
+                    // If sub exists, it looks in Gallery/Edwardian/Edwardian Glass Roof/01.jpg
+                    const path = subs.length > 0 ? 
+                        `Gallery/${mainFolder}/${folderName}/${imgNum}.jpg` : 
+                        `Gallery/${mainFolder}/${imgNum}.jpg`;
+
+                    const div = document.createElement('div');
+                    div.className = 'item';
+                    div.onclick = () => zoom(path);
+                    div.innerHTML = `<img src="${path}" onerror="this.parentElement.style.display='none'"><p>${folderName}</p>`;
+                    grid.appendChild(div);
                 }
             });
+            document.querySelector('main').scrollTop = 0;
         }
 
         function backToCats() {
             document.getElementById('cat-grid').classList.remove('hidden');
             document.getElementById('photo-view').classList.add('hidden');
+            document.querySelector('main').scrollTop = 0;
         }
 
         function zoom(src) { document.getElementById('full-img').src = src; document.getElementById('img-ov').style.display = 'flex'; }
         function playVid() { document.getElementById('vid-ov').style.display = 'flex'; document.getElementById('player').play(); }
         function stopVid() { document.getElementById('vid-ov').style.display = 'none'; document.getElementById('player').pause(); }
-        
-        function openPDF() {
-            // Updated to use a more direct link method
-            const pdfUrl = 'presentation.pdf';
-            window.open(pdfUrl, '_blank');
-        }
+        function openPDF() { window.open('presentation.pdf', '_blank'); }
     </script>
 </body>
 </html>
