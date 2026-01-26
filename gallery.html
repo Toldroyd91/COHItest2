@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <title>Gallery | Yorkshire Windows</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header class="header">
   <img src="Logo/co-logo.jpg" class="logo">
+  <button class="present-btn" onclick="toggleFullscreen()">Present Mode</button>
 </header>
 
 <nav class="nav">
@@ -18,7 +19,7 @@
 </nav>
 
 <main class="gallery-page">
-  <h1>Our Gallery</h1>
+  <h1>Gallery</h1>
 
   <div class="category">
     <h2 onclick="toggleFolder(this)">Edwardian</h2>
@@ -31,7 +32,7 @@
   <div class="category">
     <h2 onclick="toggleFolder(this)">Flat Roof</h2>
     <div class="subfolders">
-      <button onclick="openGallery('Gallery/Flat Roof')">View Images</button>
+      <button onclick="openGallery('Gallery/Flat Roof')">View</button>
     </div>
   </div>
 
@@ -60,7 +61,6 @@
   </div>
 </main>
 
-<!-- IMAGE MODAL -->
 <div id="modal" class="modal">
   <span class="close" onclick="closeModal()">×</span>
   <img id="modalImage">
@@ -70,10 +70,9 @@
   </div>
 </div>
 
-<footer class="footer">
-  © Yorkshire Windows
-</footer>
+<footer class="footer">© Yorkshire Windows</footer>
 
 <script src="gallery.js"></script>
+<script src="kiosk.js"></script>
 </body>
 </html>
