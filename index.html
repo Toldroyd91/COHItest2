@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Yorkshire Windows | Kiosk</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Yorkshire Windows – Presentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
 
-<header class="header">
-  <img src="Logo/co-logo.jpg" class="logo">
-  <button class="present-btn" onclick="toggleFullscreen()">Present Mode</button>
-</header>
+<body class="kiosk">
 
-<nav class="nav">
-  <a href="index.html">Home</a>
-  <a href="gallery.html">Gallery</a>
-</nav>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <img src="Logo/co-logo.jpg" alt="COHI Logo" />
+    </div>
 
-<main class="hero">
-  <div class="overlay">
+    <nav class="nav">
+      <a class="active" href="index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+  </header>
 
-    <section class="vision">
-      <div>
+  <!-- MAIN -->
+  <main class="home">
+
+    <section class="hero">
+      <div class="video-wrap">
         <h2>Our Vision</h2>
-        <video controls>
-          <source src="intro.mp4" type="video/mp4">
+        <video controls playsinline>
+          <source src="intro.mp4" type="video/mp4" />
         </video>
       </div>
 
-      <div>
+      <div class="process-wrap">
         <h2>Our Process</h2>
-        <a class="pdf-link" href="brochures/pitchperfect.pdf" target="_blank">
-          View Presentation
-        </a>
+        <div class="process-card">
+          <p>
+            From initial design to final installation, Yorkshire Windows
+            delivers carefully considered solutions built around your home.
+          </p>
+          <p>
+            Quality materials, experienced designers, and a process that puts
+            clarity first.
+          </p>
+        </div>
       </div>
     </section>
 
     <section class="why">
       <h2>Why Choose Yorkshire Windows</h2>
       <p>
-        We deliver premium conservatories, solid roofs and glazing systems
-        designed for performance, comfort and long-term value.
+        We believe exceptional results come from experience, transparency,
+        and pride in craftsmanship. Our installations are tailored, not
+        templated — and our service continues long after installation.
       </p>
     </section>
 
-    <section class="partners">
-      <img src="Logo/clearview.png">
-      <img src="Logo/orion.png">
-      <img src="Logo/planet.png">
-      <img src="Logo/trentvalley.png">
-      <img src="Logo/yorkshire.png">
-      <img src="Logo/west-yorkshire.png">
-    </section>
+  </main>
 
-  </div>
-</main>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <img src="Logo/clearview.png" onerror="this.style.display='none'" />
+    <img src="Logo/orion.png" onerror="this.style.display='none'" />
+    <img src="Logo/planet.png" onerror="this.style.display='none'" />
+    <img src="Logo/trentvalley.png" onerror="this.style.display='none'" />
+    <img src="Logo/yorkshire.png" onerror="this.style.display='none'" />
+    <img src="Logo/West Yorkshire.png" onerror="this.style.display='none'" />
+  </footer>
 
-<footer class="footer">© Yorkshire Windows</footer>
-
-<script src="kiosk.js"></script>
 </body>
 </html>
