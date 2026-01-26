@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery | Yorkshire Windows</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+  <img src="Logo/co-logo.jpg" class="logo">
+</header>
+
+<nav class="nav">
+  <a href="index.html">Home</a>
+  <a href="gallery.html">Gallery</a>
+</nav>
+
+<main class="gallery-page">
+  <h1>Our Gallery</h1>
+
+  <div class="category">
+    <h2 onclick="toggleFolder(this)">Edwardian</h2>
+    <div class="subfolders">
+      <button onclick="openGallery('Gallery/Edwardian/Edwardian Glass Roof')">Glass Roof</button>
+      <button onclick="openGallery('Gallery/Edwardian/Edwardian Solid Roof')">Solid Roof</button>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2 onclick="toggleFolder(this)">Flat Roof</h2>
+    <div class="subfolders">
+      <button onclick="openGallery('Gallery/Flat Roof')">View Images</button>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2 onclick="toggleFolder(this)">Gable End</h2>
+    <div class="subfolders">
+      <button onclick="openGallery('Gallery/Gable End/Gable End Glass Roof')">Glass Roof</button>
+      <button onclick="openGallery('Gallery/Gable End/Gable End Solid Roof')">Solid Roof</button>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2 onclick="toggleFolder(this)">Leanto</h2>
+    <div class="subfolders">
+      <button onclick="openGallery('Gallery/Leanto/Leanto Glass Roof')">Glass Roof</button>
+      <button onclick="openGallery('Gallery/Leanto/Leanto Solid Roof')">Solid Roof</button>
+    </div>
+  </div>
+
+  <div class="category">
+    <h2 onclick="toggleFolder(this)">Victorian</h2>
+    <div class="subfolders">
+      <button onclick="openGallery('Gallery/Victorian/Victorian Glass Roof')">Glass Roof</button>
+      <button onclick="openGallery('Gallery/Victorian/Victorian Solid Roof')">Solid Roof</button>
+    </div>
+  </div>
+</main>
+
+<!-- IMAGE MODAL -->
+<div id="modal" class="modal">
+  <span class="close" onclick="closeModal()">×</span>
+  <img id="modalImage">
+  <div class="controls">
+    <button onclick="prevImage()">‹</button>
+    <button onclick="nextImage()">›</button>
+  </div>
+</div>
+
+<footer class="footer">
+  © Yorkshire Windows
+</footer>
+
+<script src="gallery.js"></script>
+</body>
+</html>
